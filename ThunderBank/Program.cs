@@ -1,7 +1,15 @@
+using ThunderBank.Services.Interfaces;
+using ThunderBank.Services.Repositorios;
+using ThunderBank.Services.Sql;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var sqlConfiguration = new SqlConfiguration(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddSingleton(sqlConfiguration);
+
+builder.Services.AddTransient<IRepositorioCliente, RepositorioCliente>();
 
 var app = builder.Build();
 
