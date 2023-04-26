@@ -9,45 +9,45 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ThunderBank_-_Backup
 build_property.RootNamespace = ThunderBank_-_Backup
-build_property.ProjectDir = C:\Users\RAFAEL.MAESTRE\source\Github\repo-proyecto\ThunderBank\
+build_property.ProjectDir = C:\Users\ALEJANDRO.GOMEZ\Desktop\PROYECTO\ThunderBank\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\RAFAEL.MAESTRE\source\Github\repo-proyecto\ThunderBank
+build_property.MSBuildProjectDirectory = C:\Users\ALEJANDRO.GOMEZ\Desktop\PROYECTO\ThunderBank
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/Cliente/Crear.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/Cliente/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxDcmVhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/Cliente/Index.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/Cliente/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/Home/Index.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/Home/Privacy.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/Shared/Error.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/_ViewImports.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/_ViewStart.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RAFAEL.MAESTRE/source/Github/repo-proyecto/ThunderBank/Views/Shared/_Layout.cshtml]
+[C:/Users/ALEJANDRO.GOMEZ/Desktop/PROYECTO/ThunderBank/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-krae1aa9yc
