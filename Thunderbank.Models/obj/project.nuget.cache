@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FP83k1ZPLAdbPrrz/OZByMkoO7l9rGS5tJzqzbLGPjFpp+q1s9pW+KIao60sbR08Z/GUNK0hZcfOANm6dFR4qQ==",
+  "dgSpecHash": "G8UcwkwK6/G7gOP3M2MSOcDpvk9UYFvJ556W1G0j3Jjmmb+jWLH4bIxcsS7VWDWMvtVYs3vS8d04U/8STjyFZQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\Thunderbank.Models\\Thunderbank.Models.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\RAFAEL.MAESTRE\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512"
+  ],
   "logs": []
 }

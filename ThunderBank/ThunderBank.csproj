@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Thunderbank.Models\Thunderbank.Models.csproj" />
+    <ProjectReference Include="..\ThunderBank.Services\ThunderBank.Services.csproj" />
+  </ItemGroup>
+
 </Project>
