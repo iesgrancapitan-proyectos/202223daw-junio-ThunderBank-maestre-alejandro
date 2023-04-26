@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs
+/ThunderBank.Services/obj/Release/net6.0/ThunderBank.Services.assets.cache
+/ThunderBank.Services/obj/Debug/net6.0/ThunderBank.Services.csproj.AssemblyReference.cache
+/Thunderbank.Models/obj/Release/net6.0/Thunderbank.Models.assets.cache
+/ThunderBank/obj/Debug/net6.0/ThunderBank.csproj.AssemblyReference.cache
