@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\Thunderbank.Models\\Thunderbank.Models.csproj": {}
+    "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\Thunderbank.Models\\Thunderbank.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\Thunderbank.Models\\Thunderbank.Models.csproj": {
+    "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\Thunderbank.Models\\Thunderbank.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\Thunderbank.Models\\Thunderbank.Models.csproj",
+        "projectUniqueName": "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\Thunderbank.Models\\Thunderbank.Models.csproj",
         "projectName": "Thunderbank.Models",
-        "projectPath": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\Thunderbank.Models\\Thunderbank.Models.csproj",
-        "packagesPath": "C:\\Users\\RAFAEL.MAESTRE\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\Thunderbank.Models\\obj\\",
+        "projectPath": "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\Thunderbank.Models\\Thunderbank.Models.csproj",
+        "packagesPath": "C:\\Users\\ALEJANDRO.GOMEZ\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\Thunderbank.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\RAFAEL.MAESTRE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ALEJANDRO.GOMEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

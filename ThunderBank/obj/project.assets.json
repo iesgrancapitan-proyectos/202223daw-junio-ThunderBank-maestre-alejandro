@@ -2073,19 +2073,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\RAFAEL.MAESTRE\\.nuget\\packages\\": {}
+    "C:\\Users\\ALEJANDRO.GOMEZ\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\ThunderBank\\ThunderBank.csproj",
+      "projectUniqueName": "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\ThunderBank\\ThunderBank.csproj",
       "projectName": "ThunderBank",
-      "projectPath": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\ThunderBank\\ThunderBank.csproj",
-      "packagesPath": "C:\\Users\\RAFAEL.MAESTRE\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\ThunderBank\\obj\\",
+      "projectPath": "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\ThunderBank\\ThunderBank.csproj",
+      "packagesPath": "C:\\Users\\ALEJANDRO.GOMEZ\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\ThunderBank\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\RAFAEL.MAESTRE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ALEJANDRO.GOMEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2099,11 +2099,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\Thunderbank.Models\\Thunderbank.Models.csproj": {
-              "projectPath": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\Thunderbank.Models\\Thunderbank.Models.csproj"
+            "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\Thunderbank.Models\\Thunderbank.Models.csproj": {
+              "projectPath": "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\Thunderbank.Models\\Thunderbank.Models.csproj"
             },
-            "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\ThunderBank.Services\\ThunderBank.Services.csproj": {
-              "projectPath": "C:\\Users\\RAFAEL.MAESTRE\\source\\Github\\repo-proyecto\\ThunderBank.Services\\ThunderBank.Services.csproj"
+            "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\ThunderBank.Services\\ThunderBank.Services.csproj": {
+              "projectPath": "C:\\Users\\ALEJANDRO.GOMEZ\\Desktop\\PROYECTO\\ThunderBank.Services\\ThunderBank.Services.csproj"
             }
           }
         }
