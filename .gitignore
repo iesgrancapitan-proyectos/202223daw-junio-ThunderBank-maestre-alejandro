@@ -396,3 +396,15 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+=======
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ThunderBank.Services/obj/Release/net6.0/ThunderBank.Services.assets.cache
+/ThunderBank.Services/obj/Debug/net6.0/ThunderBank.Services.csproj.AssemblyReference.cache
+/Thunderbank.Models/obj/Release/net6.0/Thunderbank.Models.assets.cache
+/ThunderBank/obj/Debug/net6.0/ThunderBank.csproj.AssemblyReference.cache
+/ThunderBank/.vs/ThunderBank/FileContentIndex/719890da-b9db-4248-afbc-036cd010144f.vsidx
+/ThunderBank/.vs/ThunderBank/FileContentIndex/851de497-0968-46c8-a1bd-71df337347d2.vsidx
