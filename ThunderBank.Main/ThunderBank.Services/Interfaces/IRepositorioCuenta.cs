@@ -2,8 +2,8 @@
 
 namespace ThunderBank.Services.Interfaces
 {
-    public interface IRepositorioCliente
+    public interface IRepositorioCuenta
     {
-        Task Crear(Cliente cliente);
+        Task Crear(Cuenta cuenta);
     }
 }
