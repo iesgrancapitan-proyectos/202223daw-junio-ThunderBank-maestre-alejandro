@@ -2,7 +2,7 @@
 
 namespace ThunderBank.Main.Controllers
 {
-    public class UsuariosController : Controller
+    public class UsuarioController : Controller
     {
         public IActionResult Index()
         {

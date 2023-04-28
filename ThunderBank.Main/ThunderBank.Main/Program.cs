@@ -11,6 +11,7 @@ builder.Services.AddSingleton(sqlConfiguration);
 
 builder.Services.AddTransient<IRepositorioCliente, RepositorioCliente>();
 builder.Services.AddTransient<IRepositorioCuenta, RepositorioCuenta>();
+builder.Services.AddTransient<IRepositorioTarjeta, RepositorioTarjeta>();
 
 var app = builder.Build();
 

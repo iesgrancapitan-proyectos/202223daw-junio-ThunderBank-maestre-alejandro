@@ -1,0 +1,22 @@
+﻿@using ThunderBank.Models;
+@model Tarjeta
+
+@{
+    ViewData["Title"] = "Crear nueva tarjeta";
+}
+
+<h1>Crear tarjeta</h1>
+<form asp-controller="Tarjeta" asp-action="Crear">
+    <input type="hidden" asp-for="FechaDeCreacion" value="@DateTime.Now" />
+    <input type="hidden" asp-for="FechaDeCaducidad" value="@DateTime.Now.AddYears(3)" />
+    <input type="hidden" asp-for="Cvc" value="@Model.Cvc" />
+    <input type="hidden" asp-for="Pin" value="@Model.Pin" />
+    <input type="hidden" asp-for="Estado" value="@Model.Estado" />
+    <input type="hidden" asp-for="NumeroDeCuenta" value="@Model.NumeroDeCuenta" />
+    <label class="form-label">Anota tu código pin</label>
+    <input type="text" disabled placeholder="@Model.Pin" asp-for="Pin" />
+    <button type="submit" class="btn btn-success">Crear tarjeta</button>
+    <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+</form>
+
+
