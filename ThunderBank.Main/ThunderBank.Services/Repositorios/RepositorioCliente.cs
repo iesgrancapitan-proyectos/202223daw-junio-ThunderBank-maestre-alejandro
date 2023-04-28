@@ -19,6 +19,11 @@ namespace ThunderBank.Services.Repositorios
             return new SqlConnection(_configuration.ConnectionString);
         }
 
+        public int ObtenerClienteId()
+        {
+            return 1002;
+        }
+
         public async Task Crear(Cliente cliente)
         {
             var db = DbConnection();
