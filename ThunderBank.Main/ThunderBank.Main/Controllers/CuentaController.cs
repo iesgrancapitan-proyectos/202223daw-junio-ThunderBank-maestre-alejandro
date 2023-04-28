@@ -12,9 +12,16 @@ namespace ThunderBank.Main.Controllers
         {
             this._repositorioCuenta = repositorioCuenta;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //Hay que obtener las cuentas por idCliente
+
+            var cuentasAgrupadas = await _repositorioCuenta.Buscar(1002); //idCliente metido a pelo
+            var modelo = cuentasAgrupadas.GroupBy(x => x.Tipo).Select(grupo => new CuentaIndex
+            {
+                Cuentas = grupo.AsEnumerable()
+            }).ToList();
+            return View(modelo);
         }
 
         [HttpGet]
