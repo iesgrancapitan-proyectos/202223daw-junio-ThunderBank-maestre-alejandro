@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ThunderBank.Models
 {
-    public class CuentaIndex
+    public class CuentaViewModel
     {
         public IEnumerable<Cuenta> Cuentas { get; set; }
     }

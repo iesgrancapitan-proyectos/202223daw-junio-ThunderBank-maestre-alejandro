@@ -5,13 +5,9 @@
 }
 
 
+<h5>Creación de Cuenta</h5>
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <form asp-controller="Cuenta" asp-action="Crear">
-    <div class="mb-3">
-        <label asp-for="Numero" class="form-label"></label>
-        <input type="text" asp-for="Numero" class="form-control text-black" />
-        <span asp-validation-for="Numero" class="text-danger"></span>
-    </div>
     <div class="mb-3">
         <label asp-for="Saldo" class="form-label"></label>
         <input type="text" asp-for="Saldo" class="form-control text-black" />
