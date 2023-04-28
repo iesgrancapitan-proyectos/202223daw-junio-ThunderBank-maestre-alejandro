@@ -22,7 +22,7 @@ namespace ThunderBank.Services.Repositorios
         {
             var db = DbConnection();
             var sql = @"INSERT INTO Cuenta(numero,saldo,fechaApertura,tipo,idCliente)
-                VALUES (@Numero,@Saldo,@FechaApertura,@Tipo,1002)";
+                VALUES (@Numero,@Saldo,@FechaApertura,@Tipo,1002) SELECT SCOPE_IDENTITY();";
             await db.QuerySingleAsync(sql, cuenta);
         }
     }
