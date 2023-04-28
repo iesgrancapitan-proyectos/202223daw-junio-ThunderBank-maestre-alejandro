@@ -22,11 +22,31 @@ namespace ThunderBank.Services.Repositorios
 
         public async Task Crear(Tarjeta tarjeta)
         {
-            SqlConnection db = DbConnection();
+            using SqlConnection db = DbConnection();
             await db.QuerySingleAsync(
-                @"INSERT INTO Tarjeta(numero, fechaCaducidad, cvc, pin, fechaCreacion, estado, numeroCuenta)
-                VALUES(@NumeroDeTarjeta, @FechaDeCaducidad, @Cvc, @Pin, @FechaDeCreacion, @Estado, @NumeroDeCuenta) SELECT SCOPE_IDENTITY();", 
-                tarjeta);
+                @"Tarjeta_Insertar",
+                new{
+                    FechaDeCreacion = tarjeta.FechaDeCreacion,
+                    FechaDeCaducidad = tarjeta.FechaDeCaducidad,
+                    Cvc = tarjeta.Cvc,
+                    Pin = tarjeta.Pin,
+                    Estado = tarjeta.Estado,
+                    NumeroDeCuenta = tarjeta.NumeroDeCuenta
+                }, commandType: System.Data.CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId)
+        {
+            using SqlConnection db = DbConnection();
+            return await db.QueryAsync<Tarjeta>(
+                @"SELECT DISTINCT T.numero AS NumeroDeTarjeta,
+                T.fechaCreacion AS FechaDeCreacion,
+                T.fechaCaducidad AS FechaDeCaducidad,
+                T.cvc, T.pin, T.estado, 
+                T.numeroCuenta AS NumeroDeCuenta
+                FROM Tarjeta T
+                INNER JOIN Cuenta C
+                ON C.idCliente = @ClienteId", new {clienteId});
         }
     }
 }

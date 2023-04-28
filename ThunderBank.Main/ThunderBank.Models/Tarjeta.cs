@@ -4,7 +4,7 @@ namespace ThunderBank.Models
 {
     public class Tarjeta
     {
-        public string NumeroDeTarjeta { get; set; } = GenerarCódigo(16);        // HAY QUE CONTROLAR QUE NO SE REPITA EN LA BD
+        public string NumeroDeTarjeta { get; set; }
         public DateTime FechaDeCreacion { get; set; }
         public DateTime FechaDeCaducidad { get; set; }
         public string Cvc { get; set; } = GenerarCódigo(3);
