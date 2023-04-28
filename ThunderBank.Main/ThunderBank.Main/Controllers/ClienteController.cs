@@ -32,7 +32,7 @@ namespace ThunderBank.Main.Controllers
                 return View(cliente);
             }
             await _repositorioCliente.Crear(cliente);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Cliente");
         }
     }
 }

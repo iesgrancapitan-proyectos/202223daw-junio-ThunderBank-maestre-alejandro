@@ -12,6 +12,10 @@ namespace ThunderBank.Main.Controllers
         {
             this._repositorioCuenta = repositorioCuenta;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Crear()
@@ -26,7 +30,7 @@ namespace ThunderBank.Main.Controllers
                 return View(cuenta);
             }
             await _repositorioCuenta.Crear(cuenta);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
     }
 }
