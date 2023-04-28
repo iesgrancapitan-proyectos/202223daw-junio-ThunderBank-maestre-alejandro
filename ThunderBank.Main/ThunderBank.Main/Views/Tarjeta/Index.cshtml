@@ -1,4 +1,6 @@
-﻿
+﻿@using ThunderBank.Models;
+@model IEnumerable<Tarjeta>
+
 @{
     ViewData["Title"] = "Tarjetas";
 }
@@ -6,3 +8,12 @@
 <h1>Menú de gestión de tarjetas</h1>
 
 <a asp-action="Crear" class="btn btn-danger">Crear nueva tarjeta</a>
+<h2>Tarjetas</h2>
+
+@foreach(Tarjeta tarjeta in Model.ToList()){
+    <h5>Número: </h5>
+    <b>@tarjeta.NumeroDeTarjeta</b>
+    <p>Pin: @tarjeta.Pin</p>
+    <p>Fecha de caducidad: @tarjeta.FechaDeCaducidad.ToString("dd/MM/yy")</p>
+    <p>CVC: @tarjeta.Cvc</p>
+}
