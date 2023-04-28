@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 using System.Reflection;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
@@ -8,14 +9,20 @@ namespace ThunderBank.Main.Controllers
     public class TarjetaController : Controller
     {
         private readonly IRepositorioTarjeta _repositorioTarjeta;
+        private readonly IRepositorioCuenta _repositorioCuenta;
+        private readonly IRepositorioCliente _repositorioCliente;
 
-        public TarjetaController(IRepositorioTarjeta repositorioTarjeta)
+        public TarjetaController(IRepositorioTarjeta repositorioTarjeta, IRepositorioCuenta repositorioCuenta, IRepositorioCliente repositorioCliente)
         {
             _repositorioTarjeta = repositorioTarjeta;
+            _repositorioCuenta = repositorioCuenta;
+            _repositorioCliente = repositorioCliente;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            int clienteId = _repositorioCliente.ObtenerClienteId();
+            IEnumerable<Tarjeta> tarjetasCliente = await _repositorioTarjeta.ObtenerTarjetas(clienteId);
+            return View(tarjetasCliente);
         }
         [HttpGet]
         public IActionResult Crear()
