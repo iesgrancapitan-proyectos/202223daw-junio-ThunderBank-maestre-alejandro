@@ -1,0 +1,97 @@
+﻿a {
+    color: var(--secondary-color);
+}
+
+    a:hover {
+        cursor: pointer;
+    }
+
+#izquierdaLanding {
+    width: 40% !important;
+    padding-left: 7%;
+    padding-top: 5%;
+    z-index: 999;
+}
+
+    #izquierdaLanding div {
+        width: 80%;
+    }
+
+
+.container {
+    color: var(--secondary-color);
+}
+
+    .container div {
+        align-items: center;
+    }
+
+.logo {
+    width: 10em;
+    position: absolute;
+    top: 5%;
+}
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 15px;
+    padding: 1em 1em !important;
+    font-size: 1.3em;
+    color: var(--secondary-color);
+}
+
+#botonLogin {
+    border: none;
+    background: rgb(3,29,64);
+    background: linear-gradient(150deg, var(--primary-color) -140%, var(--secondary-color) 100%);
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.3em;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
+}
+
+#botonLogin:hover {
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#uneteLink {
+    font-weight: 700;
+}
+
+.svg-container {
+    left: -50px;
+    height: 2205px;
+    width: 2205px;
+    top: -786px;
+    background-image: url(./img/figure.svg) !important;
+    animation: rotate 40s infinite linear;
+}
+
+.text-container {
+    left: 308px;
+    top: 265px;
+    width: 485px;
+    color: var(--primary-color);
+    font-size: 16pt;
+}
+
+#uneteText {
+    font-size: 22pt;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(120deg);
+    }
+
+    50% {
+        transform: rotate(130deg);
+    }
+
+    100% {
+        transform: rotate(120deg);
+    }
+}
