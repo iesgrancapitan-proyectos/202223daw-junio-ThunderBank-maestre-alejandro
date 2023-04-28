@@ -7,17 +7,18 @@ namespace ThunderBank.Main.Controllers
     public class CuentaController : Controller
     {
         private readonly IRepositorioCuenta _repositorioCuenta;
+        private readonly IRepositorioCliente _repositorioCliente;
 
-        public CuentaController(IRepositorioCuenta repositorioCuenta)
+        public CuentaController(IRepositorioCuenta repositorioCuenta, IRepositorioCliente repositorioCliente)
         {
             this._repositorioCuenta = repositorioCuenta;
+            this._repositorioCliente = repositorioCliente;
         }
         public async Task<IActionResult> Index()
         {
-            //Hay que obtener las cuentas por idCliente
-
-            var cuentasAgrupadas = await _repositorioCuenta.Buscar(1002); //idCliente metido a pelo
-            var modelo = cuentasAgrupadas.GroupBy(x => x.Tipo).Select(grupo => new CuentaIndex
+            var idCliente = _repositorioCliente.ObtenerClienteId();
+            var cuentasAgrupadas = await _repositorioCuenta.Buscar(idCliente);
+            var modelo = cuentasAgrupadas.GroupBy(x => x.Tipo).Select(grupo => new CuentaViewModel
             {
                 Cuentas = grupo.AsEnumerable()
             }).ToList();
@@ -29,15 +30,18 @@ namespace ThunderBank.Main.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Crear(Cuenta cuenta)
         {
+            var idCliente = _repositorioCliente.ObtenerClienteId();
             if (!ModelState.IsValid)
             {
                 return View(cuenta);
             }
-            await _repositorioCuenta.Crear(cuenta);
-            return RedirectToAction("Index","Home");
+            cuenta.IdCliente = idCliente;
+            await _repositorioCuenta.Crear(cuenta,idCliente);
+            return RedirectToAction("Index");
         }
     }
 }

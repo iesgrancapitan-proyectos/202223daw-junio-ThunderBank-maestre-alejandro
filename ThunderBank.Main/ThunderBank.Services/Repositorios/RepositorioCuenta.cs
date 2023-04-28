@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using System.Data;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
 using ThunderBank.Services.SQL;
@@ -18,12 +19,25 @@ namespace ThunderBank.Services.Repositorios
         {
             return new SqlConnection(_configuration.ConnectionString);
         }
-        public async Task Crear(Cuenta cuenta)
+        //public async Task Crear(Cuenta cuenta)
+        //{
+        //    var db = DbConnection();
+        //    var sql = @"INSERT INTO Cuenta(numero,saldo,fechaApertura,tipo,idCliente)
+        //        VALUES (@Numero,@Saldo,@FechaApertura,@Tipo,1002) SELECT SCOPE_IDENTITY();";
+        //    await db.QuerySingleAsync(sql, cuenta);
+        //}
+        public async Task Crear(Cuenta cuenta,int idCliente)
         {
-            var db = DbConnection();
-            var sql = @"INSERT INTO Cuenta(numero,saldo,fechaApertura,tipo,idCliente)
-                VALUES (@Numero,@Saldo,@FechaApertura,@Tipo,1002) SELECT SCOPE_IDENTITY();";
-            await db.QuerySingleAsync(sql, cuenta);
+            using var db = DbConnection();
+            cuenta.IdCliente = idCliente;
+            var numero = await db.QuerySingleAsync<string>(@"Cuenta_Insertar", new
+            {
+                cuenta.Saldo,
+                cuenta.FechaApertura,
+                cuenta.Tipo,
+                cuenta.IdCliente,
+            }, commandType: CommandType.StoredProcedure);
+            cuenta.Numero = numero;
         }
 
         public async Task<IEnumerable<Cuenta>> Buscar(int idCliente)

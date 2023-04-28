@@ -13,4 +13,5 @@ namespace ThunderBank.Models
         public string Tipo { get; set; }
         public int IdCliente { get; set; }
     }
+    
 }
