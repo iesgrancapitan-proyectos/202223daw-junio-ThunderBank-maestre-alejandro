@@ -25,5 +25,14 @@ namespace ThunderBank.Services.Repositorios
                 VALUES (@Numero,@Saldo,@FechaApertura,@Tipo,1002) SELECT SCOPE_IDENTITY();";
             await db.QuerySingleAsync(sql, cuenta);
         }
+
+        public async Task<IEnumerable<Cuenta>> Buscar(int idCliente)
+        {
+            using var db = DbConnection();
+            return await db.QueryAsync<Cuenta>(
+                @"SELECT numero,saldo,fechaApertura,tipo
+                FROM Cuenta 
+                WHERE idCliente = @idCliente;", new {idCliente});
+        }
     }
 }

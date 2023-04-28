@@ -1,5 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Cuenta";
+﻿@using ThunderBank.Models;
+
+@model IEnumerable<CuentaIndex>
+@{
+    ViewData["Title"] = "Listado Cuentas";
 }
 
 <h1>Bienvenido a el panel de Cuentas</h1>
+<div>
+    @foreach(var tipoCuenta in Model)
+    {
+        @foreach(var cuenta in tipoCuenta.Cuentas)
+        {
+            <h5 class="mt-4"><b>Cuenta: </b> @cuenta.Numero</h5>
+            <br />
+            <span>Saldo: @cuenta.Saldo €</span>
+            <br />
+            <span>Fecha de Apertura: @cuenta.FechaApertura.ToString("dd/MMMM/yyyy") </span>
+            <br />
+            <br />
+        }
+    }
+
+</div>
