@@ -1,0 +1,26 @@
+﻿h1 {
+    color: var(--secondary-color)
+}
+
+tr {
+    color: #f8f8f8;
+}
+
+#fechaApertura, #saldo {
+    display: none;
+}
+#btn-edit{
+    background-color:white !important;
+}
+#btn-edit i {
+    color: var(--secondary-color);
+    background:white !important;
+}
+
+
+@media (min-width: 768px) {
+    #fechaApertura, #saldo {
+        display: table-cell;
+        color: #f8f8f8;
+    }
+}

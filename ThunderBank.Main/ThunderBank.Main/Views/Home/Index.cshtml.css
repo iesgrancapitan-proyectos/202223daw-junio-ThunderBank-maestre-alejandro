@@ -1,0 +1,15 @@
+﻿.cards{
+    background:var(--secondary-color);
+}
+.cards i{
+    color:var(--primary-color);
+    font-size:2.3em;
+    margin-left:0.5em;
+    width:20px;
+}
+#features .container{
+    color:white;
+}
+.contacto{
+    color:white;
+}

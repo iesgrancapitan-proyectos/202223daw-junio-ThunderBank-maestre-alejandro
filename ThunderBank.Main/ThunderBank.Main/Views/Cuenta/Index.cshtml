@@ -6,19 +6,35 @@
 }
 
 <h1>Bienvenido a el panel de Cuentas</h1>
-<div>
-    @foreach(var tipoCuenta in Model)
-    {
-        @foreach(var cuenta in tipoCuenta.Cuentas)
+<a asp-action="Crear" class="btn btn-enfasis mb-3">Crear Cuenta</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th id="saldo">Saldo</th>
+            <th>Tipo</th>
+            <th id="fechaApertura">Apertura</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var listaCuenta in Model)
         {
-            <h5 class="mt-4"><b>Cuenta: </b> @cuenta.Numero</h5>
-            <br />
-            <span>Saldo: @cuenta.Saldo €</span>
-            <br />
-            <span>Fecha de Apertura: @cuenta.FechaApertura.ToString("dd/MMMM/yyyy") </span>
-            <br />
-            <br />
-        }
-    }
+            @foreach (var cuenta in listaCuenta.Cuentas)
+            {
+                <tr>
 
-</div>
+                    <td>@cuenta.Numero</td>
+                    <td id="saldo">@cuenta.Saldo €</td>
+                    <td>@cuenta.Tipo</td>
+                    <td id="fechaApertura">@cuenta.FechaApertura.ToString("dd \"de\" MMMM yyyy")</td>
+                    <td>
+                        <input type="hidden" value="@cuenta.Numero" class="numero"/>
+                        <a class="btn btn-enfasis" asp-action="Editar" asp-route-numero="@cuenta.Numero"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-danger" asp-action="Borrar" asp-route-numero="@cuenta.Numero"><i class="bi bi-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

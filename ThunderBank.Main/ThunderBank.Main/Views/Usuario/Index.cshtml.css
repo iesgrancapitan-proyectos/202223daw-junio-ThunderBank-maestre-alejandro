@@ -2,20 +2,20 @@
     color: var(--secondary-color);
 }
 
-    a:hover {
-        cursor: pointer;
-    }
+a:hover {
+    cursor: pointer;
+}
 
 #izquierdaLanding {
     width: 40% !important;
     padding-left: 7%;
     padding-top: 5%;
-    z-index: 999;
+    z-index: 1;
 }
 
-    #izquierdaLanding div {
-        width: 80%;
-    }
+#izquierdaLanding div {
+    width: 80%;
+}
 
 
 .container {
@@ -40,6 +40,10 @@
     font-size: 1.3em;
     color: var(--secondary-color);
 }
+.form-control:hover {
+    box-shadow: 5px 4px 5px rgb(255, 255, 255,0.2);
+    cursor: pointer;
+}
 
 #botonLogin {
     border: none;
@@ -53,20 +57,22 @@
 }
 
 #botonLogin:hover {
-    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 4px 5px rgb(255, 255, 255,0.2);
     cursor: pointer;
 }
 
 #uneteLink {
     font-weight: 700;
 }
-
+.derecha-landing {
+    z-index: 0;
+}
 .svg-container {
     left: -50px;
     height: 2205px;
     width: 2205px;
     top: -786px;
-    background-image: url(./img/figure.svg) !important;
+    background-image: url(./img/figure.svg);
     animation: rotate 40s infinite linear;
 }
 
