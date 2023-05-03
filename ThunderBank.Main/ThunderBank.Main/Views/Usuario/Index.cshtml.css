@@ -41,7 +41,6 @@ a:hover {
     color: var(--secondary-color);
 }
 .form-control:hover {
-    box-shadow: 5px 4px 5px rgb(255, 255, 255,0.2);
     cursor: pointer;
 }
 

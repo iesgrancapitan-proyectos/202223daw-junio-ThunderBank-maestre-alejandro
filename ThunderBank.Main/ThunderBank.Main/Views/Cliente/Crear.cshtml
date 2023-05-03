@@ -4,11 +4,11 @@
     ViewData["Title"] = "Pantalla Creación de Clientes";
 }
 
-<h1>Formulario para clientes</h1>
+<h1 class="text-white">Creación de Cliente</h1>
 
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form asp-controller="Cliente" asp-action="Crear">
+@*<form asp-controller="Cliente" asp-action="Crear" class="text-white">
     <div class="mb-3">
         <label asp-for="Dni" class="form-label"></label>
         <input type="text" asp-for="Dni" class="form-control text-black" />
@@ -48,6 +48,60 @@
 
     <button class="btn btn-primary" type="submit">Enviar</button>
     <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>*@
+<form class="text-white" asp-controller="Cliente" asp-action="Crear">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form-outline">
+                <input type="text" asp-for="Nombre" class="form-control text-black" />
+                <label asp-for="Nombre" class="form-label"></label>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-outline">
+                <input type="text" asp-for="Apellido" class="form-control text-black" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+                <label asp-for="Apellido" class="form-label"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-outline mb-4">
+        <input type="text" asp-for="Dni" class="form-control text-black" />
+        <span asp-validation-for="Dni" class="text-danger"></span>
+        <label asp-for="Dni" class="form-label"></label>
+    </div>
+
+    <div class="form-outline mb-4">
+        <input type="text" asp-for="Telefono" class="form-control text-black" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+        <label asp-for="Telefono" class="form-label"></label>
+    </div>
+
+
+    <div class="form-outline mb-4">
+        <input type="text" asp-for="Correo" class="form-control text-black" />
+        <span asp-validation-for="Correo" class="text-danger"></span>
+        <label asp-for="Correo" class="form-label"></label>
+    </div>
+
+    <div class="form-outline mb-4">
+        <input type="text" asp-for="Direccion" class="form-control text-black" />
+        <span asp-validation-for="Direccion" class="text-danger"></span>
+        <label asp-for="Direccion" class="form-label"></label>
+    </div>
+
+    <div class="form-outline mb-4">
+        <input type="date" asp-for="FechaDeNacimiento" class="form-control text-black" />
+        <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
+        <label asp-for="FechaDeNacimiento" class="form-label"></label>
+    </div>
+
+    <input type="hidden" asp-for="FechaDeAlta" value="@DateTime.Now" />
+
+    <button class="btn btn-success" type="submit">Enviar</button>
+    <a class="btn btn-warning" asp-action="Index">Cancelar</a>
 </form>
 
 @section Scripts{
