@@ -14,6 +14,7 @@ namespace ThunderBank.Models
         public string Telefono { get; set; }
         public string Correo { get; set; }
         public string Direccion { get; set; }
+        [Display(Name ="Fecha de Nacimiento")]
         public DateTime FechaDeNacimiento { get; set; }
         public DateTime FechaDeAlta { get; set; }
         public int IdUsuario { get; set; }

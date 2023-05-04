@@ -9,10 +9,8 @@ tr {
 #btn-edit {
     background-color: white !important;
 }
-
-#btn-edit i {
-    color: var(--secondary-color);
-    background: white !important;
+a i{
+    color: white !important;
 }
 
 #fechaApertura, #saldo {

@@ -19,13 +19,6 @@ namespace ThunderBank.Services.Repositorios
         {
             return new SqlConnection(_configuration.ConnectionString);
         }
-        //public async Task Crear(Cuenta cuenta)
-        //{
-        //    var db = DbConnection();
-        //    var sql = @"INSERT INTO Cuenta(numero,saldo,fechaApertura,tipo,idCliente)
-        //        VALUES (@Numero,@Saldo,@FechaApertura,@Tipo,1002) SELECT SCOPE_IDENTITY();";
-        //    await db.QuerySingleAsync(sql, cuenta);
-        //}
         public async Task Crear(Cuenta cuenta,int idCliente)
         {
             using var db = DbConnection();
