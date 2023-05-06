@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ThunderBank.Models;
+using ThunderBank.Models.DTO;
+using ThunderBank.Models.Validaciones;
 using ThunderBank.Services.Interfaces;
 
 namespace ThunderBank.Main.Controllers
@@ -10,7 +11,7 @@ namespace ThunderBank.Main.Controllers
 
         public ClienteController(IRepositorioCliente repositorioCliente)
         {
-            this._repositorioCliente = repositorioCliente;
+            _repositorioCliente = repositorioCliente;
         }
 
         public IActionResult Index()
@@ -22,17 +23,6 @@ namespace ThunderBank.Main.Controllers
         public IActionResult Crear()
         {
             return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Crear(Cliente cliente)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(cliente);
-            }
-            await _repositorioCliente.Crear(cliente);
-            return RedirectToAction("Index","Cliente");
         }
     }
 }

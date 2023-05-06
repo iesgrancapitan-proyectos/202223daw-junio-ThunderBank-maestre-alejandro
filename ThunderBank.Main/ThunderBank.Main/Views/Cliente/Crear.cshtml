@@ -1,5 +1,6 @@
-﻿@using ThunderBank.Models;
-@model Cliente
+﻿@using ThunderBank.Models.DTO;
+@using ThunderBank.Models;
+@model DtoUsuario
 @{
     ViewData["Title"] = "Pantalla Creación de Clientes";
 }
@@ -9,6 +10,27 @@
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <form class="text-white" asp-controller="Cliente" asp-action="Crear">
+    <div class="row mb-4">
+        <div class="form-floating mb-3">
+            <select asp-for="Rol" asp-items="Html.GetEnumSelectList<RolesUsuario>()" class="form-select"> </select>
+            <label asp-for="Rol" class="form-label"></label>
+            <span asp-validation-for="Rol" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <div class="form-outline">
+                <input type="text" asp-for="NombreUsuario" class="form-control text-black" />
+                <label asp-for="NombreUsuario" class="form-label"></label>
+                <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-outline">
+                <input type="text" asp-for="Psw" class="form-control text-black" />
+                <span asp-validation-for="Psw" class="text-danger"></span>
+                <label asp-for="Psw" class="form-label"></label>
+            </div>
+        </div>
+    </div>
     <div class="row mb-4">
         <div class="col">
             <div class="form-outline">
@@ -40,9 +62,9 @@
 
 
     <div class="form-outline mb-4">
-        <input type="text" asp-for="Correo" class="form-control text-black" />
-        <span asp-validation-for="Correo" class="text-danger"></span>
-        <label asp-for="Correo" class="form-label"></label>
+        <input type="text" asp-for="Email" class="form-control text-black" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <label asp-for="Email" class="form-label"></label>
     </div>
 
     <div class="form-outline mb-4">
