@@ -1,11 +1,12 @@
 ﻿
+
 a {
     color: var(--secondary-color);
 }
 
-    a:hover {
-        cursor: pointer;
-    }
+a:hover {
+    cursor: pointer;
+}
 
 #izquierdaLanding {
     width: 40% !important;
@@ -46,10 +47,9 @@ a {
     font-size: 1.3em;
     color: var(--secondary-color);
 }
-
-    .form-control:hover {
-        cursor: pointer;
-    }
+.form-control:hover {
+    cursor: pointer;
+}
 
 #botonLogin {
     border: none;
@@ -62,19 +62,17 @@ a {
     transition: box-shadow 0.3s ease;
 }
 
-    #botonLogin:hover {
-        box-shadow: 5px 4px 5px rgb(255, 255, 255,0.2);
-        cursor: pointer;
-    }
+#botonLogin:hover {
+    box-shadow: 5px 4px 5px rgb(255, 255, 255,0.2);
+    cursor: pointer;
+}
 
 #uneteLink {
     font-weight: 700;
 }
-
 .derecha-landing {
     z-index: 0;
 }
-
 .svg-container {
     left: -50px;
     height: 2205px;

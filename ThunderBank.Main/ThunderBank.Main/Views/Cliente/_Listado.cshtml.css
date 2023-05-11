@@ -1,0 +1,9 @@
+﻿table{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+thead tr{
+    font-weight: 700;
+}
+

@@ -19,6 +19,7 @@ namespace ThunderBank.Main.Controllers
             return View();
         }
 
+        // CREAR USUARIOS
         [HttpGet]
         public IActionResult Crear()
         {
