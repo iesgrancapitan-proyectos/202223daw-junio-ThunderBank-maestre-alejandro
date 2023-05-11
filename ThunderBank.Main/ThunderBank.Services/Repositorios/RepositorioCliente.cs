@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using ThunderBank.Models;
+using ThunderBank.Models.DTO;
 using ThunderBank.Services.Interfaces;
 using ThunderBank.Services.SQL;
 
@@ -24,15 +25,38 @@ namespace ThunderBank.Services.Repositorios
             return 1002;
         }
 
-        public async Task Crear(Cliente cliente)
+        public async Task<IEnumerable<DtoUsuario>> Listar()
         {
-            var db = DbConnection();
-            var sql = @"INSERT INTO Cliente(dni,nombre,apellido,telefono,correo,direccion,fechaNacimiento,fechaAlta,idUsuario,idResponsable)
-                VALUES (@dni,@nombre,@apellido,@telefono,@correo,@direccion,@fechaDeNacimiento,@fechaDeAlta,1,1) SELECT SCOPE_IDENTITY();";
-            var id = await db.QuerySingleAsync<int>(sql, cliente);
-            cliente.Id = id;
+            using SqlConnection db = DbConnection();
+            IEnumerable<DtoUsuario> listado = await db.QueryAsync<DtoUsuario>(
+                @"SELECT Dni,
+                nombre,
+                apellido,
+                telefono,
+                correo AS Email,
+                direccion,
+                fechaNacimiento AS FechaDeNacimiento
+                FROM Cliente
+                WHERE activo = 1;");
+            return listado;
         }
 
+        public async Task<IEnumerable<DtoUsuario>> ListarPorResponsable(int idResponsable)
+        {
+            using SqlConnection db = DbConnection();
+            IEnumerable<DtoUsuario> listado = await db.QueryAsync<DtoUsuario>(
+                @"SELECT Dni,
+                nombre,
+                apellido,
+                telefono,
+                correo AS Email,
+                direccion,
+                fechaNacimiento AS FechaDeNacimiento
+                FROM Cliente
+                WHERE idResponsable = @IdResponsable
+                AND activo = 1", new { idResponsable });
+            return listado;
+        }
     }
 }
 

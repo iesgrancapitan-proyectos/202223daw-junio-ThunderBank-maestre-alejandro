@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Tarjeta tarjeta in Model.ToList())
+        @foreach (Tarjeta tarjeta in Model.ToList().OrderByDescending(x=>x.FechaDeCreacion))
         {
                 <tr>
 

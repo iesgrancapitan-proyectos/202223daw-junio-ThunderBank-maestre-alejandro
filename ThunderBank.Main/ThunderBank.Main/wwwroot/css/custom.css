@@ -7,6 +7,10 @@
     --main-font: 'Montserrat', sans-serif;
 }
 
+body{
+    background-color: var(--primary-color);
+}
+
 #bodyLogin {
     font-family: var(--main-font);
     background-color: var(--primary-color);
@@ -21,11 +25,11 @@
     margin-top: 0;
 }
 
-#footerRedes a {
-    margin: .7em;
-    color: var(--primary-color);
-    font-size: 1.5em;
-}
+    #footerRedes a {
+        margin: .7em;
+        color: var(--primary-color);
+        font-size: 1.5em;
+    }
 
 .containerLogin {
     margin-right: 0;
@@ -34,8 +38,13 @@
     height: 100vh;
     width: 100vw;
 }
- /*Botones listado actions*/
-.btn-enfasis{
+/*Botones listado actions*/
+.btn-enfasis {
     background: var(--secondary-color);
     color: var(--primary-color);
+}
+
+/*TITULOS Y TEXTOS*/
+h1, h2, h3, h4, h5, p{
+    color: var(--secondary-color)
 }
