@@ -13,3 +13,12 @@
 .contacto{
     color:white;
 }
+.tarjetas-landing {
+    box-shadow: -1px -1px 45px -17px rgba(16,57,112,1);
+    padding: 1em;
+    border-radius:12px;
+}
+
+.tarjetas-landing p{
+    color: #f8f8f8;
+}
