@@ -27,9 +27,8 @@ namespace ThunderBank.Main.Controllers
         {
             Tarjeta model = new()
             {
-                NumeroDeCuenta = "123456789012345678925"
+                NumeroDeCuenta = _repositorioCuenta.ObtenerNumeroDeCuenta()
             };
-
             return View(model);
         }
         [HttpPost]

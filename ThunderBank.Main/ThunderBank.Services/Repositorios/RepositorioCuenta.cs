@@ -19,6 +19,11 @@ namespace ThunderBank.Services.Repositorios
         {
             return new SqlConnection(_configuration.ConnectionString);
         }
+        public string ObtenerNumeroDeCuenta()
+        {
+            return "5772281704013526134306522";
+        }
+
         public async Task Crear(Cuenta cuenta,int idCliente)
         {
             using var db = DbConnection();
