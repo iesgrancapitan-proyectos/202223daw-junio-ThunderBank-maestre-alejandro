@@ -1,23 +1,23 @@
 ﻿@using ThunderBank.Models.DTO;
 @using ThunderBank.Models;
 @model DtoUsuario
+
 @{
-    ViewData["Title"] = "Dar de alta";
+    ViewData["Title"] = "Editar usuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="form-container">
-    <h1 class="text-white">Nueva alta</h1>
+    <h1 class="text-white">Editar usuario</h1>
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="Usuario" asp-action="Crear" class="w-100">
+    <form asp-controller="Usuario" asp-action="Editar" class="w-100">
         <div class="col mb-4">
             <div class="row">
                 <div class="col-4">
                     @*Nombre*@
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" asp-for="Nombre" placeholder="Nombre" />
+                        <input disabled="disabled" type="text" class="form-control" asp-for="Nombre" placeholder="@Model.Nombre" />
                         <label asp-for="Nombre" class="form-label"></label>
                         <span asp-validation-for="Nombre" class="text-danger"></span>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="col">
                     @*Apellidos*@
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" asp-for="Apellido" placeholder="Apellidos" />
+                        <input disabled="disabled" type="text" class="form-control" asp-for="Apellido" placeholder="Apellidos" />
                         <label asp-for="Apellido" class="form-label"></label>
                         <span asp-validation-for="Apellido" class="text-danger"></span>
                     </div>
@@ -36,14 +36,14 @@
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" asp-for="Psw" placeholder="Contraseña" />
+                        <input disabled="disabled" type="password" class="form-control" asp-for="Psw" placeholder="Contraseña" />
                         <label asp-for="Psw" class="form-label"></label>
                         <span asp-validation-for="Psw" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" asp-for="PswComprobada" placeholder="Contraseña" />
+                        <input disabled="disabled" type="password" class="form-control" asp-for="PswComprobada" placeholder="Contraseña" />
                         <label asp-for="PswComprobada" class="form-label"></label>
                         <span asp-validation-for="PswComprobada" class="text-danger"></span>
                     </div>
@@ -55,7 +55,7 @@
                 <div class="col-4">
                     @*DNI*@
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" asp-for="Dni" placeholder="DNI" />
+                        <input disabled="disabled" type="text" class="form-control" asp-for="Dni" placeholder="DNI" />
                         <label asp-for="Dni" class="form-label"></label>
                         <span asp-validation-for="Dni" class="text-danger"></span>
                     </div>
@@ -74,7 +74,7 @@
                 <div class="col">
                     @*Selección de rol*@
                     <div class="form-floating mb-3">
-                        <select asp-for="Rol" asp-items="Html.GetEnumSelectList<RolesUsuario>()"
+                        <select disabled="disabled" asp-for="Rol" asp-items="Html.GetEnumSelectList<RolesUsuario>()"
                                 class="form-select" id="floatingSelect"></select>
                         <label class="form-label" asp-for="Rol" for="floatingSelect">Tipo de usuario</label>
                         <span asp-validation-for="Rol" class="text-danger"></span>
@@ -84,7 +84,7 @@
                 <div class="col">
                     @*Fecha de nacimiento*@
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" asp-for="FechaDeNacimiento" placeholder="Fecha de nacimiento" />
+                        <input disabled="disabled" type="date" class="form-control" asp-for="FechaDeNacimiento" placeholder="Fecha de nacimiento" />
                         <label asp-for="FechaDeNacimiento" class="form-label"></label>
                         <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
                     </div>
@@ -101,18 +101,12 @@
 
             </div>
 
-
-
-
-
             @*Dirección*@
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" asp-for="Direccion" placeholder="Dirección" />
                 <label asp-for="Direccion" class="form-label"></label>
                 <span asp-validation-for="Direccion" class="text-danger"></span>
             </div>
-
-
         </div>
 
         <input type="hidden" asp-for="FechaDeAlta" value="@DateTime.Now" />

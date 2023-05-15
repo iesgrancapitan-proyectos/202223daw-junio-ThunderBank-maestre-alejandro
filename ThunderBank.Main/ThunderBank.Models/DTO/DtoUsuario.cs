@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using ThunderBank.Models.Validaciones;
 
 namespace ThunderBank.Models.DTO
@@ -9,49 +10,51 @@ namespace ThunderBank.Models.DTO
 
         [StringLength(maximumLength: 9, MinimumLength = 9, ErrorMessage = "Introduzca un DNI válido.")]
         [DniCorrecto]
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [Display(Name = "DNI")]
         public string Dni { get; set; }
 
         [StringLength(maximumLength: 50, MinimumLength = 1, ErrorMessage = "La longitud del campo debe estar entre {1} y {0}")]
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
         [StringLength(maximumLength: 100, MinimumLength = 1, ErrorMessage = "La longitud del campo debe estar entre {1} y {0}")]
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [Display(Name = "Apellido")]
         public string Apellido { get; set; }
 
         [Phone(ErrorMessage = "Introduce un número de teléfono válido.")]
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
 
         [EmailAddress(ErrorMessage = "Introduce un correo electrónico válido")]
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
 
         [StringLength(maximumLength: 150, MinimumLength = 1, ErrorMessage = "La longitud del campo debe estar entre {1} y {0}")]
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
         [DataType(DataType.Date)]
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [Display(Name = "Fecha de nacimiento")]
         public DateTime FechaDeNacimiento { get; set; }
 
         public string NombreUsuario { get; set; }
 
         [DataType(DataType.Password)]
-        [Required]
+        [Required(ErrorMessage = "La constraseña es obligatoria")]
         [Display(Name = "Contraseña")]
+        [Compare("PswComprobada", ErrorMessage = "Las constraseñas no son iguales")]
         public string Psw { get; set; }
+        public string PswComprobada { get; set; }
         public DateTime FechaDeAlta { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [Display(Name = "Tipo de usuario")]
         public RolesUsuario Rol { get; set; }
     }

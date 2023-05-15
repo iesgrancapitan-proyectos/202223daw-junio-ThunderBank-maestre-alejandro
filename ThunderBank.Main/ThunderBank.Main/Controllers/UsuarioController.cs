@@ -47,5 +47,11 @@ namespace ThunderBank.Main.Controllers
             await _repositorioUsuario.Crear(usuario);
             return RedirectToAction("Index", "Usuario");
         }
+
+        [HttpGet]
+        public IActionResult Editar()
+        {
+            return View();
+        }
     }
 }
