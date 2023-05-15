@@ -17,9 +17,6 @@ namespace ThunderBank.Main.Controllers
         public IActionResult Index()
         {
             return View();
-        }public IActionResult Login()
-        {
-            return View();
         }
 
         // CREAR USUARIOS
