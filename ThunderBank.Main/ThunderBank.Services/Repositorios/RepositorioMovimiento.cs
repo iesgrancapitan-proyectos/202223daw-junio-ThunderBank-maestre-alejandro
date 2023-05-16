@@ -1,7 +1,5 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
@@ -25,7 +23,7 @@ namespace ThunderBank.Services.Repositorios
         public async Task Crear(Movimiento movimiento)
         {
             using SqlConnection db = DbConnection();
-            await db.QuerySingleAsync(
+            await db.ExecuteAsync(
                 @"Movimiento_Insertar",
                 new
                 {
@@ -34,12 +32,8 @@ namespace ThunderBank.Services.Repositorios
                     movimiento.Comentario,
                     movimiento.NumeroCuentaRelacionada,
                     movimiento.NumeroCuenta
-                },commandType: CommandType.StoredProcedure
-                );
+                }, commandType: CommandType.StoredProcedure);
 
         }
-
-
-
     }
 }

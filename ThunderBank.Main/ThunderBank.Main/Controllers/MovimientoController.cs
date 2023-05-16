@@ -27,15 +27,13 @@ namespace ThunderBank.Main.Controllers
         public async Task<IActionResult> Crear(Movimiento movimiento)
         {
             var cuentaOrigen = _repositorioCuenta.ObtenerNumeroDeCuenta();
-            var cuentaDestino = "5728987842785985690219571";
             if (!ModelState.IsValid)
             {
                 return View(movimiento);
             }
-            movimiento.NumeroCuentaRelacionada = cuentaDestino;
             movimiento.NumeroCuenta = cuentaOrigen;
             await _repositorioMovimiento.Crear(movimiento);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Cuenta");
         }
     }
 }

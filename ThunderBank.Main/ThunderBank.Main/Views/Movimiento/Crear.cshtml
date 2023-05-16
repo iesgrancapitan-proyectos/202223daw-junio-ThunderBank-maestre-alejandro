@@ -4,9 +4,9 @@
     ViewData["Title"] = "Crear Movimiento";
 }
 
-<h5>Creación de Cuenta</h5>
+<h5>Creación de Movimientos</h5>
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form asp-controller="Movimiento" asp-action="Crear">
+<form asp-controller="Movimiento" asp-action="Crear" class="text-white">
     <div class="mb-3">
         <select asp-for="Tipo">
             <option value="INGRESO">INGRESO</option>
@@ -15,7 +15,7 @@
     </div>
     <div class="mb-3">
         <label asp-for="Importe" class="form-label"></label>
-        <input type="number" asp-for="Importe" class="form-control text-black" />
+        <input type="text" asp-for="Importe" class="form-control text-black" />
         <span asp-validation-for="Importe" class="text-danger"></span>
     </div>
     <div class="mb-3">
@@ -23,8 +23,11 @@
         <input type="text" asp-for="Comentario" class="form-control text-black" />
         <span asp-validation-for="Comentario" class="text-danger"></span>
     </div>
-    <input type="hidden" asp-for="NumeroCuentaRelacionada" value="" />
-    <input type="hidden" asp-for="NumeroCuenta" value="" />
+    <div class="mb-3">
+        <label asp-for="NumeroCuentaRelacionada" class="form-label"></label>
+        <input type="text" asp-for="NumeroCuentaRelacionada" class="form-control text-black" />
+        <span asp-validation-for="NumeroCuentaRelacionada" class="text-danger"></span>
+    </div>
     <button class="btn btn-primary" type="submit">Enviar</button>
     <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
 </form>
