@@ -14,6 +14,7 @@ builder.Services.AddTransient<IRepositorioCuenta, RepositorioCuenta>();
 builder.Services.AddTransient<IRepositorioTarjeta, RepositorioTarjeta>();
 builder.Services.AddTransient<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddTransient<IRepositorioResponsable, RepositorioResponsable>();
+builder.Services.AddTransient<IRepositorioMovimiento, RepositorioMovimiento>();
 
 var app = builder.Build();
 
