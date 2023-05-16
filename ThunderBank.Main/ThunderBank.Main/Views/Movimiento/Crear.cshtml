@@ -1,0 +1,36 @@
+﻿@using ThunderBank.Models;
+@model Movimiento;
+
+@{
+    ViewData["Title"] = "Crear Movimiento";
+}
+
+<h5>Crear movimiento</h5>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-controller="Movimiento" asp-action="Crear" class="text-white">
+
+    @*<input type="hidden" asp-for="NumeroCuentaRelacionada" value="@Model.NumeroCuentaRelacionada" />*@
+    <div class="mb-3">
+        <label asp-for="Importe" class="form-label "></label>
+        <input type="number" asp-for="Importe" class="form-control " />
+        <span asp-validation-for="Importe" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tipo Movimiento</label><br />
+        <select asp-for="Tipo">
+            <option value="Envio">Enviar</option>
+            <option value="Solicitar">Traer</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Comentario" class="form-label"></label>
+        <input type="text" asp-for="Comentario" class="form-control" />
+        <span asp-validation-for="Comentario" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="NumeroCuenta" class="form-label"></label>
+        <input type="text" asp-for="NumeroCuenta" class="form-control" />
+        <span asp-validation-for="NumeroCuenta" class="text-danger"></span>
+    </div>
+    </div>
+</form>
