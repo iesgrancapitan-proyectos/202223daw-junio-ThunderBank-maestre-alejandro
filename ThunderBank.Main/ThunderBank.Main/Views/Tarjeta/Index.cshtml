@@ -26,7 +26,7 @@
                 <td>@tarjeta.FechaDeCaducidad.ToString("dd/MM/yy")</td>
                     <td>
                         <input type="hidden" value="@tarjeta.NumeroDeTarjeta" class="numero" />
-                    <a class="btn btn-enfasis" asp-action="Editar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
+                    <a class="btn btn-enfasis" asp-action="Info" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
                     <a class="btn btn-danger" asp-action="Borrar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-trash"></i></a>
                     </td>
                 </tr>

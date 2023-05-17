@@ -7,8 +7,8 @@
     --main-font: 'Montserrat', sans-serif;
 }
 
-body{
-    background-color: var(--primary-color);
+body {
+    background: linear-gradient(180deg, #031D40 0%, #123360 100%);
 }
 
 #bodyLogin {

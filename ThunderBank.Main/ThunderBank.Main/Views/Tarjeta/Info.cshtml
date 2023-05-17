@@ -1,0 +1,68 @@
+﻿@using ThunderBank.Models;
+@model Tarjeta
+
+@{
+    ViewData["Title"] = "Información de la tarjeta";
+}
+
+@*Sección info y solicitar tarjeta*@
+<section class="d-flex row position-relative justify-content-center" id="seccionInfo">
+    <div class="justify-content-center">
+        <div id="imagenTarjeta" class="position-absolute">
+            <img id="tarjeta" src="~/img/tarjetaTrueno.png" class="img-fluid" />
+            <div id="tarjetaDatos" class="d-flex">
+                <div id="tarjetaDatosIzquierda">
+                    <p>**** **** **** 6382</p>
+                    <p>NACHO VIDAL</p>
+                </div>
+                <div id="tarjetaDatosDerecha">
+                    <p>05/25</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="cajasTarjeta" class="d-flex row justify-content-end align-items-end">
+            <div id="infoTarjeta" class="d-flex">
+                <div id="itemsInfoTarjeta" class="d-flex">
+                    <div id="textoInfoTarjeta">
+                        <p class="textoInfo">Saldo</p>
+                        <h3 class="textoInfo">1.230,85 €</h3>
+                    </div>
+                    <div id="botonesInfoTarjeta" class="d-flex">
+                        <a>
+                            <i class="bi bi-send"></i>
+                            <p class="textoInfo">ENVIAR</p>
+                        </a>
+                        <a>
+                            <i class="bi bi-piggy-bank"></i>
+                            <p class="textoInfo">INGRESAR</p>
+                        </a>
+                        <a>
+                            <i class="bi bi-lock"></i>
+                            <p class="textoInfo">BLOQUEAR</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="solicitarTarjeta" class="d-flex" asp-action="Crear">
+                <a asp-action="Crear" style="text-decoration: none">
+                    <div id="cajaNuevaTarjeta">
+                        <div id="imagenTarjetas">
+                            <img src="~/img/tarjetas.png" class="img-fluid" />
+                        </div>
+                        <div id="textoSolicitarTarjeta">
+                            <h3>SOLICITAR NUEVA TARJETA</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+</section>
+
+@*Listado de movimientos*@
+
+
