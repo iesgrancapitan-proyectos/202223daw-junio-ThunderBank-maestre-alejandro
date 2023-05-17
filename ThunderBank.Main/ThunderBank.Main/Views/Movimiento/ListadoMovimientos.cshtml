@@ -1,0 +1,52 @@
+﻿@using ThunderBank.Models;
+@model IEnumerable<Movimiento>
+
+@{
+    ViewData["Title"] = "Listado Movimientos";
+}
+
+<h2>Tus movimientos</h2>
+<a asp-action="Crear" class="btn btn-danger">Hacer un nuevo movimiento</a>
+<table class="table text-white">
+    <thead>
+        <tr>
+            <th>Importe</th>
+            <th>Tipo</th>
+            <th>Comentario</th>
+            <th>Relacionada</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Movimiento movimiento in Model.ToList().OrderBy(x => x.Id))
+        {
+            <tr>
+                @if (movimiento.Tipo == "GASTO")
+                {
+                    <td class="text-danger">-@movimiento.Importe €</td>
+                }
+                else
+                {
+                    <td class="text-success">@movimiento.Importe €</td>
+                }
+                <td>@movimiento.Tipo</td>
+                @if (movimiento.Comentario == null)
+                {
+                    <td>Sin Comentario</td>
+                }
+                else
+                {
+                    <td>@movimiento.Comentario</td>
+
+                }
+                @if (movimiento.Tipo == "INGRESO")
+                {
+                    <td>@movimiento.NumeroCuentaRelacionada</td>
+                }
+                else
+                {
+                    <td>@movimiento.NumeroCuentaRelacionada</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
