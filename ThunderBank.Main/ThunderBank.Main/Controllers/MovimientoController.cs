@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
+using ThunderBank.Services.Repositorios;
 
 namespace ThunderBank.Main.Controllers
 {
@@ -42,7 +43,14 @@ namespace ThunderBank.Main.Controllers
                 TempData["ErrorMessage"] = e.Message;
                 return RedirectToAction("Error","Movimiento");
             }
-            return RedirectToAction("Index","Cuenta");
+            return RedirectToAction("ListadoMovimientos");
+        }
+
+        public async Task<IActionResult> ListadoMovimientos()
+        {
+            string numeroCuenta = _repositorioCuenta.ObtenerNumeroDeCuenta();
+            IEnumerable<Movimiento> movimientosCuenta = await _repositorioMovimiento.ObtenerMovimientos(numeroCuenta);
+            return View(movimientosCuenta);
         }
 
         public IActionResult Error()

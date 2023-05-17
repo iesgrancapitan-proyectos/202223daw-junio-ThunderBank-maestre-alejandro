@@ -18,6 +18,7 @@ namespace ThunderBank.Models
         public string Comentario { get; set; }
         [Display(Name ="Numero de cuenta de destino")]
         public string NumeroCuentaRelacionada { get; set; } // ESTE ES EL NUMERO DE LA OTRA CUENTA
+        [Display(Name="Numero de Cuenta")]
         public string NumeroCuenta { get; set; }
     }
 }
