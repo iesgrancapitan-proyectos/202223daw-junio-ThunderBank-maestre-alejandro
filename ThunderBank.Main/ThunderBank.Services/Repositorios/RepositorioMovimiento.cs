@@ -33,7 +33,15 @@ namespace ThunderBank.Services.Repositorios
                     movimiento.NumeroCuentaRelacionada,
                     movimiento.NumeroCuenta
                 }, commandType: CommandType.StoredProcedure);
+        }
 
+        public async Task<IEnumerable<Movimiento>> ObtenerMovimientos(string numeroCuenta)
+        {
+            using SqlConnection db = DbConnection();
+            return await db.QueryAsync<Movimiento>(@"SELECT * 
+                        FROM Movimiento 
+                        WHERE numeroCuenta = @NumeroCuenta"
+                        , new { numeroCuenta });
         }
     }
 }
