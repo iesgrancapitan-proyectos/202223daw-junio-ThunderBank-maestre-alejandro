@@ -22,6 +22,10 @@ namespace ThunderBank.Main.Controllers
             IEnumerable<Tarjeta> tarjetasCliente = await _repositorioTarjeta.ObtenerTarjetas(clienteId);
             return View(tarjetasCliente);
         }
+
+        /*
+         CREAR TARJETA
+         */
         [HttpGet]
         public IActionResult Crear()
         {
@@ -31,11 +35,18 @@ namespace ThunderBank.Main.Controllers
             };
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Crear(Tarjeta model)
         {
             await _repositorioTarjeta.Crear(model);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Info(Tarjeta tarjeta)
+        {
+            return View(tarjeta);
         }
     }
 }
