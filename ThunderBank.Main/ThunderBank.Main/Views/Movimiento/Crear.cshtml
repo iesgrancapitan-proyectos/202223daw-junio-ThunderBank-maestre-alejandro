@@ -4,7 +4,8 @@
     ViewData["Title"] = "Crear Movimiento";
 }
 
-<h5>Creación de Movimientos</h5>
+<h3>Creación de Movimientos</h3>
+
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <form asp-controller="Movimiento" asp-action="Crear" class="text-white">
     <div class="mb-3">
@@ -29,5 +30,5 @@
         <span asp-validation-for="NumeroCuentaRelacionada" class="text-danger"></span>
     </div>
     <button class="btn btn-primary" type="submit">Enviar</button>
-    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+    <a class="btn btn-secondary" asp-action="Index" asp-controller="Cuenta">Cancelar</a>
 </form>

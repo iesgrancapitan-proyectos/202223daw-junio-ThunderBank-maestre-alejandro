@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
 
@@ -32,8 +33,26 @@ namespace ThunderBank.Main.Controllers
                 return View(movimiento);
             }
             movimiento.NumeroCuenta = cuentaOrigen;
-            await _repositorioMovimiento.Crear(movimiento);
+            try
+            {
+                await _repositorioMovimiento.Crear(movimiento);
+
+            }catch(SqlException e)
+            {
+                TempData["ErrorMessage"] = e.Message;
+                return RedirectToAction("Error","Movimiento");
+            }
             return RedirectToAction("Index","Cuenta");
+        }
+
+        public IActionResult Error()
+        {
+            if (TempData.ContainsKey("ErrorMessage"))
+            {
+                string mensajeError = TempData["ErrorMessage"].ToString();
+                ViewBag.Error = mensajeError;
+            }
+            return View();
         }
     }
 }
