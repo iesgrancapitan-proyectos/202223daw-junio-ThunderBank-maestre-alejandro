@@ -1,4 +1,5 @@
 ﻿@using ThunderBank.Models;
+@using System.Text.RegularExpressions;
 @model IEnumerable<Tarjeta>
 
 @{
@@ -7,27 +8,28 @@
 
 <h1>Menú de gestión de tarjetas</h1>
 
-<a asp-action="Crear" class="btn btn-danger">Crear nueva tarjeta</a>
+<a asp-action="Crear" class="btn btn-success">Crear nueva tarjeta</a>
 
 <table class="table">
     <thead>
         <tr>
             <th>Numero</th>
             <th>Fecha de caducidad</th>
+            <th>Estado</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Tarjeta tarjeta in Model.ToList().OrderByDescending(x=>x.FechaDeCreacion))
+        @foreach (Tarjeta tarjeta in Model.ToList().Where(x => x.Estado != "CANCELADA").OrderByDescending(x=>x.FechaDeCreacion))
         {
                 <tr>
-
-                    <td>@tarjeta.NumeroDeTarjeta</td>
-                <td>@tarjeta.FechaDeCaducidad.ToString("dd/MM/yy")</td>
+                <td>@Regex.Replace(tarjeta.NumeroDeTarjeta, "(.{4})", "$1 ")</td>
+                <td>@tarjeta.FechaDeCaducidad.ToString("MM/yy")</td>
+                <td>@tarjeta.Estado</td>
                     <td>
                         <input type="hidden" value="@tarjeta.NumeroDeTarjeta" class="numero" />
-                    <a class="btn btn-enfasis" asp-action="Info" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
-                    <a class="btn btn-danger" asp-action="Borrar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-trash"></i></a>
+                        <a class="btn btn-enfasis" asp-action="Info" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
+                    <a class="btn btn-danger" asp-action="CancelarTarjeta" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-trash"></i></a>
                     </td>
                 </tr>
             }
