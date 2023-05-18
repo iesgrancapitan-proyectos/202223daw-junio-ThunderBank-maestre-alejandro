@@ -70,18 +70,27 @@
     color: var(--primary-color);
 }
 
-#botonesInfoTarjeta {
+#botonesInfoTarjeta{
     justify-content: stretch;
     text-align: center;
     margin-top: 5%;
 }
 
-    #botonesInfoTarjeta a {
+    #botonesInfoTarjeta div{
         flex-grow: 1;
     }
 
-        #botonesInfoTarjeta a:not(:first-child) {
+        #botonesInfoTarjeta div:not(:first-child) {
             border-left: 1px solid black;
+        }
+
+        .enlaceAccion{
+            text-decoration: none !important;
+        }
+
+        .enlaceAccion i, .enlaceAccion p{
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
 #botonesInfoTarjeta:hover {

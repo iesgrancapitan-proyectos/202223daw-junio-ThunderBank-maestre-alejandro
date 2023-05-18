@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ThunderBank.Models;
+using ThunderBank.Models.DTO;
 using ThunderBank.Services.Interfaces;
 
 namespace ThunderBank.Main.Controllers
@@ -43,10 +44,38 @@ namespace ThunderBank.Main.Controllers
             return RedirectToAction("Index");
         }
 
+        /*
+         INFO TARJETA
+         */
         [HttpGet]
-        public IActionResult Info(Tarjeta tarjeta)
+        public async Task<IActionResult> Info(string numero)
         {
-            return View(tarjeta);
+            DtoTarjeta model = await _repositorioTarjeta.ObtenerDatosTarjeta(numero);
+            return View(model);
+        }
+
+        /*
+         ACCIONES TARJETA
+         */
+        [HttpGet]
+        public async Task<RedirectToActionResult> CongelarTarjeta(string numero)
+        {
+            await _repositorioTarjeta.CongelarTarjeta(numero);
+            return RedirectToAction("Index", "Tarjeta");
+        }
+
+        [HttpGet]
+        public async Task<RedirectToActionResult> ActivarTarjeta(string numero)
+        {
+            await _repositorioTarjeta.ActivarTarjeta(numero);
+            return RedirectToAction("Index", "Tarjeta");
+        }
+
+        [HttpGet]
+        public async Task<RedirectToActionResult> CancelarTarjeta(string numero)
+        {
+            await _repositorioTarjeta.CancelarTarjeta(numero);
+            return RedirectToAction("Index", "Tarjeta");
         }
     }
 }
