@@ -7,16 +7,23 @@
 <h3>Creación de Movimientos</h3>
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form asp-controller="Movimiento" asp-action="Crear" class="text-white">
+<form asp-controller="Movimiento" asp-action="Crear" class="text-white ">
     <div class="mb-3">
-        <select asp-for="Tipo">
+        <select asp-for="Tipo" class="form-select w-25" aria-label="Default select example">
+            <option selected>Seleccione el tipo de movimiento</option>
             <option value="INGRESO">INGRESO</option>
             <option value="GASTO">GASTO</option>
         </select>
+
+@*        <label class="form-label">Tipo de Movimiento</label><br />
+        <select asp-for="Tipo">
+            <option value="INGRESO">Recibir dinero</option>
+            <option value="GASTO">Enviar dinero</option>
+        </select>*@
     </div>
     <div class="mb-3">
         <label asp-for="Importe" class="form-label"></label>
-        <input type="text" asp-for="Importe" class="form-control text-black" />
+        <input type="text" asp-for="Importe" placeholder="Intoduzca una cuantía. Ejemplo(1000 - 30,5)" class="form-control text-black"/>
         <span asp-validation-for="Importe" class="text-danger"></span>
     </div>
     <div class="mb-3">
@@ -29,6 +36,6 @@
         <input type="text" asp-for="NumeroCuentaRelacionada" class="form-control text-black" />
         <span asp-validation-for="NumeroCuentaRelacionada" class="text-danger"></span>
     </div>
-    <button class="btn btn-primary" type="submit">Enviar</button>
-    <a class="btn btn-secondary" asp-action="ListadoMovimientos">Cancelar</a>
+    <button class="btn btn-success" type="submit">Enviar</button>
+    <a class="btn btn-danger" asp-action="ListadoMovimientos">Cancelar</a>
 </form>

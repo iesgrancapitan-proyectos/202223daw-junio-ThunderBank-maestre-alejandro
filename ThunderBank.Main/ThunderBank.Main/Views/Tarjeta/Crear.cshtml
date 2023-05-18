@@ -6,17 +6,19 @@
 }
 
 <h1>Crear tarjeta</h1>
-<form asp-controller="Tarjeta" asp-action="Crear">
+<form asp-controller="Tarjeta" asp-action="Crear"class="text-white">
     <input type="hidden" asp-for="FechaDeCreacion" value="@DateTime.Now" />
     <input type="hidden" asp-for="FechaDeCaducidad" value="@DateTime.Now.AddYears(3)" />
     <input type="hidden" asp-for="Cvc" value="@Model.Cvc" />
     <input type="hidden" asp-for="Pin" value="@Model.Pin" />
     <input type="hidden" asp-for="Estado" value="@Model.Estado" />
     <input type="hidden" asp-for="NumeroDeCuenta" value="@Model.NumeroDeCuenta" />
-    <label class="form-label">Anota tu código pin</label>
+    <label class="form-label">Anota tu código pin</label><br>
     <input type="text" disabled placeholder="@Model.Pin" asp-for="Pin" />
-    <button type="submit" class="btn btn-success">Crear tarjeta</button>
-    <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-success">Crear tarjeta</button>
+        <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+    </div>
 </form>
 
 

@@ -6,10 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<h1 class="text-white">Nueva alta</h1>
 <div class="form-container">
-    <h1 class="text-white">Nueva alta</h1>
-
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="Usuario" asp-action="Crear" class="w-100">
         <div class="col mb-4">
@@ -31,7 +29,6 @@
                     </div>
                 </div>
             </div>
-
             @*Contraseña*@
             <div class="row">
                 <div class="col">
@@ -48,9 +45,7 @@
                         <span asp-validation-for="PswComprobada" class="text-danger"></span>
                     </div>
                 </div>
-
             </div>
-
             <div class="row">
                 <div class="col-4">
                     @*DNI*@
@@ -68,7 +63,6 @@
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col">
@@ -79,7 +73,6 @@
                         <label class="form-label" asp-for="Rol" for="floatingSelect">Tipo de usuario</label>
                         <span asp-validation-for="Rol" class="text-danger"></span>
                     </div>
-
                 </div>
                 <div class="col">
                     @*Fecha de nacimiento*@
@@ -88,7 +81,6 @@
                         <label asp-for="FechaDeNacimiento" class="form-label"></label>
                         <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
                     </div>
-
                 </div>
                 <div class="col">
                     @*Teléfono*@
@@ -98,23 +90,14 @@
                         <span asp-validation-for="Telefono" class="text-danger"></span>
                     </div>
                 </div>
-
             </div>
-
-
-
-
-
             @*Dirección*@
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" asp-for="Direccion" placeholder="Dirección" />
                 <label asp-for="Direccion" class="form-label"></label>
                 <span asp-validation-for="Direccion" class="text-danger"></span>
             </div>
-
-
         </div>
-
         <input type="hidden" asp-for="FechaDeAlta" value="@DateTime.Now" />
 
         <button class="btn btn-success" type="submit">Dar de alta</button>

@@ -4,25 +4,24 @@
     ViewData["Title"] = "Crear Cuentas";
 }
 
-
 <h5>Creación de Cuenta</h5>
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form asp-controller="Cuenta" asp-action="Crear">
-    <div class="mb-3">
+<form asp-controller="Cuenta" asp-action="Crear" class="text-white">
+    <div class="mb-3 w-50">
         <label asp-for="Saldo" class="form-label"></label>
-        <input type="text" asp-for="Saldo" class="form-control text-black" />
+        <input type="text" asp-for="Saldo" class="form-control" placeholder="Intoduzca la cantidad inicial de la cuenta.Ejemplos(100,02 - 50 - 25 - 250,02)" />
         <span asp-validation-for="Saldo" class="text-danger"></span>
     </div>
     <input type="hidden" asp-for="FechaApertura" value="@DateTime.Now" />
     <div class="mb-3">
+        <label>Tipos de Cuenta</label><br/>
         <select asp-for="Tipo">
             <option value="RAYO">RAYO</option>
             <option value="TRUENO">TRUENO</option>
             <option value="TORMENTA">TORMENTA</option>
         </select>
     </div>
-
-    <button class="btn btn-primary" type="submit">Enviar</button>
-    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+    <button class="btn btn-success" type="submit">Enviar</button>
+    <a class="btn btn-danger" asp-action="Index">Cancelar</a>
 </form>
 
