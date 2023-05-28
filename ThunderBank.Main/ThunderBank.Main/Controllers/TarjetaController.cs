@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ThunderBank.Models;
+using ThunderBank.Models.DTO;
 using ThunderBank.Services.Interfaces;
 
 namespace ThunderBank.Main.Controllers
@@ -22,6 +23,10 @@ namespace ThunderBank.Main.Controllers
             IEnumerable<Tarjeta> tarjetasCliente = await _repositorioTarjeta.ObtenerTarjetas(clienteId);
             return View(tarjetasCliente);
         }
+
+        /*
+         CREAR TARJETA
+         */
         [HttpGet]
         public IActionResult Crear()
         {
@@ -31,11 +36,46 @@ namespace ThunderBank.Main.Controllers
             };
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Crear(Tarjeta model)
         {
             await _repositorioTarjeta.Crear(model);
             return RedirectToAction("Index");
+        }
+
+        /*
+         INFO TARJETA
+         */
+        [HttpGet]
+        public async Task<IActionResult> Info(string numero)
+        {
+            DtoTarjeta model = await _repositorioTarjeta.ObtenerDatosTarjeta(numero);
+            return View(model);
+        }
+
+        /*
+         ACCIONES TARJETA
+         */
+        [HttpGet]
+        public async Task<RedirectToActionResult> CongelarTarjeta(string numero)
+        {
+            await _repositorioTarjeta.CongelarTarjeta(numero);
+            return RedirectToAction("Index", "Tarjeta");
+        }
+
+        [HttpGet]
+        public async Task<RedirectToActionResult> ActivarTarjeta(string numero)
+        {
+            await _repositorioTarjeta.ActivarTarjeta(numero);
+            return RedirectToAction("Index", "Tarjeta");
+        }
+
+        [HttpGet]
+        public async Task<RedirectToActionResult> CancelarTarjeta(string numero)
+        {
+            await _repositorioTarjeta.CancelarTarjeta(numero);
+            return RedirectToAction("Index", "Tarjeta");
         }
     }
 }

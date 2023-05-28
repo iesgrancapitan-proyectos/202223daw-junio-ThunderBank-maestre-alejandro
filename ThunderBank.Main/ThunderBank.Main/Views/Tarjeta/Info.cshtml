@@ -1,0 +1,107 @@
+﻿@using ThunderBank.Models.DTO;
+@model DtoTarjeta
+
+@{
+    ViewData["Title"] = "Información de la tarjeta";
+    string urlTarjeta = string.Empty;
+
+    switch (Model.Tipo)
+    {
+        case "TRUENO":
+            urlTarjeta = "../../img/tarjetaTrueno.png";
+            break;
+
+        case "RAYO":
+            urlTarjeta = "../../img/tarjetaRayo.png";
+            break;
+
+        case "TORMENTA":
+            urlTarjeta = "../../img/tarjetaTormenta.png";
+            break;
+
+        default:
+            urlTarjeta = "Undefined";
+            break;
+    }
+}
+
+@*Sección info y solicitar tarjeta*@
+<section class="d-flex row position-relative justify-content-center" id="seccionInfo">
+    <div class="justify-content-center">
+        <div id="imagenTarjeta" class="position-absolute">
+            <img id="tarjeta" src=@urlTarjeta alt="Tarjeta de crédito" class="img-fluid" />
+            <div id="tarjetaDatos" class="d-flex">
+                <div id="tarjetaDatosIzquierda">
+                    <p>**** **** **** @Model.NumeroDeTarjeta.Substring(12)</p>
+                    <p>@Model.Titular.ToUpper()</p>
+                </div>
+                <div id="tarjetaDatosDerecha">
+                    <p>@Model.FechaDeCaducidad.ToString("MM/yy")</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="cajasTarjeta" class="d-flex row justify-content-end align-items-end">
+            <div id="infoTarjeta" class="d-flex">
+                <div id="itemsInfoTarjeta" class="d-flex">
+                    <div id="textoInfoTarjeta">
+                        <p class="textoInfo">Saldo</p>
+                        <h3 class="textoInfo">@Model.SaldoCuenta.ToString("#,##0.00") €</h3>
+                    </div>
+                    <div id="botonesInfoTarjeta" class="d-flex">
+                        <div>
+                            <a class="enlaceAccion" asp-action="CongelarTarjeta">
+                                <i class="bi bi-send"></i>
+                                <p class="textoInfo">ENVIAR</p>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a class="enlaceAccion" asp-action="CongelarTarjeta">
+                                <i class="bi bi-piggy-bank"></i>
+                                <p class="textoInfo">INGRESAR</p>
+                            </a>
+                        </div>
+
+                        <div>
+                            @if (Model.Estado == "ACTIVA")
+                            {
+                                <a class="enlaceAccion" asp-action="CongelarTarjeta" asp-route-numero="@Model.NumeroDeTarjeta">
+                                    <i class="bi bi-snow"></i>
+                                    <p class="textoInfo">CONGELAR</p>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="enlaceAccion" asp-action="ActivarTarjeta" asp-route-numero="@Model.NumeroDeTarjeta">
+                                    <i class="bi bi-credit-card"></i>
+                                    <p class="textoInfo">ACTIVAR</p>
+                                </a>
+                            }
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div id="solicitarTarjeta" class="d-flex" asp-action="Crear">
+                <a asp-action="Crear" style="text-decoration: none">
+                    <div id="cajaNuevaTarjeta">
+                        <div id="imagenTarjetas">
+                            <img src="~/img/tarjetas.png" class="img-fluid" />
+                        </div>
+                        <div id="textoSolicitarTarjeta">
+                            <h3>SOLICITAR NUEVA TARJETA</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+</section>
+
+@*Listado de movimientos*@
+
+
