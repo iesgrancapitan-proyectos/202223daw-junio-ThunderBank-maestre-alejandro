@@ -10,29 +10,27 @@
 
 <a asp-action="Crear" class="btn btn-success">Crear nueva tarjeta</a>
 
-<table class="table">
+<table class="table table-hover table-striped">
     <thead>
         <tr>
+            <th>Acciones</th>
             <th>Numero</th>
             <th>Fecha de caducidad</th>
-            <th>Estado</th>
-            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Tarjeta tarjeta in Model.ToList().Where(x => x.Estado != "CANCELADA").OrderByDescending(x=>x.FechaDeCreacion))
+        @foreach (Tarjeta tarjeta in Model.ToList().OrderByDescending(x => x.FechaDeCreacion))
         {
-                <tr>
-                <td>@Regex.Replace(tarjeta.NumeroDeTarjeta, "(.{4})", "$1 ")</td>
-                <td>@tarjeta.FechaDeCaducidad.ToString("MM/yy")</td>
-                <td>@tarjeta.Estado</td>
-                    <td>
-                        <input type="hidden" value="@tarjeta.NumeroDeTarjeta" class="numero" />
-                        <a class="btn btn-enfasis" asp-action="Info" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
-                    <a class="btn btn-danger" asp-action="CancelarTarjeta" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-trash"></i></a>
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    <input type="hidden" value="@tarjeta.NumeroDeTarjeta" class="numero" />
+                    <a class="btn btn-enfasis" asp-action="Editar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
+                    <a class="btn btn-danger" asp-action="Borrar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-trash"></i></a>
+                </td>
+                <td>@tarjeta.NumeroDeTarjeta</td>
+                <td>@tarjeta.FechaDeCaducidad.ToString("dd/MM/yy")</td>
+            </tr>
+        }
         }
     </tbody>
 </table>

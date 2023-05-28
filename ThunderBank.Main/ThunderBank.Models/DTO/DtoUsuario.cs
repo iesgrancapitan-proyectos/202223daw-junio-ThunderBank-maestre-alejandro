@@ -47,10 +47,13 @@ namespace ThunderBank.Models.DTO
         public string NombreUsuario { get; set; }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "La constraseña es obligatoria")]
+        [Required(ErrorMessage = "La contraseña es obligatoria")]
         [Display(Name = "Contraseña")]
-        [Compare("PswComprobada", ErrorMessage = "Las constraseñas no son iguales")]
+        [Compare("PswComprobada", ErrorMessage = "Las contraseñas no son iguales")]
         public string Psw { get; set; }
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Este campo no permite valores nulos")]
+        [Display(Name = "Repite contraseña")]
         public string PswComprobada { get; set; }
         public DateTime FechaDeAlta { get; set; }
 
