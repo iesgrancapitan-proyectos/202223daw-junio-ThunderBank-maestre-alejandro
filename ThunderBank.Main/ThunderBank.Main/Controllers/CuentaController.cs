@@ -16,7 +16,7 @@ namespace ThunderBank.Main.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var idCliente = _repositorioCliente.ObtenerClienteId();
+            var idCliente =  await _repositorioCliente.ObtenerClienteId();
             var cuentasAgrupadas = await _repositorioCuenta.Buscar(idCliente);
             var modelo = cuentasAgrupadas.GroupBy(x => x.Tipo).Select(grupo => new CuentaViewModel
             {
@@ -34,7 +34,7 @@ namespace ThunderBank.Main.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(Cuenta cuenta)
         {
-            var idCliente = _repositorioCliente.ObtenerClienteId();
+            int idCliente = await _repositorioCliente.ObtenerClienteId();
             if (!ModelState.IsValid)
             {
                 return View(cuenta);

@@ -8,6 +8,6 @@ namespace ThunderBank.Services.Interfaces
         Task CrearCliente(Cliente modelo);
         Task<IEnumerable<DtoUsuario>> Listar();
         Task<IEnumerable<DtoUsuario>> ListarPorResponsable(int idResponsable);
-        int ObtenerClienteId();
+        Task<int> ObtenerClienteId();
     }
 }
