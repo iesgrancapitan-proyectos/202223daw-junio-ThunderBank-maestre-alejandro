@@ -36,7 +36,6 @@ namespace ThunderBank.Main.Controllers
 
             var usuario = new Usuario() { Nombre = modelo.Nombre };
             var resultado = await _userManager.CreateAsync(usuario,password:modelo.Pwd);
-            //var idUsuario = await _userManager.GetUserIdAsync(usuario);
             if(resultado.Succeeded)
             {
                 var cliente = new Cliente
@@ -49,7 +48,8 @@ namespace ThunderBank.Main.Controllers
                 await _repositorioCliente.CrearCliente(cliente);
 
                 await _signInManager.SignInAsync(usuario, isPersistent: true);
-
+                ClaimsIdentity identity = new();
+                identity.AddClaim(new Claim(ClaimTypes.Role, "Responsable"));
                 return RedirectToAction("Index","Tarjeta");
             }
             else
