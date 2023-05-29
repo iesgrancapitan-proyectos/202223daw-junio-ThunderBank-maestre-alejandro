@@ -10,7 +10,6 @@ namespace ThunderBank.Services.Repositorios
     public class RepositorioCliente : IRepositorioCliente
     {
         private readonly SqlConfiguration _configuration;
-        private readonly IServicioUsuario _servicioUsuario;
 
         public RepositorioCliente(SqlConfiguration configuration)
         {
@@ -26,11 +25,10 @@ namespace ThunderBank.Services.Repositorios
             return 1002;
         }
 
-        public async Task CrearCliente(Usuario modelo)
+        public async Task CrearCliente(Cliente modelo)
         {
             using var db = DbConnection();
-            var actualDate = DateTime.Now.ToString("yyyy,MM,dd");
-            await db.QuerySingle(@"INSERT INTO Cliente(dni,nombre,fechaAlta,idUsuario) VALUES (@Dni,@Nombre,@actualDate,@idUsuario)", modelo);
+            await db.QuerySingle(@"INSERT INTO Cliente(nombre,fechaAlta,idUsuario,activo) VALUES (@Nombre,@FechaDeAlta,@IdUsuario,@Activo) SELECT SCOPE_IDENTITY()", modelo);
         }
         public async Task<IEnumerable<DtoUsuario>> Listar()
         {

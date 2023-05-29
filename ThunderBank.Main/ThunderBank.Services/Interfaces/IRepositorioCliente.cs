@@ -5,7 +5,7 @@ namespace ThunderBank.Services.Interfaces
 {
     public interface IRepositorioCliente
     {
-        Task CrearCliente(Usuario modelo);
+        Task CrearCliente(Cliente modelo);
         Task<IEnumerable<DtoUsuario>> Listar();
         Task<IEnumerable<DtoUsuario>> ListarPorResponsable(int idResponsable);
         int ObtenerClienteId();
