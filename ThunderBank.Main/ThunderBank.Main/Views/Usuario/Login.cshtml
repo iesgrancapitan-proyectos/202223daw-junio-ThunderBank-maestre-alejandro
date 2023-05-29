@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ThunderBank.Models.LoginViewModel
+@{
     ViewData["Title"] = "Login";
 }
 
@@ -12,19 +13,23 @@
     <div id="izquierdaLanding" class="w-50 m-5">
         <h1 style="font-weight: 300; font-size: 2em;">Bienvenido a <span style="font-weight: 700;">ThunderBank</span></h1>
         <p>Por favor, introduce tus datos</p>
-        <form id="formularioLogin" class="mt-5">
+        <form asp-action="Login" id="formularioLogin" class="mt-5">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input class="form-control p-3" placeholder="jose.cuervo@example.com" />
+                <label asp-for="Nombre" class="form-label"></label>
+                <input asp-for="Nombre" class="form-control p-3" placeholder="jose.cuervo@example.com"  />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input class="form-control p-3" placeholder="········" />
+                <label asp-for="Pwd" class="form-label"></label>
+                <input asp-for="Pwd" class="form-control p-3" placeholder="········" type="password" />
             </div>
+
+
             <div class="d-flex justify-content-between">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input">
-                    <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
+                    <input type="checkbox" class="form-check-input" asp-for="Recuerdame">
+                    <label class="form-check-label" for="exampleCheck1" asp-for="Recuerdame"></label>
                 </div>
                 <div>
                     <a href="#">Olvidé mi contraseña</a>
@@ -33,7 +38,6 @@
             <div>
                 <button type="submit" class="btn btn-primary w-100 p-3 mt-5 mb-3" id="botonLogin">Iniciar sesión</button>
             </div>
-
         </form>
     </div>
 
@@ -49,3 +53,8 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using ThunderBank.Main.Auth;
+using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
 using ThunderBank.Services.Repositorios;
 using ThunderBank.Services.SQL;
@@ -12,9 +15,29 @@ builder.Services.AddSingleton(sqlConfiguration);
 builder.Services.AddTransient<IRepositorioCliente, RepositorioCliente>();
 builder.Services.AddTransient<IRepositorioCuenta, RepositorioCuenta>();
 builder.Services.AddTransient<IRepositorioTarjeta, RepositorioTarjeta>();
-builder.Services.AddTransient<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddTransient<IRepositorioResponsable, RepositorioResponsable>();
 builder.Services.AddTransient<IRepositorioMovimiento, RepositorioMovimiento>();
+builder.Services.AddTransient<IRepositorioUsuario, RepositorioUsuario>();
+builder.Services.AddTransient<IUserStore<Usuario>,UsuarioStore>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<SignInManager<Usuario>>();
+
+
+builder.Services.AddIdentityCore<Usuario>(opt =>
+{
+    opt.Password.RequireDigit = false;
+    opt.Password.RequireLowercase = false;
+    opt.Password.RequireUppercase = false;
+    opt.Password.RequireNonAlphanumeric = false;
+});
+
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    opt.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+    opt.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+}).AddCookie(IdentityConstants.ApplicationScheme);
+
 
 var app = builder.Build();
 
@@ -31,6 +54,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

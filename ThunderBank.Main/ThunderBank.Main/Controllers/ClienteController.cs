@@ -21,6 +21,10 @@ namespace ThunderBank.Main.Controllers
         {
             return View();
         }
+        public IActionResult Crear()
+        {
+            return View();
+        }
 
         // LISTAR CLIENTES
 
