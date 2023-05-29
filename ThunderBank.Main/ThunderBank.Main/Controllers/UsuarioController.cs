@@ -12,11 +12,13 @@ namespace ThunderBank.Main.Controllers
     {
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
+        private readonly IRepositorioCliente _repositorioCliente;
 
-        public UsuarioController(UserManager<Usuario> userManager,SignInManager<Usuario> signInManager)
+        public UsuarioController(UserManager<Usuario> userManager,SignInManager<Usuario> signInManager,IRepositorioCliente repositorioCliente)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._repositorioCliente = repositorioCliente;
         }
 
         public IActionResult Registro()
@@ -32,12 +34,22 @@ namespace ThunderBank.Main.Controllers
                 return View(modelo);
             }
 
-
             var usuario = new Usuario() { Nombre = modelo.Nombre };
             var resultado = await _userManager.CreateAsync(usuario,password:modelo.Pwd);
+            //var idUsuario = await _userManager.GetUserIdAsync(usuario);
             if(resultado.Succeeded)
             {
+                var cliente = new Cliente
+                {
+                    Nombre = modelo.Nombre,
+                    FechaDeAlta = DateTime.Now,
+                    IdUsuario = usuario.Id,
+                    Activo = 1
+                };
+                await _repositorioCliente.CrearCliente(cliente);
+
                 await _signInManager.SignInAsync(usuario, isPersistent: true);
+
                 return RedirectToAction("Index","Tarjeta");
             }
             else

@@ -20,6 +20,7 @@ builder.Services.AddTransient<IRepositorioMovimiento, RepositorioMovimiento>();
 builder.Services.AddTransient<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddTransient<IUserStore<Usuario>,UsuarioStore>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
 builder.Services.AddTransient<SignInManager<Usuario>>();
 
 
@@ -36,7 +37,7 @@ builder.Services.AddAuthentication(opt =>
     opt.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
     opt.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
     opt.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
-}).AddCookie(IdentityConstants.ApplicationScheme);
+}).AddCookie(IdentityConstants.ApplicationScheme).AddCookie(IdentityConstants.ApplicationScheme.Length.ToString());
 
 
 var app = builder.Build();
@@ -56,6 +57,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

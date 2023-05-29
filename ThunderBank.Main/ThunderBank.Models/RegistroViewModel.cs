@@ -16,7 +16,5 @@ namespace ThunderBank.Models
         [DisplayName(displayName: "Contraseña")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Pwd { get; set; }
-        [DniCorrecto]
-        public string Dni { get; set; }
     }
 }
