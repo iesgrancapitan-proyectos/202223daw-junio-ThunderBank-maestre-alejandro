@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using ThunderBank.Models;
 using ThunderBank.Models.DTO;
 using ThunderBank.Services.Interfaces;
 using ThunderBank.Services.SQL;
@@ -8,6 +9,7 @@ namespace ThunderBank.Services.Repositorios
 {
     public class RepositorioUsuario: IRepositorioUsuario
     {
+
         private readonly SqlConfiguration _configuration;
 
         public RepositorioUsuario(SqlConfiguration configuration)
@@ -18,6 +20,20 @@ namespace ThunderBank.Services.Repositorios
         protected SqlConnection DbConnection()
         {
             return new SqlConnection(_configuration.ConnectionString);
+        }
+
+        public async Task<int> CrearUsuario(Usuario usuario)
+        {
+            using var db = DbConnection();
+            usuario.Rol = "CLIENTE";
+            var id = await db.QuerySingleAsync<int>(@"INSERT INTO Usuario(nombre,pwd,rol) VALUES (@Nombre,@Pwd,@Rol) SELECT SCOPE_IDENTITY()",usuario);
+            return id;
+        }
+
+        public async Task<Usuario> BuscarUsuarioPorNombre(string nombre)
+        {
+            using var db = DbConnection();
+            return await db.QuerySingleOrDefaultAsync<Usuario>(@"SELECT * FROM Usuario WHERE nombre = @Nombre", new { nombre });
         }
 
         public async Task<bool> Crear(DtoUsuario usuario)
