@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 using ThunderBank.Models;
 using ThunderBank.Models.DTO;
 using ThunderBank.Services.Interfaces;
@@ -28,13 +29,21 @@ namespace ThunderBank.Main.Controllers
          CREAR TARJETA
          */
         [HttpGet]
-        public IActionResult Crear()
+        public async Task<IActionResult> Crear()
         {
-            Tarjeta model = new()
+            try
             {
-                NumeroDeCuenta = _repositorioCuenta.ObtenerNumeroDeCuenta()
-            };
-            return View(model);
+                Tarjeta model = new()
+                {
+                    NumeroDeCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta()
+                };
+                return View(model);
+            }
+            catch(Exception)
+            {
+                ViewBag.Error = "No Existen cuentas a la que relacionar la cuenta";
+            }
+            return View("Index", ViewBag);
         }
 
         [HttpPost]

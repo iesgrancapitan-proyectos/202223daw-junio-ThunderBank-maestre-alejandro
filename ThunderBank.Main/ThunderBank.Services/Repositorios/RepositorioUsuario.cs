@@ -65,5 +65,11 @@ namespace ThunderBank.Services.Repositorios
             return await db.QueryFirstOrDefaultAsync<DtoUsuario>(@"SELECT nombre FROM Usuario WHERE nombre = @usuario",
                 new { usuario });
         }
+
+        public async Task<string> ObtenerRolUsuario(int id)
+        {
+            var db = DbConnection();
+            return await db.QueryFirstOrDefaultAsync<string>(@"SELECT rol FROM Usuario WHERE id = @IdUsuario",new {id});
+        }
     }
 }

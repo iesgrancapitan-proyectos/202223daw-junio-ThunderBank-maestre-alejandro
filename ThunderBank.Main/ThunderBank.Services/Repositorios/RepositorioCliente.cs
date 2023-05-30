@@ -54,7 +54,7 @@ namespace ThunderBank.Services.Repositorios
         public async Task CrearCliente(Cliente modelo)
         {
             using var db = DbConnection();
-            await db.QuerySingle(@"INSERT INTO Cliente(nombre,fechaAlta,idUsuario,activo) VALUES (@Nombre,@FechaDeAlta,@IdUsuario,@Activo) SELECT SCOPE_IDENTITY()", modelo);
+            await db.QuerySingle(@"INSERT INTO Cliente(dni,nombre,apellido,telefono,correo,fechaNacimiento,fechaAlta,idUsuario,activo) VALUES (@Dni,@Nombre,@Apellido,@Telefono,@Correo,@FechaDeNacimiento,@FechaDeAlta,@IdUsuario,@Activo) SELECT SCOPE_IDENTITY()", modelo);
         }
         public async Task<IEnumerable<DtoUsuario>> Listar()
         {

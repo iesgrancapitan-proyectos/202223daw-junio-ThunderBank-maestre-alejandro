@@ -7,6 +7,7 @@
 }
 
 <h1>Menú de gestión de tarjetas</h1>
+<h1>@ViewBag.Error</h1>
 
 <a asp-action="Crear" class="btn btn-success">Crear nueva tarjeta</a>
 
@@ -24,7 +25,7 @@
             <tr>
                 <td>
                     <input type="hidden" value="@tarjeta.NumeroDeTarjeta" class="numero" />
-                    <a class="btn btn-enfasis" asp-action="Editar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
+                    <a class="btn btn-enfasis" asp-action="Info" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
                     <a class="btn btn-danger" asp-action="Borrar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-trash"></i></a>
                 </td>
                 <td>@tarjeta.NumeroDeTarjeta</td>

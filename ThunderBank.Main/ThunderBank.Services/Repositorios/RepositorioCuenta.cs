@@ -1,6 +1,8 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Security.Claims;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
 using ThunderBank.Services.SQL;
@@ -10,18 +12,40 @@ namespace ThunderBank.Services.Repositorios
     public class RepositorioCuenta : IRepositorioCuenta
     {
         private readonly SqlConfiguration _configuration;
+        private readonly IRepositorioCliente _repositorioCliente;
+        private readonly HttpContext _httpContext;
 
-        public RepositorioCuenta(SqlConfiguration configuration)
+        public RepositorioCuenta(SqlConfiguration configuration, IHttpContextAccessor httpContextAccessor,IRepositorioCliente repositorioCliente)
         {
+            _httpContext = httpContextAccessor.HttpContext;
             _configuration = configuration;
+            this._repositorioCliente = repositorioCliente;
         }
         protected SqlConnection DbConnection()
         {
             return new SqlConnection(_configuration.ConnectionString);
         }
-        public string ObtenerNumeroDeCuenta()
+        /**
+         * Realmente no saca el ultimo porque 
+         */
+        public async Task<string> ObtenerNumeroDeCuenta()
         {
-            return "5772281704013526134306522";
+            var clienteId = await _repositorioCliente.ObtenerClienteId();
+            var ultimaCuenta = await ObtenerCuentasPorIdCliente(clienteId.ToString());
+            string ultimoNumero = ultimaCuenta.Select(x => (string)x.GetType().GetProperty("Numero").GetValue(x, null)).Last();
+            //string ultimoNumero = await ObtenerUltimaCuentaCliente(clienteId.ToString());
+            return ultimoNumero;
+        }
+
+        public async Task<IEnumerable<Cuenta>> ObtenerCuentasPorIdCliente(string id)
+        {
+            using var db = DbConnection();
+            return await db.QueryAsync<Cuenta>(@"SELECT * FROM Cuenta WHERE idCliente = @Id ORDER BY fechaApertura", new { id });
+        }
+        public async Task<string> ObtenerUltimaCuentaCliente(string id)
+        {
+            using var db = DbConnection();
+            return await db.QueryFirstOrDefaultAsync<string>(@"SELECT * FROM Cuenta WHERE idCliente = @Id ORDER BY idCliente numero DESC LIMIT 1", new { id });
         }
 
         public async Task Crear(Cuenta cuenta,int idCliente)
