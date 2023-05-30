@@ -34,15 +34,11 @@ namespace ThunderBank.Services.Repositorios
 
                 int id = await ObtenerIdClientePorIdUsuario(idClaim.Value);
                 return id;
-
-                //var id = int.Parse(idClaim.Value);
-                //return id;
             }
             else
             {
                 throw new ApplicationException("El usuario no está autenticado");
             }
-            //return 1002;
         }
 
         public async Task<int> ObtenerIdClientePorIdUsuario(string id)

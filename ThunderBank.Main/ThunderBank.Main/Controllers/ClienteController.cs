@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ThunderBank.Models;
 using ThunderBank.Models.DTO;
 using ThunderBank.Services.Interfaces;
@@ -16,11 +17,12 @@ namespace ThunderBank.Main.Controllers
             _repositorioCliente = repositorioCliente;
             _repositorioResponsable = repositorioResponsable;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
+        [Authorize]
         public IActionResult Crear()
         {
             return View();
@@ -29,6 +31,7 @@ namespace ThunderBank.Main.Controllers
         // LISTAR CLIENTES
 
         // Listar todos los clientes
+        [Authorize]
         public async Task<IActionResult> ListarClientes()
         {
             IEnumerable<DtoUsuario> listadoClientes = await _repositorioCliente.Listar();
@@ -37,6 +40,7 @@ namespace ThunderBank.Main.Controllers
         }
 
         // Listar por responsable
+        [Authorize]
         public async Task<IActionResult> ListarClientesResponsable()
         {
             int idResponsable = _repositorioResponsable.ObtenerResponsableId();

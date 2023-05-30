@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
@@ -16,6 +17,7 @@ namespace ThunderBank.Main.Controllers
             this._repositorioMovimiento = repositorioMovimiento;
             this._repositorioCuenta = repositorioCuenta;
         }
+        
         public IActionResult Index()
         {
             return View();
@@ -25,6 +27,8 @@ namespace ThunderBank.Main.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Crear(Movimiento movimiento)
         {

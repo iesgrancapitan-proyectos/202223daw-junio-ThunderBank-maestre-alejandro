@@ -49,6 +49,11 @@ namespace ThunderBank.Services.Repositorios
                 INNER JOIN Cuenta C
                 ON C.idCliente = @ClienteId", new {clienteId});
         }
+        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorNumCuenta(string numCuenta)
+        {
+            using SqlConnection db = DbConnection();
+            return await db.QueryAsync<Tarjeta>(@"SELECT * FROM Tarjeta WHERE numero = @NumCuenta", new { numCuenta});
+        }
 
         public async Task<DtoTarjeta> ObtenerDatosTarjeta(string numeroTarjeta)
         {

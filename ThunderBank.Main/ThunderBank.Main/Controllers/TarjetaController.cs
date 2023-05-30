@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using ThunderBank.Models;
 using ThunderBank.Models.DTO;
@@ -18,6 +19,7 @@ namespace ThunderBank.Main.Controllers
             _repositorioCuenta = repositorioCuenta;
             _repositorioCliente = repositorioCliente;
         }
+
         public async Task<IActionResult> Index()
         {
             int clienteId = await _repositorioCliente.ObtenerClienteId();
@@ -28,6 +30,7 @@ namespace ThunderBank.Main.Controllers
         /*
          CREAR TARJETA
          */
+
         [HttpGet]
         public async Task<IActionResult> Crear()
         {
@@ -43,7 +46,7 @@ namespace ThunderBank.Main.Controllers
             {
                 ViewBag.Error = "No Existen cuentas a la que relacionar la cuenta";
             }
-            return View("Index", ViewBag);
+            return View("Index");
         }
 
         [HttpPost]
@@ -56,6 +59,7 @@ namespace ThunderBank.Main.Controllers
         /*
          INFO TARJETA
          */
+
         [HttpGet]
         public async Task<IActionResult> Info(string numero)
         {
@@ -66,20 +70,19 @@ namespace ThunderBank.Main.Controllers
         /*
          ACCIONES TARJETA
          */
+        
         [HttpGet]
         public async Task<RedirectToActionResult> CongelarTarjeta(string numero)
         {
             await _repositorioTarjeta.CongelarTarjeta(numero);
             return RedirectToAction("Index", "Tarjeta");
         }
-
         [HttpGet]
         public async Task<RedirectToActionResult> ActivarTarjeta(string numero)
         {
             await _repositorioTarjeta.ActivarTarjeta(numero);
             return RedirectToAction("Index", "Tarjeta");
         }
-
         [HttpGet]
         public async Task<RedirectToActionResult> CancelarTarjeta(string numero)
         {

@@ -11,5 +11,6 @@ namespace ThunderBank.Services.Interfaces
         Task Crear(Tarjeta tarjeta);
         Task<DtoTarjeta> ObtenerDatosTarjeta(string numeroTarjeta);
         Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId);
+        Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorNumCuenta(string numCuenta);
     }
 }
