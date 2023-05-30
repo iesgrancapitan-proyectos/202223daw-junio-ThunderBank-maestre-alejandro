@@ -28,7 +28,7 @@ namespace ThunderBank.Main.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(Movimiento movimiento)
         {
-            var cuentaOrigen = _repositorioCuenta.ObtenerNumeroDeCuenta();
+            var cuentaOrigen = await _repositorioCuenta.ObtenerNumeroDeCuenta();
             if (!ModelState.IsValid)
             {
                 return View(movimiento);
@@ -48,7 +48,7 @@ namespace ThunderBank.Main.Controllers
 
         public async Task<IActionResult> ListadoMovimientos()
         {
-            string numeroCuenta = _repositorioCuenta.ObtenerNumeroDeCuenta();
+            string numeroCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta();
             IEnumerable<Movimiento> movimientosCuenta = await _repositorioMovimiento.ObtenerMovimientos(numeroCuenta);
             return View(movimientosCuenta);
         }

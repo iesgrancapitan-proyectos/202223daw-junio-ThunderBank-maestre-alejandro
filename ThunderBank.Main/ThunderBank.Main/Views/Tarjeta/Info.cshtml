@@ -46,23 +46,42 @@
                 <div id="itemsInfoTarjeta" class="d-flex">
                     <div id="textoInfoTarjeta">
                         <p class="textoInfo">Saldo</p>
-                        <h3 class="textoInfo">@Model.SaldoCuenta.ToString("#,##0.00") €</h3>
+                        <h3 class="textoInfo">@Model.SaldoCuenta.ToString("N") €</h3>
                     </div>
                     <div id="botonesInfoTarjeta" class="d-flex">
-                        <div>
-                            <a class="enlaceAccion" asp-action="CongelarTarjeta">
-                                <i class="bi bi-send"></i>
-                                <p class="textoInfo">ENVIAR</p>
-                            </a>
-                        </div>
+                        @if (Model.Estado == "ACTIVA")
+                        {
+                            <div>
+                                <a class="enlaceAccion" asp-action="Crear" asp-controller="Movimiento">
+                                    <i class="bi bi-send"></i>
+                                    <p class="textoInfo">ENVIAR</p>
+                                </a>
+                            </div>
 
-                        <div>
-                            <a class="enlaceAccion" asp-action="CongelarTarjeta">
-                                <i class="bi bi-piggy-bank"></i>
-                                <p class="textoInfo">INGRESAR</p>
-                            </a>
-                        </div>
+                            <div>
+                                <a class="enlaceAccion" asp-action="Crear" asp-controller="Movimiento">
+                                    <i class="bi bi-piggy-bank"></i>
+                                    <p class="textoInfo">INGRESAR</p>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <a class="enlaceAccion">
+                                    <i class="bi bi-send"></i>
+                                    <p class="textoInfo">NO DISPONIBLE</p>
+                                </a>
+                            </div>
 
+                            <div>
+                                <a class="enlaceAccion">
+                                    <i class="bi bi-piggy-bank"></i>
+                                    <p class="textoInfo">NO DISPONIBLE</p>
+                                </a>
+                            </div>
+                        }
+                        
                         <div>
                             @if (Model.Estado == "ACTIVA")
                             {

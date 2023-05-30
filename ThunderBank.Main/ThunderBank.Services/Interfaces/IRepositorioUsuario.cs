@@ -9,5 +9,6 @@ namespace ThunderBank.Services.Interfaces
         Task<bool> Crear(DtoUsuario usuario);
         Task<int> CrearUsuario(Usuario usuario);
         Task<DtoUsuario> Existe(string usuario);
+        Task<string> ObtenerRolUsuario(int id);
     }
 }

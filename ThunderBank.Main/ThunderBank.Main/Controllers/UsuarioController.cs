@@ -5,6 +5,7 @@ using ThunderBank.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace ThunderBank.Main.Controllers
 {
@@ -38,18 +39,29 @@ namespace ThunderBank.Main.Controllers
             var resultado = await _userManager.CreateAsync(usuario,password:modelo.Pwd);
             if(resultado.Succeeded)
             {
-                var cliente = new Cliente
+                var cliente = new Cliente()
                 {
+                    Dni = modelo.Dni,
                     Nombre = modelo.Nombre,
+                    Apellido = modelo.Apellido,
+                    Correo = modelo.Correo,
+                    Telefono = modelo.Telefono,
+                    FechaDeNacimiento = modelo.FechaDeNacimiento,
                     FechaDeAlta = DateTime.Now,
                     IdUsuario = usuario.Id,
                     Activo = 1
                 };
-                await _repositorioCliente.CrearCliente(cliente);
+                try
+                {
+                    await _repositorioCliente.CrearCliente(cliente);
+
+                }catch (RuntimeBinderException)
+                {
+                    await _signInManager.SignInAsync(usuario, isPersistent: true);
+                    return RedirectToAction("Index", "Tarjeta");
+                }
 
                 await _signInManager.SignInAsync(usuario, isPersistent: true);
-                ClaimsIdentity identity = new();
-                identity.AddClaim(new Claim(ClaimTypes.Role, "Responsable"));
                 return RedirectToAction("Index","Tarjeta");
             }
             else
