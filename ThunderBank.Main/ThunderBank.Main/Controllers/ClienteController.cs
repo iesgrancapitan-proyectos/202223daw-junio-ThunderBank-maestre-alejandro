@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ThunderBank.Models;
 using ThunderBank.Models.DTO;
 using ThunderBank.Services.Interfaces;
+using ThunderBank.Services.Repositorios;
 
 namespace ThunderBank.Main.Controllers
 {
@@ -48,6 +49,20 @@ namespace ThunderBank.Main.Controllers
 
             return View(listadoClientes);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(string dni)
+        {
+            Cliente model = await _repositorioCliente.ObtenerDatosCliente(dni);
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Editar(Cliente cliente)
+        {
+            await _repositorioCliente.Editar(cliente);
+            return RedirectToAction("ListarClientes");
+        }
+        
 
 
     }

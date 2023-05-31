@@ -84,6 +84,25 @@ namespace ThunderBank.Services.Repositorios
                 AND activo = 1", new { idResponsable });
             return listado;
         }
+        public async Task<Cliente> ObtenerDatosCliente(string dni)
+        {
+            using SqlConnection db = DbConnection();
+            return await db.QueryFirstOrDefaultAsync<Cliente>(@"SELECT * FROM Cliente WHERE dni = @Dni", new { dni});
+        }
+
+        public async Task Editar(Cliente cliente)
+        {
+            using SqlConnection db = DbConnection();
+            await db.ExecuteAsync(
+                @"UPDATE Cliente
+                SET nombre = @Nombre,
+                apellido = @Apellido,
+                telefono = @Telefono,
+                correo = @Correo,
+                direccion = @Direccion
+                WHERE idUsuario = @IdUsuario",
+                    cliente);
+        }
     }
 }
 

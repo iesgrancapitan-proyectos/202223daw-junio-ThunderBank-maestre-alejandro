@@ -7,6 +7,7 @@
 }
 
 <h1>Crear tarjeta</h1>
+<span class="text-white">Cuenta = @Model.NumeroDeCuenta</span>
 <form asp-controller="Tarjeta" asp-action="Crear"class="text-white">
     <input type="hidden" asp-for="FechaDeCreacion" value="@DateTime.Now" />
     <input type="hidden" asp-for="FechaDeCaducidad" value="@DateTime.Now.AddYears(3)" />
@@ -21,5 +22,3 @@
         <a asp-action="Index" class="btn btn-danger">Cancelar</a>
     </div>
 </form>
-
-
