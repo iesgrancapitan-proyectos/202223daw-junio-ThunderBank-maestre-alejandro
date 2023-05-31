@@ -36,7 +36,7 @@ namespace ThunderBank.Services.Repositorios
                 }, commandType: System.Data.CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId)
+        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId,string fkNum)
         {
             using SqlConnection db = DbConnection();
             return await db.QueryAsync<Tarjeta>(
@@ -47,7 +47,12 @@ namespace ThunderBank.Services.Repositorios
                 T.numeroCuenta AS NumeroDeCuenta
                 FROM Tarjeta T
                 INNER JOIN Cuenta C
-                ON C.idCliente = @ClienteId", new {clienteId});
+                ON C.idCliente = @ClienteId WHERE T.numeroCuenta = @FkNum  ", new {clienteId,fkNum});
+        }
+        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorNumCuenta(string numCuenta)
+        {
+            using SqlConnection db = DbConnection();
+            return await db.QueryAsync<Tarjeta>(@"SELECT * FROM Tarjeta WHERE numero = @NumCuenta", new { numCuenta});
         }
 
         public async Task<DtoTarjeta> ObtenerDatosTarjeta(string numeroTarjeta)

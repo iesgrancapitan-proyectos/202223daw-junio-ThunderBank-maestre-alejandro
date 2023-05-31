@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
 
@@ -14,6 +15,7 @@ namespace ThunderBank.Main.Controllers
             this._repositorioCuenta = repositorioCuenta;
             this._repositorioCliente = repositorioCliente;
         }
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var idCliente =  await _repositorioCliente.ObtenerClienteId();
@@ -24,13 +26,13 @@ namespace ThunderBank.Main.Controllers
             }).ToList();
             return View(modelo);
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Crear()
         {
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Crear(Cuenta cuenta)
         {

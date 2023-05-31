@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.CSharp.RuntimeBinder;
+using Microsoft.AspNetCore.Authorization;
+using System.Reflection;
 
 namespace ThunderBank.Main.Controllers
 {
@@ -21,12 +23,12 @@ namespace ThunderBank.Main.Controllers
             this._signInManager = signInManager;
             this._repositorioCliente = repositorioCliente;
         }
-
+        [AllowAnonymous]
         public IActionResult Registro()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Registro(RegistroViewModel modelo)
         {
@@ -58,11 +60,11 @@ namespace ThunderBank.Main.Controllers
                 }catch (RuntimeBinderException)
                 {
                     await _signInManager.SignInAsync(usuario, isPersistent: true);
-                    return RedirectToAction("Index", "Tarjeta");
+                    return RedirectToAction("Crear", "Cuenta");
                 }
 
                 await _signInManager.SignInAsync(usuario, isPersistent: true);
-                return RedirectToAction("Index","Tarjeta");
+                return RedirectToAction("Crear", "Cuenta");
             }
             else
             {
@@ -73,12 +75,13 @@ namespace ThunderBank.Main.Controllers
                 return View(modelo);
             }
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel modelo)
         {
@@ -89,10 +92,21 @@ namespace ThunderBank.Main.Controllers
 
             var resultado = await _signInManager.PasswordSignInAsync(modelo.Nombre, modelo.Pwd,
                             modelo.Recuerdame, lockoutOnFailure: false);
+            
 
             if (resultado.Succeeded)
             {
-                return RedirectToAction("Index", "Cuenta");
+                var user = await _userManager.FindByNameAsync(modelo.Nombre);
+                var roles = await _userManager.GetRolesAsync(user);
+                if (roles.Contains("RESPONSABLE"))
+                {
+                    return RedirectToAction("ListarClientes","Cliente");
+                }
+                else if (roles.Contains("CLIENTE"))
+                {
+                    return RedirectToAction("Crear", "Cuenta");
+                }
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -101,7 +115,6 @@ namespace ThunderBank.Main.Controllers
             }
 
         }
-
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -109,50 +122,5 @@ namespace ThunderBank.Main.Controllers
             return RedirectToAction("Index","Home");
         }
 
-
-
-        //    private readonly IRepositorioUsuario _repositorioUsuario;
-        //    private readonly IRepositorioResponsable _repositorioResponsable;
-
-        //    public UsuarioController(IRepositorioUsuario repositorioUsuario, IRepositorioResponsable repositorioResponsable)
-        //    {
-        //        _repositorioUsuario = repositorioUsuario;
-        //        _repositorioResponsable = repositorioResponsable;
-        //    }
-
-        //    // CREAR USUARIOS
-        //    [HttpGet]
-        //    public IActionResult Crear()
-        //    {
-        //        return View();
-        //    }
-
-        //    [HttpPost]
-        //    public async Task<IActionResult> Crear(DtoUsuario usuario)
-        //    {
-        //        if (!ModelState.IsValid)
-        //        {
-        //            return View(usuario);
-        //        }
-
-
-        //        DtoUsuario cuenta = await _repositorioUsuario.Existe(usuario.Dni);
-        //        if (cuenta is not null)
-        //        {
-        //            return RedirectToAction("Error", "Shared");
-        //        }
-
-        //        usuario.NombreUsuario = usuario.Dni;
-        //        usuario.ResponsableId = _repositorioResponsable.ObtenerResponsableId();
-
-        //        await _repositorioUsuario.Crear(usuario);
-        //        return RedirectToAction("Index", "Usuario");
-        //    }
-
-        //    [HttpGet]
-        //    public IActionResult Editar()
-        //    {
-        //        return View();
-        //    }
     }
 }

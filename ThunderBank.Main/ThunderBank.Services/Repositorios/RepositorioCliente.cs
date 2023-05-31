@@ -34,15 +34,11 @@ namespace ThunderBank.Services.Repositorios
 
                 int id = await ObtenerIdClientePorIdUsuario(idClaim.Value);
                 return id;
-
-                //var id = int.Parse(idClaim.Value);
-                //return id;
             }
             else
             {
                 throw new ApplicationException("El usuario no está autenticado");
             }
-            //return 1002;
         }
 
         public async Task<int> ObtenerIdClientePorIdUsuario(string id)
@@ -87,6 +83,25 @@ namespace ThunderBank.Services.Repositorios
                 WHERE idResponsable = @IdResponsable
                 AND activo = 1", new { idResponsable });
             return listado;
+        }
+        public async Task<Cliente> ObtenerDatosCliente(string dni)
+        {
+            using SqlConnection db = DbConnection();
+            return await db.QueryFirstOrDefaultAsync<Cliente>(@"SELECT * FROM Cliente WHERE dni = @Dni", new { dni});
+        }
+
+        public async Task Editar(Cliente cliente)
+        {
+            using SqlConnection db = DbConnection();
+            await db.ExecuteAsync(
+                @"UPDATE Cliente
+                SET nombre = @Nombre,
+                apellido = @Apellido,
+                telefono = @Telefono,
+                correo = @Correo,
+                direccion = @Direccion
+                WHERE idUsuario = @IdUsuario",
+                    cliente);
         }
     }
 }
