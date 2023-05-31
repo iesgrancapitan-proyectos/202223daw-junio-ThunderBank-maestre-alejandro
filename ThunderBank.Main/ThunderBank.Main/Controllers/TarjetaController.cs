@@ -23,7 +23,8 @@ namespace ThunderBank.Main.Controllers
         public async Task<IActionResult> Index()
         {
             int clienteId = await _repositorioCliente.ObtenerClienteId();
-            IEnumerable<Tarjeta> tarjetasCliente = await _repositorioTarjeta.ObtenerTarjetas(clienteId);
+            string numCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta();
+            IEnumerable<Tarjeta> tarjetasCliente = await _repositorioTarjeta.ObtenerTarjetas(clienteId,numCuenta);
             return View(tarjetasCliente);
         }
 
