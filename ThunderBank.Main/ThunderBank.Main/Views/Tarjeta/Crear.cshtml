@@ -1,5 +1,5 @@
-﻿@using ThunderBank.Models;
-@model Tarjeta
+﻿@using ThunderBank.Models.DTO;
+@model DTOCrearTarjeta
 
 @{
     ViewData["Title"] = "Crear nueva tarjeta";
@@ -7,16 +7,25 @@
 }
 
 <h1>Crear tarjeta</h1>
-<span class="text-white">Cuenta = @Model.NumeroDeCuenta</span>
-<form asp-controller="Tarjeta" asp-action="Crear"class="text-white">
+<form asp-controller="Tarjeta" asp-action="Crear" class="text-white">
     <input type="hidden" asp-for="FechaDeCreacion" value="@DateTime.Now" />
     <input type="hidden" asp-for="FechaDeCaducidad" value="@DateTime.Now.AddYears(3)" />
     <input type="hidden" asp-for="Cvc" value="@Model.Cvc" />
     <input type="hidden" asp-for="Pin" value="@Model.Pin" />
     <input type="hidden" asp-for="Estado" value="@Model.Estado" />
-    <input type="hidden" asp-for="NumeroDeCuenta" value="@Model.NumeroDeCuenta" />
+
+    <label for="cuenta">Selecciona una cuenta:</label>
+    <select name="NumeroDeCuenta" id="cuenta" asp-for="NumeroDeCuenta">
+        @foreach (var cuenta in Model.Cuentas)
+        {
+            <option value="@cuenta.Numero">@cuenta.Numero</option>
+        }
+    </select>
+
+    <br />
     <label class="form-label">Anota tu código pin</label><br>
     <input type="text" disabled placeholder="@Model.Pin" asp-for="Pin" />
+
     <div class="mt-3">
         <button type="submit" class="btn btn-success">Crear tarjeta</button>
         <a asp-action="Index" class="btn btn-danger">Cancelar</a>

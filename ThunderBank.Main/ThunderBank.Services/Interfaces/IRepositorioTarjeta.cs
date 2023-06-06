@@ -8,10 +8,12 @@ namespace ThunderBank.Services.Interfaces
         Task ActivarTarjeta(string numeroTarjeta);
         Task CancelarTarjeta(string numeroTarjeta);
         Task CongelarTarjeta(string numeroTarjeta);
-        Task Crear(Tarjeta tarjeta);
+        Task Crear(DTOCrearTarjeta tarjeta);
         Task<DtoTarjeta> ObtenerDatosTarjeta(string numeroTarjeta);
+        Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId);
+
         //Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId);
-        Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId, string fkNum);
+        Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorCuenta(int clienteId, string fkNum);
         Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorNumCuenta(string numCuenta);
     }
 }

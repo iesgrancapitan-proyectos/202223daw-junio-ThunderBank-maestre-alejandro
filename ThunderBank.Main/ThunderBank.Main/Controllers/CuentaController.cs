@@ -42,8 +42,17 @@ namespace ThunderBank.Main.Controllers
                 return View(cuenta);
             }
             cuenta.IdCliente = idCliente;
+            try
+            {
             await _repositorioCuenta.Crear(cuenta,idCliente);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("ErrorView","Home");
+            }
             return RedirectToAction("Index");
         }
+
     }
 }

@@ -23,8 +23,7 @@ namespace ThunderBank.Main.Controllers
         public async Task<IActionResult> Index()
         {
             int clienteId = await _repositorioCliente.ObtenerClienteId();
-            string numCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta();
-            IEnumerable<Tarjeta> tarjetasCliente = await _repositorioTarjeta.ObtenerTarjetas(clienteId,numCuenta);
+            IEnumerable<Tarjeta> tarjetasCliente = await _repositorioTarjeta.ObtenerTarjetas(clienteId);
             return View(tarjetasCliente);
         }
 
@@ -37,21 +36,23 @@ namespace ThunderBank.Main.Controllers
         {
             try
             {
-                Tarjeta model = new()
+                var clienteId = await _repositorioCliente.ObtenerClienteId();
+                DTOCrearTarjeta model = new()
                 {
-                    NumeroDeCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta()
+                    Cuentas = await _repositorioCuenta.ObtenerCuentasPorIdCliente(clienteId)
                 };
                 return View(model);
             }
-            catch(Exception)
+            catch (Exception ex)
             {
-                ViewBag.Error = "No Existen cuentas a la que relacionar la cuenta";
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("ErrorView", "Home");
             }
             return View("Index");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear(Tarjeta model)
+        public async Task<IActionResult> Crear(DTOCrearTarjeta model)
         {
             await _repositorioTarjeta.Crear(model);
             return RedirectToAction("Index");

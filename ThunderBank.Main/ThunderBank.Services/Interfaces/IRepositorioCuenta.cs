@@ -6,6 +6,7 @@ namespace ThunderBank.Services.Interfaces
     {
         Task<IEnumerable<Cuenta>> Buscar(int idCliente);
         Task Crear(Cuenta cuenta,int idCliente);
+        Task<IEnumerable<Cuenta>> ObtenerCuentasPorIdCliente(int idCliente);
         Task<string> ObtenerNumeroDeCuenta();
         Task<string> ObtenerUltimaCuentaCliente(string id);
     }

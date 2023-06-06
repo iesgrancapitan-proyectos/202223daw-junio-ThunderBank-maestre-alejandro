@@ -36,7 +36,6 @@ namespace ThunderBank.Main.Controllers
         public async Task<IActionResult> ListarClientes()
         {
             IEnumerable<DtoUsuario> listadoClientes = await _repositorioCliente.Listar();
-
             return View(listadoClientes);
         }
 
