@@ -31,17 +31,19 @@ namespace ThunderBank.Services.Repositorios
         public async Task<string> ObtenerNumeroDeCuenta()
         {
             var clienteId = await _repositorioCliente.ObtenerClienteId();
-            var ultimaCuenta = await ObtenerCuentasPorIdCliente(clienteId.ToString());
+            var ultimaCuenta = await ObtenerCuentasPorIdCliente(clienteId);
             string ultimoNumero = ultimaCuenta.Select(x => (string)x.GetType().GetProperty("Numero").GetValue(x, null)).Last();
             //string ultimoNumero = await ObtenerUltimaCuentaCliente(clienteId.ToString());
             return ultimoNumero;
         }
 
-        public async Task<IEnumerable<Cuenta>> ObtenerCuentasPorIdCliente(string id)
+        public async Task<IEnumerable<Cuenta>> ObtenerCuentasPorIdCliente(int idCliente)
         {
             using var db = DbConnection();
-            return await db.QueryAsync<Cuenta>(@"SELECT * FROM Cuenta WHERE idCliente = @Id ORDER BY fechaApertura", new { id });
+            var cuentas = await db.QueryAsync<Cuenta>(@"SELECT * FROM Cuenta WHERE idCliente = @IdCliente", new { IdCliente = idCliente });
+            return cuentas;
         }
+
         public async Task<string> ObtenerUltimaCuentaCliente(string id)
         {
             using var db = DbConnection();

@@ -17,10 +17,10 @@ namespace ThunderBank.Main.Controllers
         {
             return View();
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult ErrorView()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.ErrorMessage = TempData["Error"] as string;
+            return View();
         }
     }
 }

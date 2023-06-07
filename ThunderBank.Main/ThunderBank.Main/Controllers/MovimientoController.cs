@@ -13,11 +13,13 @@ namespace ThunderBank.Main.Controllers
     {
         private readonly IRepositorioMovimiento _repositorioMovimiento;
         private readonly IRepositorioCuenta _repositorioCuenta;
+        private readonly IRepositorioCliente _repositorioCliente;
 
-        public MovimientoController(IRepositorioMovimiento repositorioMovimiento,IRepositorioCuenta repositorioCuenta)
+        public MovimientoController(IRepositorioMovimiento repositorioMovimiento,IRepositorioCuenta repositorioCuenta,IRepositorioCliente repositorioCliente)
         {
             this._repositorioMovimiento = repositorioMovimiento;
             this._repositorioCuenta = repositorioCuenta;
+            this._repositorioCliente = repositorioCliente;
         }
         
         public IActionResult Index()
@@ -44,24 +46,27 @@ namespace ThunderBank.Main.Controllers
             {
                 await _repositorioMovimiento.Crear(movimiento);
 
-            }catch(SqlException e)
+            }
+            catch (Exception ex)
             {
-                TempData["ErrorMessage"] = e.Message;
-                return RedirectToAction("Error","Movimiento");
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("ErrorView", "Home");
             }
             return RedirectToAction("ListadoMovimientos");
         }
 
         public async Task<IActionResult> ListadoMovimientos()
         {
-            string numeroCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta();
-            IEnumerable<Movimiento> movimientosCuenta = await _repositorioMovimiento.ObtenerMovimientos(numeroCuenta);
-            return View(movimientosCuenta);
+            var idCliente = await _repositorioCliente.ObtenerClienteId();
+            var cuentas = await _repositorioCuenta.ObtenerCuentasPorIdCliente(idCliente);
+            List<Movimiento> movimientosTotales = new List<Movimiento>();
+            foreach (var cuenta in cuentas)
+            {
+                var movimientosCuentaActual = await _repositorioMovimiento.ObtenerMovimientos(cuenta.Numero);
+                movimientosTotales.AddRange(movimientosCuentaActual);
+            }
+            return View(movimientosTotales);
         }
-        //public IActionResult ExportarExcel()
-        //{
-        //    return View();
-        //}
 
         [HttpGet]
         public async Task<FileResult> ExportarExcel()

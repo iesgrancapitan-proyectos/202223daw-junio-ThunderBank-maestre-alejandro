@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Listado Cuentas";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.10/dist/sweetalert2.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.10/dist/sweetalert2.all.min.js"></script>
+</head>
+<body>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '@ViewBag.ErrorMessage'
+        }).then(function () {
+            window.location.href = '@Url.Action("Index", "Home")'; // Redirige al índice de Home
+        });
+    </script>
+</body>
+</html>

@@ -11,12 +11,17 @@ namespace ThunderBank.Models
 {
     public class RegistroViewModel
     {
+        [DniCorrecto]
+        [Required]
         public string Dni { get; set; }
         [Required(ErrorMessage ="El campo {0} es obligatorio")]
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+
         public string Telefono { get; set; }
+        
         public string Correo { get; set; }
+        [Required]
         public DateTime FechaDeNacimiento { get; set; }
         [DisplayName(displayName: "Contraseña")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]

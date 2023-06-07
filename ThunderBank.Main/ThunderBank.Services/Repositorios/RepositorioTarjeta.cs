@@ -21,7 +21,7 @@ namespace ThunderBank.Services.Repositorios
             return new SqlConnection(_configuration.ConnectionString);
         }
 
-        public async Task Crear(Tarjeta tarjeta)
+        public async Task Crear(DTOCrearTarjeta tarjeta)
         {
             using SqlConnection db = DbConnection();
             await db.QuerySingleAsync(
@@ -36,7 +36,7 @@ namespace ThunderBank.Services.Repositorios
                 }, commandType: System.Data.CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId,string fkNum)
+        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorCuenta(int clienteId,string fkNum)
         {
             using SqlConnection db = DbConnection();
             return await db.QueryAsync<Tarjeta>(
@@ -48,6 +48,19 @@ namespace ThunderBank.Services.Repositorios
                 FROM Tarjeta T
                 INNER JOIN Cuenta C
                 ON C.idCliente = @ClienteId WHERE T.numeroCuenta = @FkNum  ", new {clienteId,fkNum});
+        }
+        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId)
+        {
+            using SqlConnection db = DbConnection();
+            return await db.QueryAsync<Tarjeta>(
+                @"SELECT DISTINCT T.numero AS NumeroDeTarjeta,
+                T.fechaCreacion AS FechaDeCreacion,
+                T.fechaCaducidad AS FechaDeCaducidad,
+                T.cvc, T.pin, T.estado, 
+                T.numeroCuenta AS NumeroDeCuenta
+                FROM Tarjeta T
+                INNER JOIN Cuenta C
+                ON C.idCliente = @ClienteId", new { clienteId });
         }
         public async Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorNumCuenta(string numCuenta)
         {
