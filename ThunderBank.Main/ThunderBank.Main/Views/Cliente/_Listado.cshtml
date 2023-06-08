@@ -19,12 +19,19 @@
         {
             <tr>
                 <td>
-                    <a class="btn btn-primary" asp-action="Editar" asp-controller="Cliente" asp-route-dni="@cliente.Dni">
+                    <a class="btn btn-primary" asp-action="Editar" asp-controller="Cliente" asp-route-dni="@cliente.Dni" 
+                    data-bs-toggle="tooltip" data-bs-title="Editar cliente">
                         <i class="bi bi-pen-fill"></i>
                     </a>
-                    <a class="btn btn-danger">
+                    <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Dar de baja">
                         <i class="bi bi-person-dash"></i>
                     </a>
+                    @if (cliente.ResponsableId == 0)
+                    {
+                        <a class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Llevar a este cliente">
+                            <i class="bi bi-check"></i>
+                        </a>
+                    }
                 </td>
                 <td>@cliente.Nombre</td>
                 <td>@cliente.Apellido</td>

@@ -62,7 +62,8 @@ namespace ThunderBank.Services.Repositorios
                 telefono,
                 correo AS Email,
                 direccion,
-                fechaNacimiento AS FechaDeNacimiento
+                fechaNacimiento AS FechaDeNacimiento,
+                idResponsable AS ResponsableId
                 FROM Cliente
                 WHERE activo = 1;");
             return listado;
@@ -78,7 +79,8 @@ namespace ThunderBank.Services.Repositorios
                 telefono,
                 correo AS Email,
                 direccion,
-                fechaNacimiento AS FechaDeNacimiento
+                fechaNacimiento AS FechaDeNacimiento,
+                idResponsable AS ResponsableId
                 FROM Cliente
                 WHERE idResponsable = @IdResponsable
                 AND activo = 1", new { idResponsable });
