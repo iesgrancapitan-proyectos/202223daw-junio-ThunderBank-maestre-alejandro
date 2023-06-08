@@ -5,9 +5,19 @@
     ViewData["Title"] = "Listado Cuentas";
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
+<div class="px-4 py-5 my-3 text-center">
+    <i class="bi bi-bank mb-4 text-white" style="font-size:55px"></i>
+    <h1 class="display-5 fw-bold">Bienvenido a tu panel de Cuentas</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4 text-white">Estamos orgullosos de que hayas confiado en nosotros, ahora tenemos un camino largo que recorrer juntos.
+            En esta ventana podras tanto crear como ver detalles sobre tus cuentas <b>activas</b>. Échale un vistazo
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a asp-action="Crear" class="btn btn-enfasis mb-3 btn-lg text-white  btn-lg px-4 gap-3">Crear Cuenta</a>
+        </div>
+    </div>
+</div>
 
-<h1>Bienvenido a el panel de Cuentas</h1>
-<a asp-action="Crear" class="btn btn-enfasis mb-3">Crear Cuenta</a>
 <table class="table table-hover table-striped">
     <thead>
         <tr>
@@ -27,7 +37,10 @@
                     <td>
                         <input type="hidden" value="@cuenta.Numero" class="numero"/>
                         <a class="btn btn-enfasis" asp-action="Editar" value="@cuenta.Numero"><i class="bi bi-pencil-square"></i></a>
-                        <a class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>
+                        @*<a id="btnDesactivar" class="btn btn-danger" onclick="confirmarDesactivar('@cuenta.Numero.ToString("0")')"><i class="bi bi-trash"></i></a>*@
+                        <a id="btnDesactivar" class="btn btn-danger" onclick="confirmarDesactivar('@cuenta.Numero')"><i class="bi bi-trash"></i></a>
+                        <a hidden id="btnDesactivarBack" class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>
+
                     </td>
                     <td>@cuenta.Numero</td>
                     <td id="saldo">@cuenta.Saldo €</td>
@@ -38,3 +51,41 @@
         }
     </tbody>
 </table>
+@if (TempData["Success"] != null)
+{
+    <script>
+        Swal.fire('Cuenta desactivada', '@TempData["Success"]', 'success');
+    </script>
+}
+
+@if (TempData["Error"] != null)
+{
+    <script>
+        Swal.fire('Error', '@TempData["Error"]', 'error');
+    </script>
+}
+@section Scripts{
+    <script>
+        function confirmarDesactivar(numCuenta) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Esta acción desactivará la cuenta ' + numCuenta,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Desactivar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    desactivarCuenta(numCuenta);
+                }
+            });
+        }
+
+        function desactivarCuenta(numCuenta) {
+            var btn = document.getElementById("btnDesactivarBack");
+            btn.click();
+           
+        }
+    </script>
+
+}

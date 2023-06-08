@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Listado Cuentas";
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    var errorMessage = TempData["Error"] as string;
 }
 
 <!DOCTYPE html>
@@ -16,7 +17,7 @@
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: '@ViewBag.ErrorMessage'
+            text: '@errorMessage'
         }).then(function () {
             window.location.href = '@Url.Action("Index", "Home")'; // Redirige al índice de Home
         });

@@ -36,14 +36,14 @@ namespace ThunderBank.Main.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(Movimiento movimiento)
         {
-            var cuentaOrigen = await _repositorioCuenta.ObtenerNumeroDeCuenta();
             if (!ModelState.IsValid)
             {
                 return View(movimiento);
             }
-            movimiento.NumeroCuenta = cuentaOrigen;
             try
             {
+                var cuentaOrigen = await _repositorioCuenta.ObtenerNumeroDeCuenta();
+                movimiento.NumeroCuenta = cuentaOrigen;
                 await _repositorioMovimiento.Crear(movimiento);
 
             }
