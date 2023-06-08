@@ -30,6 +30,7 @@ namespace ThunderBank.Services.Repositorios
         {
             var clienteId = await _repositorioCliente.ObtenerClienteId();
             var ultimaCuenta = await ObtenerCuentasPorIdCliente(clienteId);
+            ultimaCuenta = ultimaCuenta.Where(x => x.Activa == true);
             string ultimoNumero = ultimaCuenta.Select(x => (string)x.GetType().GetProperty("Numero").GetValue(x, null)).Last();
             //string ultimoNumero = await ObtenerUltimaCuentaCliente(clienteId.ToString());
             return ultimoNumero;

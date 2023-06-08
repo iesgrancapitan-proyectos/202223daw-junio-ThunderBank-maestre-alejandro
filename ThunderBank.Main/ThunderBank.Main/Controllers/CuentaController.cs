@@ -53,22 +53,40 @@ namespace ThunderBank.Main.Controllers
             }
             return RedirectToAction("Index");
         }
-
-
         public async Task<IActionResult> Desactivar(string numCuenta)
         {
             try
             {
-               await _repositorioCuenta.Desactivar(numCuenta);
+                // Aquí colocas la lógica para desactivar la cuenta
+                await _repositorioCuenta.Desactivar(numCuenta);
+
+                // Si la desactivación es exitosa, devuelves un mensaje de éxito
+                TempData["Success"] = "La cuenta " + numCuenta + " ha sido desactivada correctamente";
             }
             catch (Exception ex)
             {
-                TempData["Error"] = ex.Message;
-                return RedirectToAction("ErrorView", "Home");
+                // Si ocurre algún error durante la desactivación, devuelves un mensaje de error
+                TempData["Error"] = "Ha ocurrido un error al desactivar la cuenta: " + ex.Message;
             }
-            return RedirectToAction("Index");
 
+            // Rediriges a la acción "Index" para mostrar la vista correspondiente
+            return RedirectToAction("Index");
         }
+
+        //public async Task<IActionResult> Desactivar(string numCuenta)
+        //{
+        //    try
+        //    {
+        //       await _repositorioCuenta.Desactivar(numCuenta);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return RedirectToAction("ErrorView", "Home");
+        //    }
+        //    return RedirectToAction("Index");
+
+        //}
 
     }
 }
