@@ -26,8 +26,8 @@
                 <tr>
                     <td>
                         <input type="hidden" value="@cuenta.Numero" class="numero"/>
-                        <a class="btn btn-enfasis" asp-action="Editar" asp-route-numero="@cuenta.Numero"><i class="bi bi-pencil-square"></i></a>
-                        <a class="btn btn-danger" asp-action="Borrar" asp-route-numero="@cuenta.Numero"><i class="bi bi-trash"></i></a>
+                        <a class="btn btn-enfasis" asp-action="Editar" value="@cuenta.Numero"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>
                     </td>
                     <td>@cuenta.Numero</td>
                     <td id="saldo">@cuenta.Saldo €</td>

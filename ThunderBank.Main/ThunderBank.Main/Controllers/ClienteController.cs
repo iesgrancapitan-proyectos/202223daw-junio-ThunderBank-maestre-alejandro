@@ -61,8 +61,5 @@ namespace ThunderBank.Main.Controllers
             await _repositorioCliente.Editar(cliente);
             return RedirectToAction("ListarClientes");
         }
-        
-
-
     }
 }
