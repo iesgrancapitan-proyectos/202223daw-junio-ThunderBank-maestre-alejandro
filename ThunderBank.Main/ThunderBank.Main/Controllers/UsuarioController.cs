@@ -60,11 +60,11 @@ namespace ThunderBank.Main.Controllers
                 }catch (RuntimeBinderException)
                 {
                     await _signInManager.SignInAsync(usuario, isPersistent: true);
-                    return RedirectToAction("Crear", "Cuenta");
+                    return RedirectToAction("Index", "Cuenta");
                 }
 
                 await _signInManager.SignInAsync(usuario, isPersistent: true);
-                return RedirectToAction("Crear", "Cuenta");
+                return RedirectToAction("Index", "Cuenta");
             }
             else
             {
@@ -104,7 +104,7 @@ namespace ThunderBank.Main.Controllers
                 }
                 else if (roles.Contains("CLIENTE"))
                 {
-                    return RedirectToAction("Crear", "Cuenta");
+                    return RedirectToAction("Index", "Cuenta");
                 }
                 return RedirectToAction("Index", "Home");
             }

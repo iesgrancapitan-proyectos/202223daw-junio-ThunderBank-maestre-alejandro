@@ -26,6 +26,7 @@
             <th id="saldo">Saldo</th>
             <th>Tipo</th>
             <th id="fechaApertura">Apertura</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -36,8 +37,6 @@
                 <tr>
                     <td>
                         <input type="hidden" value="@cuenta.Numero" class="numero"/>
-                        <a class="btn btn-enfasis" asp-action="Editar" value="@cuenta.Numero"><i class="bi bi-pencil-square"></i></a>
-                        @*<a id="btnDesactivar" class="btn btn-danger" onclick="confirmarDesactivar('@cuenta.Numero.ToString("0")')"><i class="bi bi-trash"></i></a>*@
                         <a id="btnDesactivar" class="btn btn-danger" onclick="confirmarDesactivar('@cuenta.Numero')"><i class="bi bi-trash"></i></a>
                         <a hidden id="btnDesactivarBack" class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>
 
@@ -46,6 +45,15 @@
                     <td id="saldo">@cuenta.Saldo €</td>
                     <td>@cuenta.Tipo</td>
                     <td id="fechaApertura">@cuenta.FechaApertura.ToString("dd \"de\" MMMM yyyy")</td>
+                    @if (cuenta.Activa)
+                    {
+                        <td><span class="badge rounded-pill bg-success">Activa</span></td>
+                    }
+                    else
+                    {
+                        <td><span class="badge rounded-pill bg-danger">Desactiva</span></td>
+
+                    }
                 </tr>
             }
         }
@@ -73,10 +81,19 @@
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Desactivar',
-                cancelButtonText: 'Cancelar'
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#3085d6',
             }).then((result) => {
                 if (result.isConfirmed) {
                     desactivarCuenta(numCuenta);
+                } else if (result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    Swal.fire(
+                        'Has cancelado',
+                        'Tu cuenta no se ha borrado :)',
+                        'error'
+                    )
                 }
             });
         }
