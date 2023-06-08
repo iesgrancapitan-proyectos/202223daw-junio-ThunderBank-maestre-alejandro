@@ -22,7 +22,7 @@ namespace ThunderBank.Main.Controllers
             var cuentasAgrupadas = await _repositorioCuenta.Buscar(idCliente);
             var modelo = cuentasAgrupadas.GroupBy(x => x.Tipo).Select(grupo => new CuentaViewModel
             {
-                Cuentas = grupo.AsEnumerable()
+                Cuentas = grupo.Where(c=>c.Activa == true).AsEnumerable()
             }).ToList();
             return View(modelo);
         }
@@ -52,6 +52,22 @@ namespace ThunderBank.Main.Controllers
                 return RedirectToAction("ErrorView","Home");
             }
             return RedirectToAction("Index");
+        }
+
+
+        public async Task<IActionResult> Desactivar(string numCuenta)
+        {
+            try
+            {
+               await _repositorioCuenta.Desactivar(numCuenta);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("ErrorView", "Home");
+            }
+            return RedirectToAction("Index");
+
         }
 
     }

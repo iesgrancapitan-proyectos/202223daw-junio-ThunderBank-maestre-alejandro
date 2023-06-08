@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Security.Claims;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
 using ThunderBank.Services.SQL;
@@ -25,9 +24,8 @@ namespace ThunderBank.Services.Repositorios
         {
             return new SqlConnection(_configuration.ConnectionString);
         }
-        /**
-         * Realmente no saca el ultimo porque 
-         */
+
+
         public async Task<string> ObtenerNumeroDeCuenta()
         {
             var clienteId = await _repositorioCliente.ObtenerClienteId();
@@ -68,9 +66,18 @@ namespace ThunderBank.Services.Repositorios
         {
             using var db = DbConnection();
             return await db.QueryAsync<Cuenta>(
-                @"SELECT numero,saldo,fechaApertura,tipo
+                @"SELECT numero,saldo,fechaApertura,tipo,activa
                 FROM Cuenta 
                 WHERE idCliente = @idCliente;", new {idCliente});
+        }
+
+        public async Task Desactivar(string numCuenta)
+        {
+            using var db = DbConnection();
+            await db.ExecuteAsync(
+                @"UPDATE Cuenta
+                  SET activa = 0
+                  WHERE numero = @numCuenta;", new { numCuenta });
         }
     }
 }

@@ -59,7 +59,7 @@ namespace ThunderBank.Main.Controllers
         {
             var idCliente = await _repositorioCliente.ObtenerClienteId();
             var cuentas = await _repositorioCuenta.ObtenerCuentasPorIdCliente(idCliente);
-            List<Movimiento> movimientosTotales = new List<Movimiento>();
+            List<Movimiento> movimientosTotales = new();
             foreach (var cuenta in cuentas)
             {
                 var movimientosCuentaActual = await _repositorioMovimiento.ObtenerMovimientos(cuenta.Numero);
@@ -79,7 +79,7 @@ namespace ThunderBank.Main.Controllers
 
         private FileResult GenerarExcel(string numeroCuenta, IEnumerable<Movimiento> movimientos)
         {
-            DataTable dataTable = new DataTable("Transacciones");
+            DataTable dataTable = new("Transacciones");
             dataTable.Columns.AddRange(new DataColumn[]
             {
                 new DataColumn("ID"),
@@ -99,17 +99,13 @@ namespace ThunderBank.Main.Controllers
                     item.NumeroCuentaRelacionada,
                     item.NumeroCuenta);
             }
-            using(XLWorkbook wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(dataTable);
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    wb.SaveAs(stream);
-                    return File(stream.ToArray(),
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        numeroCuenta);
-                }
-            }
+            using XLWorkbook wb = new();
+            wb.Worksheets.Add(dataTable);
+            using MemoryStream stream = new();
+            wb.SaveAs(stream);
+            return File(stream.ToArray(),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                numeroCuenta);
         }
 
 

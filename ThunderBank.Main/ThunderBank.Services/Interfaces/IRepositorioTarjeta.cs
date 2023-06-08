@@ -6,6 +6,7 @@ namespace ThunderBank.Services.Interfaces
     public interface IRepositorioTarjeta
     {
         Task ActivarTarjeta(string numeroTarjeta);
+        void Borrar(string numero);
         Task CancelarTarjeta(string numeroTarjeta);
         Task CongelarTarjeta(string numeroTarjeta);
         Task Crear(DTOCrearTarjeta tarjeta);

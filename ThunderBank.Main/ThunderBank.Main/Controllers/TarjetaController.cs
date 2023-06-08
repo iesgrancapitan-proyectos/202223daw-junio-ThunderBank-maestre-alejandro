@@ -48,14 +48,21 @@ namespace ThunderBank.Main.Controllers
                 TempData["Error"] = ex.Message;
                 return RedirectToAction("ErrorView", "Home");
             }
-            return View("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> Crear(DTOCrearTarjeta model)
         {
-            await _repositorioTarjeta.Crear(model);
-            return RedirectToAction("Index");
+            try
+            {
+                await _repositorioTarjeta.Crear(model);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("ErrorView", "Home");
+            }
         }
 
         /*
@@ -67,6 +74,11 @@ namespace ThunderBank.Main.Controllers
         {
             DtoTarjeta model = await _repositorioTarjeta.ObtenerDatosTarjeta(numero);
             return View(model);
+        }
+        public async Task<RedirectToActionResult> Borrar(string numero)
+        {
+            _repositorioTarjeta.Borrar(numero);
+            return RedirectToAction("Index");
         }
 
         /*
@@ -91,5 +103,6 @@ namespace ThunderBank.Main.Controllers
             await _repositorioTarjeta.CancelarTarjeta(numero);
             return RedirectToAction("Index", "Tarjeta");
         }
+
     }
 }

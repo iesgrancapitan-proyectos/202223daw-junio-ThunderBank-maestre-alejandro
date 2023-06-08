@@ -11,6 +11,7 @@ namespace ThunderBank.Models
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime FechaApertura { get; set; }
         public string Tipo { get; set; }
+        public bool Activa { get; set; }
         public int IdCliente { get; set; }
     }
     

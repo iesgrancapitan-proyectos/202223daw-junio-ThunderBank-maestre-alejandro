@@ -7,7 +7,7 @@ using ThunderBank.Services.SQL;
 
 namespace ThunderBank.Services.Repositorios
 {
-    public class RepositorioTarjeta: IRepositorioTarjeta
+    public class RepositorioTarjeta : IRepositorioTarjeta
     {
         private readonly SqlConfiguration _configuration;
 
@@ -26,7 +26,7 @@ namespace ThunderBank.Services.Repositorios
             using SqlConnection db = DbConnection();
             await db.QuerySingleAsync(
                 @"Tarjeta_Insertar",
-                new{
+                new {
                     FechaDeCreacion = tarjeta.FechaDeCreacion,
                     FechaDeCaducidad = tarjeta.FechaDeCaducidad,
                     Cvc = tarjeta.Cvc,
@@ -36,7 +36,7 @@ namespace ThunderBank.Services.Repositorios
                 }, commandType: System.Data.CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorCuenta(int clienteId,string fkNum)
+        public async Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorCuenta(int clienteId, string fkNum)
         {
             using SqlConnection db = DbConnection();
             return await db.QueryAsync<Tarjeta>(
@@ -47,25 +47,27 @@ namespace ThunderBank.Services.Repositorios
                 T.numeroCuenta AS NumeroDeCuenta
                 FROM Tarjeta T
                 INNER JOIN Cuenta C
-                ON C.idCliente = @ClienteId WHERE T.numeroCuenta = @FkNum  ", new {clienteId,fkNum});
+                ON C.idCliente = @ClienteId WHERE T.numeroCuenta = @FkNum  ", new { clienteId, fkNum });
         }
         public async Task<IEnumerable<Tarjeta>> ObtenerTarjetas(int clienteId)
         {
             using SqlConnection db = DbConnection();
             return await db.QueryAsync<Tarjeta>(
-                @"SELECT DISTINCT T.numero AS NumeroDeTarjeta,
-                T.fechaCreacion AS FechaDeCreacion,
-                T.fechaCaducidad AS FechaDeCaducidad,
-                T.cvc, T.pin, T.estado, 
-                T.numeroCuenta AS NumeroDeCuenta
+                @"SELECT T.numero AS NumeroDeTarjeta,
+                       T.fechaCreacion AS FechaDeCreacion,
+                       T.fechaCaducidad AS FechaDeCaducidad,
+                       T.cvc,
+                       T.pin,
+                       T.estado,
+                       T.numeroCuenta AS NumeroDeCuenta
                 FROM Tarjeta T
-                INNER JOIN Cuenta C
-                ON C.idCliente = @ClienteId", new { clienteId });
+                INNER JOIN Cuenta C ON T.numeroCuenta = C.numero
+                WHERE C.idCliente = @ClienteId;", new { clienteId });
         }
         public async Task<IEnumerable<Tarjeta>> ObtenerTarjetasPorNumCuenta(string numCuenta)
         {
             using SqlConnection db = DbConnection();
-            return await db.QueryAsync<Tarjeta>(@"SELECT * FROM Tarjeta WHERE numero = @NumCuenta", new { numCuenta});
+            return await db.QueryAsync<Tarjeta>(@"SELECT * FROM Tarjeta WHERE numero = @NumCuenta", new { numCuenta });
         }
 
         public async Task<DtoTarjeta> ObtenerDatosTarjeta(string numeroTarjeta)
@@ -100,12 +102,13 @@ namespace ThunderBank.Services.Repositorios
                 SET estado = 'CONGELADA' 
                 WHERE numero = @numeroTarjeta
                 SELECT SCOPE_IDENTITY();",
-                new {numeroTarjeta});
+                new { numeroTarjeta });
         }
 
         public async Task ActivarTarjeta(string numeroTarjeta)
         {
             using SqlConnection db = DbConnection();
+
             await db.QueryAsync(
                 @"UPDATE Tarjeta 
                 SET estado = 'ACTIVA' 
@@ -123,6 +126,13 @@ namespace ThunderBank.Services.Repositorios
                 WHERE numero = @numeroTarjeta
                 SELECT SCOPE_IDENTITY();",
                 new { numeroTarjeta });
+        }
+
+        public async void Borrar(string numero)
+        {
+            using SqlConnection db = DbConnection();
+            string sql = "DELETE FROM Tarjeta WHERE numero = @Numero;";
+        await db.ExecuteAsync(sql, new { numero });
         }
     }
 }
