@@ -8,6 +8,7 @@ namespace ThunderBank.Services.Interfaces
 {
     public interface IRepositorioResponsable
     {
-        int ObtenerResponsableId();
+        Task<int> ObtenerIdResponsanlePorIdUsuario(string id);
+        Task<int> ObtenerResponsableId();
     }
 }

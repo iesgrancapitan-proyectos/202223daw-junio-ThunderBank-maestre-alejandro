@@ -43,7 +43,7 @@ namespace ThunderBank.Main.Controllers
         [Authorize]
         public async Task<IActionResult> ListarClientesResponsable()
         {
-            int idResponsable = _repositorioResponsable.ObtenerResponsableId();
+            int idResponsable = await _repositorioResponsable.ObtenerResponsableId();
             IEnumerable<DtoUsuario> listadoClientes = await _repositorioCliente.ListarPorResponsable(idResponsable);
 
             return View(listadoClientes);
