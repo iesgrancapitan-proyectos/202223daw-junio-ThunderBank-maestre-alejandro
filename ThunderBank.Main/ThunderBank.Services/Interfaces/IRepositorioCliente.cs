@@ -11,5 +11,6 @@ namespace ThunderBank.Services.Interfaces
         Task<IEnumerable<DtoUsuario>> ListarPorResponsable(int idResponsable);
         Task<int> ObtenerClienteId();
         Task<Cliente> ObtenerDatosCliente(string id);
+        Task Soltar(int idCliente);
     }
 }
