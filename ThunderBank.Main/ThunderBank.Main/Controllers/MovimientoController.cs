@@ -69,7 +69,7 @@ namespace ThunderBank.Main.Controllers
         }
 
         [HttpGet]
-        public async Task<FileResult> ExportarExcel()
+        public async Task<FileResult> ExportarExcel(IEnumerable<Movimiento> movimientos)
         {
             string numeroCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta();
             IEnumerable<Movimiento> movimientosCuenta = await _repositorioMovimiento.ObtenerMovimientos(numeroCuenta);

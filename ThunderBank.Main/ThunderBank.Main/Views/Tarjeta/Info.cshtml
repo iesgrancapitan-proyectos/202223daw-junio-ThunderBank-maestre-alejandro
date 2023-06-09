@@ -82,11 +82,11 @@
                                 </a>
                             </div>
                         }
-                        
+
                         <div>
                             @if (Model.Estado == "ACTIVA")
                             {
-                                <a class="enlaceAccion" asp-action="CongelarTarjeta" asp-route-numero="@Model.NumeroDeTarjeta">
+                                <a id="btnCongelar" class="enlaceAccion" asp-action="CongelarTarjeta" asp-route-numero="@Model.NumeroDeTarjeta">
                                     <i class="bi bi-snow"></i>
                                     <p class="textoInfo">CONGELAR</p>
                                 </a>
@@ -99,7 +99,7 @@
                                 </a>
                             }
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -118,10 +118,7 @@
             </div>
         </div>
     </div>
-    
-    
+
+
 </section>
-
-@*Listado de movimientos*@
-
 

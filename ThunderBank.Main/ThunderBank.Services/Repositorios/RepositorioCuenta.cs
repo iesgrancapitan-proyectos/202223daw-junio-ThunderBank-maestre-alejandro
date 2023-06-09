@@ -39,7 +39,7 @@ namespace ThunderBank.Services.Repositorios
         public async Task<IEnumerable<Cuenta>> ObtenerCuentasPorIdCliente(int idCliente)
         {
             using var db = DbConnection();
-            var cuentas = await db.QueryAsync<Cuenta>(@"SELECT * FROM Cuenta WHERE idCliente = @IdCliente", new { IdCliente = idCliente });
+            var cuentas = await db.QueryAsync<Cuenta>(@"SELECT * FROM Cuenta WHERE idCliente = @IdCliente AND activa = 1", new { IdCliente = idCliente });
             return cuentas;
         }
 

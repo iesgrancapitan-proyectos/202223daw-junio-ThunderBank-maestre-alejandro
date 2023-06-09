@@ -6,10 +6,21 @@
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
 
-<h2>Tus últimos movimientos</h2>
-<a asp-action="Crear" class="btn btn-danger">Hacer un nuevo movimiento</a>
-<a asp-action="ExportarExcel" class="btn btn-success">Exportar movimientos a Excel</a>
-
+<div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 shadow-lg">
+    <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-4 fw-bold lh-1">Panel de Movimientos</h1>
+        <p class="lead text-white">De un rapido vistazo podrás ver todos los movimientos. En rojo los <b class="text-danger">GASTOS</b> y en verde los <b class="text-success">INGRESOS</b>. En ThunderBank entendemos la importancia de un panel amigable para ver sus últimos movimientos.<br />
+            Por ello hemos agregado una funcionalidad de exportacion a Excel de sus movimientos.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+            <a asp-action="Crear" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Hacer un nuevo movimiento</a>
+            <a id="btnExportarExcel" hidden asp-action="ExportarExcel" asp-route-listado="@Model" class="btn btn-success">Exportar movimientos a Excel</a>
+            <a class="btn btn-outline-success btn-lg px-4" onclick="exportarExcel()">Exportar movimientos a Excel</a>
+        </div>
+    </div>
+    <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+        <img class="rounded-lg-3" src="bootstrap-docs.png" alt="" width="720">
+    </div>
+</div>
 <table class="table text-white mt-3">
     <thead>
         <tr>
@@ -53,3 +64,27 @@
         }
     </tbody>
 </table>
+
+@section Scripts{
+    <script>
+        function exportarExcel() {
+            Swal.fire({
+                title: 'Espere',
+                html: 'Se está generando el excel',
+                timer: 2000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    document.getElementById("btnExportarExcel").click();
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                },
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    
+                }
+            })
+        }
+    </script>
+}
