@@ -105,6 +105,15 @@ namespace ThunderBank.Services.Repositorios
                 WHERE idUsuario = @IdUsuario",
                     cliente);
         }
+
+        public async Task Soltar(int idCliente)
+        {
+            using var db = DbConnection();
+            await db.ExecuteAsync(
+                @"UPDATE Cliente
+                  SET idResponsable = 0
+                  WHERE id = @idCliente;", new { idCliente });
+        }
     }
 }
 
