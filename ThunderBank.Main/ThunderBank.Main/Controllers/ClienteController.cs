@@ -35,6 +35,7 @@ namespace ThunderBank.Main.Controllers
         [Authorize]
         public async Task<IActionResult> ListarClientes()
         {
+            ViewBag.Id = _repositorioResponsable.ObtenerResponsableId();
             IEnumerable<DtoUsuario> listadoClientes = await _repositorioCliente.Listar();
             return View(listadoClientes);
         }
@@ -44,6 +45,7 @@ namespace ThunderBank.Main.Controllers
         public async Task<IActionResult> ListarClientesResponsable()
         {
             int idResponsable = await _repositorioResponsable.ObtenerResponsableId();
+            ViewBag.Id = _repositorioResponsable.ObtenerResponsableId();
             IEnumerable<DtoUsuario> listadoClientes = await _repositorioCliente.ListarPorResponsable(idResponsable);
 
             return View(listadoClientes);
@@ -60,6 +62,26 @@ namespace ThunderBank.Main.Controllers
         {
             await _repositorioCliente.Editar(cliente);
             return RedirectToAction("ListarClientes");
+        }
+
+        public async Task<IActionResult> SoltarCliente(int idCliente)
+        {
+            try
+            {
+                // Aquí colocas la lógica para desactivar la cuenta
+                await _repositorioCliente.Soltar(idCliente);
+
+                // Si la desactivación es exitosa, devuelves un mensaje de éxito
+                TempData["Success"] = "Cliente liberado";
+            }
+            catch (Exception ex)
+            {
+                // Si ocurre algún error durante la desactivación, devuelves un mensaje de error
+                TempData["Error"] = "Ha ocurrido un error al liberar al cliente: " + ex.Message;
+            }
+
+            // Rediriges a la acción "Index" para mostrar la vista correspondiente
+            return RedirectToAction("Index");
         }
     }
 }
