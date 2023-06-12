@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic;
 using System.Data;
 using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
@@ -39,7 +40,8 @@ namespace ThunderBank.Services.Repositorios
         public async Task<IEnumerable<Cuenta>> ObtenerCuentasPorIdCliente(int idCliente)
         {
             using var db = DbConnection();
-            var cuentas = await db.QueryAsync<Cuenta>(@"SELECT * FROM Cuenta WHERE idCliente = @IdCliente AND activa = 1", new { IdCliente = idCliente });
+            //DateAndTime activa = 1
+            var cuentas = await db.QueryAsync<Cuenta>(@"SELECT * FROM Cuenta WHERE idCliente = @IdCliente", new { IdCliente = idCliente });
             return cuentas;
         }
 

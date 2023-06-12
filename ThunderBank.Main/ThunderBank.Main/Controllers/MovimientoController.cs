@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using ThunderBank.Models;
+using ThunderBank.Models.DTO;
 using ThunderBank.Services.Interfaces;
 using ThunderBank.Services.Repositorios;
 
@@ -26,10 +27,22 @@ namespace ThunderBank.Main.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "CLIENTE")]
-        public IActionResult Crear()
+
+        public async Task<IActionResult> Crear()
         {
-            return View();
+            try
+            {
+                var clienteId = await _repositorioCliente.ObtenerClienteId();
+                DtoMovimiento model = new()
+                {
+                    Cuentas = await _repositorioCuenta.ObtenerCuentasPorIdCliente(clienteId)
+                };
+                return View(model);
+            }catch(Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("ErrorView", "Home");
+            }
         }
 
         [Authorize(Roles = "CLIENTE")]
@@ -71,10 +84,18 @@ namespace ThunderBank.Main.Controllers
         [HttpGet]
         public async Task<FileResult> ExportarExcel(IEnumerable<Movimiento> movimientos)
         {
-            string numeroCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta();
-            IEnumerable<Movimiento> movimientosCuenta = await _repositorioMovimiento.ObtenerMovimientos(numeroCuenta);
-            var nombreArchivo = $"Movimientos - {numeroCuenta}.xlsx";
-            return GenerarExcel(nombreArchivo, movimientosCuenta);
+            var idCliente = await _repositorioCliente.ObtenerClienteId();
+            var cuentas = await _repositorioCuenta.ObtenerCuentasPorIdCliente(idCliente);
+            List<Movimiento> movimientosTotales = new();
+            foreach(var cuenta in cuentas)
+            {
+                var movimientosCuentaActual = await _repositorioMovimiento.ObtenerMovimientos(cuenta.Numero);
+                movimientosTotales.AddRange(movimientosCuentaActual);
+            }
+            //string numeroCuenta = await _repositorioCuenta.ObtenerNumeroDeCuenta();
+            //IEnumerable<Movimiento> movimientosCuenta = await _repositorioMovimiento.ObtenerMovimientos(numeroCuenta);
+            var nombreArchivo = $"Movimientos - {idCliente}.xlsx";
+            return GenerarExcel(nombreArchivo, movimientosTotales);
         }
         [Authorize(Roles = "CLIENTE")]
         private FileResult GenerarExcel(string numeroCuenta, IEnumerable<Movimiento> movimientos)
