@@ -19,7 +19,7 @@ namespace ThunderBank.Main.Controllers
             _repositorioCuenta = repositorioCuenta;
             _repositorioCliente = repositorioCliente;
         }
-
+        [Authorize(Roles = "CLIENTE")]
         public async Task<IActionResult> Index()
         {
             int clienteId = await _repositorioCliente.ObtenerClienteId();
@@ -30,7 +30,7 @@ namespace ThunderBank.Main.Controllers
         /*
          CREAR TARJETA
          */
-
+        [Authorize(Roles = "CLIENTE")]
         [HttpGet]
         public async Task<IActionResult> Crear()
         {
@@ -49,7 +49,7 @@ namespace ThunderBank.Main.Controllers
                 return RedirectToAction("ErrorView", "Home");
             }
         }
-
+        [Authorize(Roles = "CLIENTE")]
         [HttpPost]
         public async Task<IActionResult> Crear(DTOCrearTarjeta model)
         {
@@ -68,7 +68,7 @@ namespace ThunderBank.Main.Controllers
         /*
          INFO TARJETA
          */
-
+        [Authorize(Roles = "CLIENTE")]
         [HttpGet]
         public async Task<IActionResult> Info(string numero)
         {
@@ -84,19 +84,23 @@ namespace ThunderBank.Main.Controllers
         /*
          ACCIONES TARJETA
          */
-        
+        [Authorize(Roles = "CLIENTE")]
         [HttpGet]
         public async Task<RedirectToActionResult> CongelarTarjeta(string numero)
         {
             await _repositorioTarjeta.CongelarTarjeta(numero);
             return RedirectToAction("Index", "Tarjeta");
         }
+
+        [Authorize(Roles = "CLIENTE")]
         [HttpGet]
         public async Task<RedirectToActionResult> ActivarTarjeta(string numero)
         {
             await _repositorioTarjeta.ActivarTarjeta(numero);
             return RedirectToAction("Index", "Tarjeta");
         }
+
+        [Authorize(Roles = "CLIENTE")]
         [HttpGet]
         public async Task<RedirectToActionResult> CancelarTarjeta(string numero)
         {
