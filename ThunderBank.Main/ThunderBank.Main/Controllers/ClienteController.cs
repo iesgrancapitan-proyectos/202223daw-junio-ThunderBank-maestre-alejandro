@@ -68,20 +68,40 @@ namespace ThunderBank.Main.Controllers
         {
             try
             {
-                // Aquí colocas la lógica para desactivar la cuenta
                 await _repositorioCliente.Soltar(idCliente);
 
                 // Si la desactivación es exitosa, devuelves un mensaje de éxito
-                TempData["Success"] = "Cliente liberado";
+                TempData["LiberarSuccess"] = "Cliente liberado";
             }
             catch (Exception ex)
             {
                 // Si ocurre algún error durante la desactivación, devuelves un mensaje de error
-                TempData["Error"] = "Ha ocurrido un error al liberar al cliente: " + ex.Message;
+                TempData["LiberarError"] = "Ha ocurrido un error al liberar al cliente: " + ex.Message;
             }
 
             // Rediriges a la acción "Index" para mostrar la vista correspondiente
-            return RedirectToAction("Index");
+            return RedirectToAction("ListarClientes");
         }
+
+        public async Task<IActionResult> AsignarCliente(int idCliente)
+        {
+            try
+            {
+                int idResponsable = await _repositorioResponsable.ObtenerResponsableId();
+                await _repositorioCliente.Asignar(idCliente, idResponsable);
+
+                // Si la desactivación es exitosa, devuelves un mensaje de éxito
+                TempData["AsignarSuccess"] = "Cliente asignado";
+            }
+            catch (Exception ex)
+            {
+                // Si ocurre algún error durante la desactivación, devuelves un mensaje de error
+                TempData["AsignarError"] = "Ha ocurrido un error al asignar al cliente: " + ex.Message;
+            }
+
+            // Rediriges a la acción "Index" para mostrar la vista correspondiente
+            return RedirectToAction("ListarClientes");
+        }
+
     }
 }
