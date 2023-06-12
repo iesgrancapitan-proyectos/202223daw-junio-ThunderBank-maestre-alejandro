@@ -78,6 +78,7 @@ namespace ThunderBank.Main.Controllers
                             Activo = 1
                         };
                         await _repositorioCliente.CrearCliente(cliente);
+                        await _signInManager.SignInAsync(usuario, isPersistent: false);
                     }
 
                     await _signInManager.SignInAsync(usuario, isPersistent: true);

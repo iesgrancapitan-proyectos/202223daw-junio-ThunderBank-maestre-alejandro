@@ -6,7 +6,7 @@ namespace ThunderBank.Main.Controllers
 {
     public class ResponsableController : Controller
     {
-        [Authorize]
+        [Authorize(Roles = "RESPONSABLE")]
         public IActionResult Crear(RegistroViewModel modelo)
         {
             return View(modelo);

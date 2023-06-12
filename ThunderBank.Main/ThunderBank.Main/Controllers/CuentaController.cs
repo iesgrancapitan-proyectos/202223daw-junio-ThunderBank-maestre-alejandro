@@ -15,7 +15,7 @@ namespace ThunderBank.Main.Controllers
             this._repositorioCuenta = repositorioCuenta;
             this._repositorioCliente = repositorioCliente;
         }
-        [Authorize]
+        [Authorize(Roles = "CLIENTE")]
         public async Task<IActionResult> Index()
         {
             var idCliente =  await _repositorioCliente.ObtenerClienteId();
@@ -26,13 +26,13 @@ namespace ThunderBank.Main.Controllers
             }).ToList();
             return View(modelo);
         }
-        [Authorize]
+        [Authorize(Roles = "CLIENTE")]
         [HttpGet]
         public IActionResult Crear()
         {
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "CLIENTE")]
         [HttpPost]
         public async Task<IActionResult> Crear(Cuenta cuenta)
         {
@@ -53,6 +53,7 @@ namespace ThunderBank.Main.Controllers
             }
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "CLIENTE")]
         public async Task<IActionResult> Desactivar(string numCuenta)
         {
             try
