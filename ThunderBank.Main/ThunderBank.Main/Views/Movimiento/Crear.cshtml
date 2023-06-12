@@ -1,36 +1,80 @@
-﻿@using ThunderBank.Models;
-@model Movimiento
+﻿@using ThunderBank.Models.DTO;
+@model DtoMovimiento
 @{
     ViewData["Title"] = "Crear Movimiento";
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
 
-    <h3>Creación de Movimientos</h3>
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="Movimiento" asp-action="Crear" class="text-white">
-        <div class="mb-3">
-            <select required asp-for="Tipo" class="form-select w-25" aria-label="Default select example">
-                <option>Seleccione el tipo de movimiento</option>
-                <option value="INGRESO" selected>INGRESO</option>
-                <option value="GASTO">GASTO</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Importe" class="form-label"></label>
-            <input type="text" asp-for="Importe" placeholder="Intoduzca una cuantía. Ejemplo(1000 - 30,5)" class="form-control text-black"/>
-            <span asp-validation-for="Importe" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Comentario" class="form-label"></label>
-            <input type="text" asp-for="Comentario" class="form-control text-black" />
-            <span asp-validation-for="Comentario" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="NumeroCuentaRelacionada" class="form-label"></label>
-            <input type="text" asp-for="NumeroCuentaRelacionada" class="form-control text-black" required />
-            <span asp-validation-for="NumeroCuentaRelacionada" class="text-danger"></span>
-        </div>
-        <button class="btn btn-success" type="submit">Enviar</button>
-        <a class="btn btn-danger" asp-action="ListadoMovimientos">Cancelar</a>
-    </form>
+<div class="container">
 
+    <div class=" text-center mt-5 ">
+        <h1>Creación de Movimientos</h1>
+    </div>
+
+    <div class="row ">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light">
+                <div class="card-body bg-light">
+                    <div class="container">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <form asp-controller="Movimiento" asp-action="Crear" id="formMovimiento">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Importe" class="form-label"></label>
+                                            <input type="text" asp-for="Importe" placeholder="Intoduzca una cuantía *" required class="form-control" />
+                                            <span asp-validation-for="Importe" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="NumeroCuentaRelacionada" class="form-label"></label>
+                                            <input type="text" asp-for="NumeroCuentaRelacionada" class="form-control text-black" required />
+                                            <span asp-validation-for="NumeroCuentaRelacionada" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_need">Elija el tipo de movimiento *</label>
+                                            <select required asp-for="Tipo" class="form-select" aria-label="Default select example">
+                                                <option>Seleccione el tipo de movimiento</option>
+                                                <option value="INGRESO" selected>INGRESO</option>
+                                                <option value="GASTO">GASTO</option>
+                                            </select>
+                                        </div>
+                                        <label for="cuenta">Selecciona una cuenta:</label>
+                                        <select name="NumeroCuenta" id="cuenta" asp-for="NumeroCuenta">
+                                            @foreach (var cuenta in Model.Cuentas.Where(x => x.Activa == true))
+                                            {
+                                                <option value="@cuenta.Numero">@cuenta.Numero</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="Comentario" class="form-label"></label>
+                                            <textarea type="text" asp-for="Comentario" class="form-control" placeholder="Escriba su comentario." rows="4"></textarea>
+                                            <span asp-validation-for="Comentario" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-success btn-send mt-4 pt-2 btn-block" type="submit" id="btnEnviar">Enviar</button>
+                                        <a class="btn btn-danger mt-4" asp-action="ListadoMovimientos">Cancelar</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
