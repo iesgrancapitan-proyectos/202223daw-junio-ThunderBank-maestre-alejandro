@@ -1,18 +1,46 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using ThunderBank.Models;
 @inject SignInManager<Usuario> SignInManager
+@{
+    string nameFirstLetter = @User.Identity.Name.Substring(0, 2);
+}
+<style>
+    .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #031D40; /* Color de fondo del círculo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+    }
 
-    <ul class="navbar-nav">
+    .dropdown-toggle::after {
+        font-size:15px;
+    }
+</style>
+
+<ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <span class="nav-link">Hola, @User.Identity.Name</span>
-        </li>
+        <li>
+            <div class="flex-shrink-0 dropdown text-white">
+                <a href="#" class="circle dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false" style="font-size:20px; text-decoration:none; color:#f0f0f0;">
+                    @nameFirstLetter
+                </a>
 
-        <li class="nav-item">
-            <form class="form-inline" asp-action="Logout" asp-controller="Usuario">
-                <button type="submit" class="nav-link btn btn-link">LOGOUT</button>
-            </form>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="margin-left: -130px">
+                    <li><a class="dropdown-item" href="#">Hola, @User.Identity.Name</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    @*<a class="nav-link text-black" asp-action="Logout" asp-controller="Usuario">Cerrar Sesión</a>*@
+                    <li class="nav-item">
+                        <form class="form-inline" asp-action="Logout" asp-controller="Usuario">
+                            <button type="submit" class=" nav-link btn btn-link text-black">Cerrar sesión</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </li>
     }
     else
@@ -24,5 +52,5 @@
             <a class="nav-link" asp-action="Login" asp-controller="Usuario">Login</a>
         </li>
     }
+</ul>
 
-    </ul>

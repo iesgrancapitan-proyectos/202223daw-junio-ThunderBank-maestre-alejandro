@@ -21,6 +21,7 @@ namespace ThunderBank.Models
         public string Telefono { get; set; }
         
         public string Correo { get; set; }
+        [DisplayName(displayName: "Fecha de Nacimiento")]
         [Required]
         public DateTime FechaDeNacimiento { get; set; }
         [DisplayName(displayName: "Contraseña")]

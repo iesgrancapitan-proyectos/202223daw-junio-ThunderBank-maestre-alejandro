@@ -10,50 +10,57 @@
 </div>
 
 <div class="d-flex vh-80">
-    <div id="izquierdaLanding" class="w-50 m-5">
+    <div id="izquierdaLanding" class="w-50 m-2">
         <h1 style="font-weight: 300; font-size: 2em;">Bienvenido a <span style="font-weight: 700;">ThunderBank</span></h1>
         <p>Por favor, introduce tus datos</p>
         <form asp-action="Registro" id="formularioLogin" class="mt-5">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3 row">
-                <label asp-for="Dni" class="form-label"></label>
-                <input asp-for="Dni" class="form-control p-3" placeholder="00000000X" />
-                <span asp-validation-for="Dni" class="text-danger"></span>
+            <div class="row">
+                <div class="mb-3 col">
+                    <label asp-for="Dni" class="form-label"></label>
+                    <input asp-for="Dni" class="form-control p-3" placeholder="00000000X" />
+                    <span asp-validation-for="Dni" class="text-danger"></span>
+                </div>
+                <div class="mb-3 col">
+                    <label asp-for="Nombre" class="form-label"></label>
+                    <input asp-for="Nombre" class="form-control p-3" placeholder="rafaelpeleas" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
             </div>
             
             <div class="row">
-                <div class="mb-3 col">
-                    <label asp-for="Nombre" class="form-label"></label>
-                    <input asp-for="Nombre" class="form-control p-3" placeholder="rafaelpeleas"  />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
-                </div>
                 <div class="mb-3 col">
                     <label asp-for="Apellido" class="form-label"></label>
                     <input asp-for="Apellido" class="form-control p-3" placeholder="Cuervo Botellas" />
                     <span asp-validation-for="Apellido" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="mb-3 row">
-                <label asp-for="Telefono" class="form-label"></label>
-                <input asp-for="Telefono" class="form-control p-3" placeholder="634587521" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="mb-3 row">
-                <label asp-for="Correo" class="form-label"></label>
-                <input type="email" asp-for="Correo" class="form-control p-3" placeholder="josecuervo@god.com" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
+                <div class="mb-3 col">
+                    <label asp-for="FechaDeNacimiento" class="form-label"></label>
+                    <input asp-for="FechaDeNacimiento" type="date" class="form-control p-3" />
+                    <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
+                </div>
             </div>
             <div class="row">
-                <div class="mb-3 col row">
-                <label asp-for="FechaDeNacimiento" class="form-label"></label>
-                <input asp-for="FechaDeNacimiento" type="date" class="form-control p-3"/>
-                <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
-            </div>
                 <div class="mb-3 col">
-                <label asp-for="Pwd" class="form-label"></label>
-                <input asp-for="Pwd" class="form-control p-3" placeholder="········" type="password" />
+                    <label asp-for="Correo" class="form-label"></label>
+                    <input type="email" asp-for="Correo" class="form-control p-3" placeholder="josecuervo@god.com" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
             </div>
+
+            <div class="row">
+                <div class="mb-3 col">
+                    <label asp-for="Telefono" class="form-label"></label>
+                    <input asp-for="Telefono" class="form-control p-3" placeholder="634587521" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+                <div class="mb-3 col">
+                    <label asp-for="Pwd" class="form-label"></label>
+                    <input asp-for="Pwd" class="form-control p-3" placeholder="········" type="password" />
+                </div>
             </div>
+                
+
 
 
             <div class="d-flex justify-content-between">
@@ -66,7 +73,7 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-100 p-3 mt-5 mb-3" id="botonLogin">Registrate</button>
+                <button type="submit" class="btn btn-primary w-100 p-3 mt-3 mb-3" id="botonLogin">Registrate</button>
             </div>
         </form>
     </div>
