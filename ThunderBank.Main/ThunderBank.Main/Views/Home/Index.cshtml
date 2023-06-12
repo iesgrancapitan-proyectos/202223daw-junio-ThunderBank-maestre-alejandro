@@ -1,6 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    if (User.IsInRole("RESPONSABLE"))
+    {
+        Layout = "~/Views/Shared/_LayoutResponsable.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
 }
 <div>
     <header>
