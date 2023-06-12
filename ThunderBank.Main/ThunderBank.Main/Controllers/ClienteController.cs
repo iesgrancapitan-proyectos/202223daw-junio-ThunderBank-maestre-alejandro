@@ -51,12 +51,14 @@ namespace ThunderBank.Main.Controllers
             return View(listadoClientes);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Editar(string dni)
         {
             Cliente model = await _repositorioCliente.ObtenerDatosCliente(dni);
             return View(model);
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Editar(Cliente cliente)
         {
@@ -64,6 +66,7 @@ namespace ThunderBank.Main.Controllers
             return RedirectToAction("ListarClientes");
         }
 
+        [Authorize]
         public async Task<IActionResult> SoltarCliente(int idCliente)
         {
             try
@@ -83,6 +86,7 @@ namespace ThunderBank.Main.Controllers
             return RedirectToAction("ListarClientes");
         }
 
+        [Authorize]
         public async Task<IActionResult> AsignarCliente(int idCliente)
         {
             try

@@ -16,12 +16,15 @@ namespace ThunderBank.Main.Controllers
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
         private readonly IRepositorioCliente _repositorioCliente;
+        private readonly IRepositorioResponsable _repositorioResponsable;
 
-        public UsuarioController(UserManager<Usuario> userManager,SignInManager<Usuario> signInManager,IRepositorioCliente repositorioCliente)
+        public UsuarioController(UserManager<Usuario> userManager,SignInManager<Usuario> signInManager,
+            IRepositorioCliente repositorioCliente, IRepositorioResponsable repositorioResponsable)
         {
-            this._userManager = userManager;
-            this._signInManager = signInManager;
-            this._repositorioCliente = repositorioCliente;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _repositorioCliente = repositorioCliente;
+            _repositorioResponsable = repositorioResponsable;
         }
         [AllowAnonymous]
         public IActionResult Registro()
@@ -30,7 +33,7 @@ namespace ThunderBank.Main.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Registro(RegistroViewModel modelo)
+        public async Task<IActionResult> Registro(RegistroViewModel modelo, bool esResponsable)
         {
             if (!ModelState.IsValid)
             {
@@ -41,21 +44,39 @@ namespace ThunderBank.Main.Controllers
             var resultado = await _userManager.CreateAsync(usuario,password:modelo.Pwd);
             if(resultado.Succeeded)
             {
-                var cliente = new Cliente()
-                {
-                    Dni = modelo.Dni,
-                    Nombre = modelo.Nombre,
-                    Apellido = modelo.Apellido,
-                    Correo = modelo.Correo,
-                    Telefono = modelo.Telefono,
-                    FechaDeNacimiento = modelo.FechaDeNacimiento,
-                    FechaDeAlta = DateTime.Now,
-                    IdUsuario = usuario.Id,
-                    Activo = 1
-                };
+
                 try
                 {
-                    await _repositorioCliente.CrearCliente(cliente);
+                    if(esResponsable)
+                    {
+                        var responsable = new Responsable()
+                        {
+                            Dni = modelo.Dni,
+                            Nombre = modelo.Nombre,
+                            Apellido = modelo.Apellido,
+                            Telefono = modelo.Telefono,
+                            Correo = modelo.Correo,
+                            IdUsuario = usuario.Id,
+                            Direccion = "-"
+                        };
+                        await _repositorioResponsable.CrearResponsable(responsable);
+                    } else
+                    {
+                        var cliente = new Cliente()
+                        {
+                            Dni = modelo.Dni,
+                            Nombre = modelo.Nombre,
+                            Apellido = modelo.Apellido,
+                            Correo = modelo.Correo,
+                            Telefono = modelo.Telefono,
+                            FechaDeNacimiento = modelo.FechaDeNacimiento,
+                            FechaDeAlta = DateTime.Now,
+                            IdUsuario = usuario.Id,
+                            Activo = 1
+                        };
+                        await _repositorioCliente.CrearCliente(cliente);
+                    }
+                    
 
                 }catch (RuntimeBinderException)
                 {
@@ -64,7 +85,7 @@ namespace ThunderBank.Main.Controllers
                 }
 
                 await _signInManager.SignInAsync(usuario, isPersistent: true);
-                return RedirectToAction("Index", "Cuenta");
+                return RedirectToAction("Index", "Home");
             }
             else
             {

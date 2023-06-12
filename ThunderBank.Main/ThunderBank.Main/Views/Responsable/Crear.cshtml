@@ -1,0 +1,78 @@
+﻿@using ThunderBank.Models;
+@model RegistroViewModel
+
+@{
+    ViewData["Title"] = "Creación de Responsable";
+    Layout = "~/Views/Shared/_LayoutResponsable.cshtml";
+}
+
+<h1 class="text-white">Dar de alta nuevo responsable</h1>
+<div class="form-container">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="Usuario" asp-action="Registro" class="w-100">
+        <div class="col mb-4">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    @*DNI*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Dni" asp-route-dni="@Model.Dni" placeholder=" " />
+                        <label asp-for="Dni" class="form-label"></label>
+                        <span asp-validation-for="Dni" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    @*Password*@
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" asp-for="Pwd" placeholder=" " />
+                        <label asp-for="Pwd" class="form-label"></label>
+                        <span asp-validation-for="Pwd" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    @*Nombre*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Nombre" placeholder=" " />
+                        <label asp-for="Nombre" class="form-label"></label>
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    @*Apellidos*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Apellido" placeholder=" " />
+                        <label asp-for="Apellido" class="form-label"></label>
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    @*Correo*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Correo" placeholder=" " />
+                        <label asp-for="Correo" class="form-label"></label>
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    @*Teléfono*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Telefono" placeholder=" " />
+                        <label asp-for="Telefono" class="form-label"></label>
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="esResponsable" value="true" />
+        <button class="btn btn-success" type="submit">Dar de alta</button>
+        <a class="btn btn-warning" asp-action="ListarClientes">Cancelar</a>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

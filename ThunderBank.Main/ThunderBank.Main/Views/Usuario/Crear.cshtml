@@ -99,6 +99,7 @@
             </div>
         </div>
         <input type="hidden" asp-for="FechaDeAlta" value="@DateTime.Now" />
+        <input type="hidden" asp-route-esResponsable="true" />
 
         <button class="btn btn-success" type="submit">Dar de alta</button>
         <a class="btn btn-warning" asp-action="Index">Cancelar</a>

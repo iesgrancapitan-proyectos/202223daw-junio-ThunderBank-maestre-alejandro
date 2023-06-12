@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using System.Security.Claims;
+using ThunderBank.Models;
 using ThunderBank.Services.Interfaces;
 using ThunderBank.Services.SQL;
 
@@ -42,6 +43,15 @@ namespace ThunderBank.Services.Repositorios
         {
             using var db = DbConnection();
             return await db.QuerySingleOrDefaultAsync<int>(@"SELECT * FROM Responsable WHERE idUsuario = @Id", new { id });
+        }
+
+        public async Task CrearResponsable(Responsable modelo)
+        {
+            using var db = DbConnection();
+            await db.QuerySingle(@"INSERT INTO Responsable(dni,nombre,apellido,telefono,correo,direccion,idUsuario) 
+                VALUES (@Dni,@Nombre,@Apellido,@Telefono,@Correo,@Direccion,@IdUsuario);
+                UPDATE Usuario SET rol = 'RESPONSABLE' WHERE id = @IdUsuario
+                SELECT SCOPE_IDENTITY()", modelo);
         }
     }
 }
