@@ -29,12 +29,15 @@
                     data-bs-toggle="tooltip" data-bs-title="Editar cliente">
                         <i class="bi bi-pen-fill"></i>
                     </a>
-                    <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Dar de baja">
+                    <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Dar de baja" >
                         <i class="bi bi-person-dash"></i>
                     </a>
                     @if (cliente.ResponsableId == 0)
                     {
-                        <a class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Llevar a este cliente">
+                        <a class="btn btn-success" asp-action="AsignarCliente" asp-controller="Cliente"
+                           data-bs-toggle="tooltip" data-bs-title="Llevar a este cliente"
+                           asp-route-idCliente="@cliente.ClienteId"
+                           onclick="clienteAsignado('@cliente.Nombre')">
                             <i class="bi bi-check"></i>
                         </a>
                     }
@@ -42,10 +45,9 @@
                     @if (cliente.ResponsableId == id)
                     {
                         <a class="btn btn-warning" asp-action="SoltarCliente" asp-controller="Cliente" 
-                        data-bs-toggle="tooltip" data-bs-title="Soltar a este cliente">
+                        data-bs-toggle="tooltip" data-bs-title="Soltar a este cliente" asp-route-idCliente="@cliente.ClienteId">
                             <i class="bi bi-x-circle"></i>
                         </a>
-                        <a hidden id="btnSoltarBack" class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cliente.Dni"><i class="bi bi-trash"></i></a>
                     }
 
                     
@@ -62,12 +64,29 @@
     </tbody>
 </table>
 
-@section Scripts{
+@if (TempData["LiberarSuccess"] != null)
+{
     <script>
-        function soltarCliente(idCliente) {
-            var btn = document.getElementById("btnSoltarBack");
-            btn.click();
-        }
+        Swal.fire('Cliente liberado', '@TempData["LiberarSuccess"]', 'success');
     </script>
+}
 
+@if (TempData["AsignarSuccess"] != null)
+{
+    <script>
+        Swal.fire('Cliente asignado', '@TempData["LiberarSuccess"]', 'success');
+    </script>
+}
+
+@if (TempData["LiberarError"] != null)
+{
+    <script>
+        Swal.fire('Error', '@TempData["Error"]', 'error');
+    </script>
+}
+@if (TempData["AsignarError"] != null)
+{
+    <script>
+        Swal.fire('Error', '@TempData["Error"]', 'error');
+    </script>
 }
