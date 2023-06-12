@@ -18,21 +18,11 @@ namespace ThunderBank.Main.Controllers
             _repositorioCliente = repositorioCliente;
             _repositorioResponsable = repositorioResponsable;
         }
-        [Authorize]
-        public IActionResult Index()
-        {
-            return View();
-        }
-        [Authorize]
-        public IActionResult Crear()
-        {
-            return View();
-        }
 
         // LISTAR CLIENTES
 
         // Listar todos los clientes
-        [Authorize]
+        [Authorize(Roles = "RESPONSABLE")]
         public async Task<IActionResult> ListarClientes()
         {
             ViewBag.Id = _repositorioResponsable.ObtenerResponsableId();
@@ -41,7 +31,7 @@ namespace ThunderBank.Main.Controllers
         }
 
         // Listar por responsable
-        [Authorize]
+        [Authorize(Roles = "RESPONSABLE")]
         public async Task<IActionResult> ListarClientesResponsable()
         {
             int idResponsable = await _repositorioResponsable.ObtenerResponsableId();
@@ -51,14 +41,14 @@ namespace ThunderBank.Main.Controllers
             return View(listadoClientes);
         }
 
-        [Authorize]
+        [Authorize(Roles = "RESPONSABLE")]
         [HttpGet]
         public async Task<IActionResult> Editar(string dni)
         {
             Cliente model = await _repositorioCliente.ObtenerDatosCliente(dni);
             return View(model);
         }
-        [Authorize]
+        [Authorize(Roles = "RESPONSABLE")]
         [HttpPost]
         public async Task<IActionResult> Editar(Cliente cliente)
         {
@@ -66,7 +56,7 @@ namespace ThunderBank.Main.Controllers
             return RedirectToAction("ListarClientes");
         }
 
-        [Authorize]
+        [Authorize(Roles = "RESPONSABLE")]
         public async Task<IActionResult> SoltarCliente(int idCliente)
         {
             try
@@ -86,7 +76,7 @@ namespace ThunderBank.Main.Controllers
             return RedirectToAction("ListarClientes");
         }
 
-        [Authorize]
+        [Authorize(Roles = "RESPONSABLE")]
         public async Task<IActionResult> AsignarCliente(int idCliente)
         {
             try
