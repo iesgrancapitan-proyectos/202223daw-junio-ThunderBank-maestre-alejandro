@@ -44,7 +44,6 @@ namespace ThunderBank.Main.Controllers
             var resultado = await _userManager.CreateAsync(usuario,password:modelo.Pwd);
             if(resultado.Succeeded)
             {
-
                 try
                 {
                     if(esResponsable)
@@ -75,16 +74,14 @@ namespace ThunderBank.Main.Controllers
                             Activo = 1
                         };
                         await _repositorioCliente.CrearCliente(cliente);
+                        await _signInManager.SignInAsync(usuario, isPersistent: false);
                     }
                     
 
                 }catch (RuntimeBinderException)
                 {
-                    await _signInManager.SignInAsync(usuario, isPersistent: true);
-                    return RedirectToAction("Index", "Cuenta");
+                    return RedirectToAction("Index", "Home");
                 }
-
-                await _signInManager.SignInAsync(usuario, isPersistent: true);
                 return RedirectToAction("Index", "Home");
             }
             else

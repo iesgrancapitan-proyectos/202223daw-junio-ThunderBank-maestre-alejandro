@@ -21,18 +21,18 @@ namespace ThunderBank.Main.Controllers
             this._repositorioCuenta = repositorioCuenta;
             this._repositorioCliente = repositorioCliente;
         }
-        
+        [Authorize(Roles = "CLIENTE")]
         public IActionResult Index()
         {
             return View();
         }
-
+        [Authorize(Roles = "CLIENTE")]
         public IActionResult Crear()
         {
             return View();
         }
 
-
+        [Authorize(Roles = "CLIENTE")]
         [HttpPost]
         public async Task<IActionResult> Crear(Movimiento movimiento)
         {
@@ -54,7 +54,7 @@ namespace ThunderBank.Main.Controllers
             }
             return RedirectToAction("ListadoMovimientos");
         }
-
+        [Authorize(Roles = "CLIENTE")]
         public async Task<IActionResult> ListadoMovimientos()
         {
             var idCliente = await _repositorioCliente.ObtenerClienteId();
@@ -67,7 +67,7 @@ namespace ThunderBank.Main.Controllers
             }
             return View(movimientosTotales);
         }
-
+        [Authorize(Roles = "CLIENTE")]
         [HttpGet]
         public async Task<FileResult> ExportarExcel(IEnumerable<Movimiento> movimientos)
         {
@@ -76,7 +76,7 @@ namespace ThunderBank.Main.Controllers
             var nombreArchivo = $"Movimientos - {numeroCuenta}.xlsx";
             return GenerarExcel(nombreArchivo, movimientosCuenta);
         }
-
+        [Authorize(Roles = "CLIENTE")]
         private FileResult GenerarExcel(string numeroCuenta, IEnumerable<Movimiento> movimientos)
         {
             DataTable dataTable = new("Transacciones");
@@ -108,7 +108,7 @@ namespace ThunderBank.Main.Controllers
                 numeroCuenta);
         }
 
-
+        [Authorize(Roles = "CLIENTE")]
         public IActionResult Error()
         {
             if (TempData.ContainsKey("ErrorMessage"))
