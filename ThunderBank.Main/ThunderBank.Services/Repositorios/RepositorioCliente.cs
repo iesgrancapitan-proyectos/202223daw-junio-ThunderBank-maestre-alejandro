@@ -56,7 +56,8 @@ namespace ThunderBank.Services.Repositorios
         {
             using SqlConnection db = DbConnection();
             IEnumerable<DtoUsuario> listado = await db.QueryAsync<DtoUsuario>(
-                @"SELECT Dni,
+                @"SELECT Id As ClienteId,
+                Dni,
                 nombre,
                 apellido,
                 telefono,
@@ -73,7 +74,8 @@ namespace ThunderBank.Services.Repositorios
         {
             using SqlConnection db = DbConnection();
             IEnumerable<DtoUsuario> listado = await db.QueryAsync<DtoUsuario>(
-                @"SELECT Dni,
+                @"SELECT Id As ClienteId,
+                Dni,
                 nombre,
                 apellido,
                 telefono,
@@ -111,8 +113,17 @@ namespace ThunderBank.Services.Repositorios
             using var db = DbConnection();
             await db.ExecuteAsync(
                 @"UPDATE Cliente
-                  SET idResponsable = 0
+                  SET idResponsable = null
                   WHERE id = @idCliente;", new { idCliente });
+        }
+
+        public async Task Asignar(int idCliente, int idResponsable)
+        {
+            using var db = DbConnection();
+            await db.ExecuteAsync(
+                @"UPDATE Cliente
+                  SET idResponsable = @idResponsable
+                  WHERE id = @idCliente;", new { idCliente, idResponsable });
         }
     }
 }

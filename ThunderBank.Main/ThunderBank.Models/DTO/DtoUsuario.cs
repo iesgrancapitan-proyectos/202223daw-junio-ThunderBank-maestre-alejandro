@@ -6,6 +6,7 @@ namespace ThunderBank.Models.DTO
 {
     public class DtoUsuario
     {
+        public int ClienteId { get; set; }
         public int ResponsableId { get; set; }
 
         [StringLength(maximumLength: 9, MinimumLength = 9, ErrorMessage = "Introduzca un DNI válido.")]
