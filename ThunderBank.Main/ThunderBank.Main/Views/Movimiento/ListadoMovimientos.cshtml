@@ -12,9 +12,8 @@
         <p class="lead text-white">De un rapido vistazo podrás ver todos los movimientos. En rojo los <b class="text-danger">GASTOS</b> y en verde los <b class="text-success">INGRESOS</b>. En ThunderBank entendemos la importancia de un panel amigable para ver sus últimos movimientos.<br />
             Por ello hemos agregado una funcionalidad de exportacion a Excel de sus movimientos.</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-            <a asp-action="Crear" class="btn btn-primary btn-lg px-4 fw-bold" style="padding-top:15px">Hacer un nuevo movimiento</a>
+            <a asp-action="Crear" class="btn btn-lg px-4 fw-bold" style="padding-top:15px;background-color: #d6b75b;">Hacer un nuevo movimiento</a>
             <a id="btnExportarExcel" hidden asp-action="ExportarExcel" asp-route-listado="@Model" class="btn btn-success">Exportar movimientos a Excel</a>
-            @*<a class="btn btn-outline-success btn-lg px-4" onclick="exportarExcel()">Exportar movimientos a Excel</a>*@
             <a class="btn btn-outline-success btn-lg px-4" onclick="exportarExcel()">
                 <img width="48" height="48" src="https://img.icons8.com/color/48/ms-excel.png" alt="ms-excel" /> Exportar movimientos a Excel
             </a>
@@ -26,14 +25,14 @@
 </div>
 <table class="table text-white mt-3">
     <thead>
-        <tr>
+        <tr style="font-size:22px">
             <th>Importe</th>
             <th>Tipo</th>
             <th>Comentario</th>
             <th>Relacionada</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="font-size:20px">
         @foreach (Movimiento movimiento in Model.ToList().OrderByDescending(x => x.Id).ToList())
         {
             <tr>
@@ -65,7 +64,7 @@
                 }
             </tr>
         }
-    </tbody>
+    </tbod>
 </table>
 
 @section Scripts{
