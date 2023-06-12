@@ -18,16 +18,6 @@ namespace ThunderBank.Main.Controllers
             _repositorioCliente = repositorioCliente;
             _repositorioResponsable = repositorioResponsable;
         }
-        [Authorize]
-        public IActionResult Index()
-        {
-            return View();
-        }
-        [Authorize]
-        public IActionResult Crear()
-        {
-            return View();
-        }
 
         // LISTAR CLIENTES
 

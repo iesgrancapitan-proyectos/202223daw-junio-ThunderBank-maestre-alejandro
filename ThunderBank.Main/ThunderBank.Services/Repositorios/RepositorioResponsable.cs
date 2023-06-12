@@ -52,6 +52,7 @@ namespace ThunderBank.Services.Repositorios
                 VALUES (@Dni,@Nombre,@Apellido,@Telefono,@Correo,@Direccion,@IdUsuario);
                 UPDATE Usuario SET rol = 'RESPONSABLE' WHERE id = @IdUsuario
                 SELECT SCOPE_IDENTITY()", modelo);
+            
         }
     }
 }

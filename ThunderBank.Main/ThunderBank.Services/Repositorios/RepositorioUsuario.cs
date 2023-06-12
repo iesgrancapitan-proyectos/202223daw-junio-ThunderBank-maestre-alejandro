@@ -25,7 +25,6 @@ namespace ThunderBank.Services.Repositorios
         public async Task<int> CrearUsuario(Usuario usuario)
         {
             using var db = DbConnection();
-            usuario.Rol = "CLIENTE";
             var id = await db.QuerySingleAsync<int>(@"INSERT INTO Usuario(nombre,pwd,rol) VALUES (@Nombre,@Pwd,@Rol) SELECT SCOPE_IDENTITY()",usuario);
             return id;
         }

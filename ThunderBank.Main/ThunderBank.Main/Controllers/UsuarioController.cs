@@ -18,7 +18,7 @@ namespace ThunderBank.Main.Controllers
         private readonly IRepositorioCliente _repositorioCliente;
         private readonly IRepositorioResponsable _repositorioResponsable;
 
-        public UsuarioController(UserManager<Usuario> userManager,SignInManager<Usuario> signInManager,
+        public UsuarioController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
             IRepositorioCliente repositorioCliente, IRepositorioResponsable repositorioResponsable)
         {
             _userManager = userManager;
@@ -31,6 +31,7 @@ namespace ThunderBank.Main.Controllers
         {
             return View();
         }
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Registro(RegistroViewModel modelo, bool esResponsable)
@@ -40,13 +41,15 @@ namespace ThunderBank.Main.Controllers
                 return View(modelo);
             }
 
-            var usuario = new Usuario() { Nombre = modelo.Nombre };
-            var resultado = await _userManager.CreateAsync(usuario,password:modelo.Pwd);
-            if(resultado.Succeeded)
+            var rol = esResponsable ? "RESPONSABLE" : "CLIENTE";
+            var usuario = new Usuario() { Nombre = modelo.Nombre, Rol = rol };
+
+            var resultado = await _userManager.CreateAsync(usuario, password: modelo.Pwd);
+            try
             {
-                try
+                if (resultado.Succeeded)
                 {
-                    if(esResponsable)
+                    if (esResponsable)
                     {
                         var responsable = new Responsable()
                         {
@@ -59,7 +62,8 @@ namespace ThunderBank.Main.Controllers
                             Direccion = "-"
                         };
                         await _repositorioResponsable.CrearResponsable(responsable);
-                    } else
+                    }
+                    else
                     {
                         var cliente = new Cliente()
                         {
@@ -76,23 +80,28 @@ namespace ThunderBank.Main.Controllers
                         await _repositorioCliente.CrearCliente(cliente);
                         await _signInManager.SignInAsync(usuario, isPersistent: false);
                     }
-                    
 
-                }catch (RuntimeBinderException)
-                {
+                    await _signInManager.SignInAsync(usuario, isPersistent: true);
                     return RedirectToAction("Index", "Home");
                 }
+                else
+                {
+                    foreach (var error in resultado.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View(modelo);
+                }
+            }
+            catch (RuntimeBinderException)
+            {
                 return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                foreach (var error in resultado.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-                return View(modelo);
-            }
+            
         }
+
+
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
@@ -105,12 +114,12 @@ namespace ThunderBank.Main.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(modelo); 
+                return View(modelo);
             }
 
             var resultado = await _signInManager.PasswordSignInAsync(modelo.Nombre, modelo.Pwd,
                             modelo.Recuerdame, lockoutOnFailure: false);
-            
+
 
             if (resultado.Succeeded)
             {
@@ -118,7 +127,7 @@ namespace ThunderBank.Main.Controllers
                 var roles = await _userManager.GetRolesAsync(user);
                 if (roles.Contains("RESPONSABLE"))
                 {
-                    return RedirectToAction("ListarClientes","Cliente");
+                    return RedirectToAction("ListarClientes", "Cliente");
                 }
                 else if (roles.Contains("CLIENTE"))
                 {
@@ -137,7 +146,7 @@ namespace ThunderBank.Main.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
     }
