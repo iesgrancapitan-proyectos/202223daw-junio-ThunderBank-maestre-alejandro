@@ -4,12 +4,11 @@
 
 @{
     var id = ViewBag.Id.Result;
-    var a = 2;
 }
 
 <table class="table table-hover table-striped">
     <thead>
-        <tr>
+        <tr style="font-size:22px">
             <td>Acciones</td>
             <td>Nombre</td>
             <td>Apellidos</td>
@@ -20,7 +19,7 @@
             <td>Fecha de nacimiento</td>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="mb-3" style="font-size:20px">
         @foreach (DtoUsuario cliente in Model)
         {
             <tr>

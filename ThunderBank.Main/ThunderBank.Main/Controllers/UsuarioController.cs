@@ -62,6 +62,7 @@ namespace ThunderBank.Main.Controllers
                             Direccion = "-"
                         };
                         await _repositorioResponsable.CrearResponsable(responsable);
+                        return View(responsable);
                     }
                     else
                     {
@@ -78,11 +79,8 @@ namespace ThunderBank.Main.Controllers
                             Activo = 1
                         };
                         await _repositorioCliente.CrearCliente(cliente);
-                        await _signInManager.SignInAsync(usuario, isPersistent: false);
+                        return View(cliente);
                     }
-
-                    await _signInManager.SignInAsync(usuario, isPersistent: true);
-                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -95,7 +93,15 @@ namespace ThunderBank.Main.Controllers
             }
             catch (RuntimeBinderException)
             {
-                return RedirectToAction("Index", "Home");
+                if (esResponsable)
+                {
+                    return RedirectToAction("ListarClientes", "Cliente");
+                }
+                else
+                {
+                    await _signInManager.SignInAsync(usuario, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
             }
             
         }
