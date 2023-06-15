@@ -34,7 +34,7 @@ El proyecto ha sido desplegado en un hosting gratuito, alojando la base de datos
 Para mas seguridad de la integridad de los datos, la cadena de conexión a la base de datos ha sido almacenada en los secrets del proyecto.
 
 Se puede acceder a la aplicación en el siguiente enlace:
->http://kretinoh1-001-site1.itempurl.com/
+>thunderies-001-site1.gtempurl.com
 
 
 La opción de despliegue en local que tienes es la siguiente: 
