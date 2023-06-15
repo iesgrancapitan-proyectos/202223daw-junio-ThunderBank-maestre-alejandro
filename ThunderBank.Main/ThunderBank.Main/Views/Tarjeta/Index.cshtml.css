@@ -1,0 +1,44 @@
+﻿
+h1 {
+    color: var(--secondary-color)
+}
+
+.table-hover tbody tr:hover td {
+    background: var(--secondary-color);
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #073b82;
+    color: white;
+}
+
+.table-striped tbody tr:nth-child(even):hover {
+    color: white;
+}
+
+thead tr {
+    font-weight: 700;
+}
+
+tr {
+    color: #f8f8f8;
+}
+
+#btn-edit {
+    background-color: white !important;
+}
+a i{
+    color: white !important;
+}
+
+#fechaCaducidad, #saldo, #status {
+    display: none;
+}
+
+@media (min-width: 426px) {
+    
+    #saldo, #status, #fechaCaducidad {
+        display: table-cell;
+        color: #f8f8f8;
+    }
+}

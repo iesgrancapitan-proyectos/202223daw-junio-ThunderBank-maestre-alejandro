@@ -1,0 +1,34 @@
+﻿@using ThunderBank.Models;
+@model Cuenta
+@{
+    ViewData["Title"] = "Crear Cuentas";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<div class="container">
+    <h1 class="text-center mt-5 mb-3">Creación de Cuenta</h1>
+    <div class="col-lg-7 mx-auto mt-5">
+        <div class="card mt-2 mx-auto p-4 bg-light">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-controller="Cuenta" asp-action="Crear">
+                <div class="mb-3 w-50">
+                    <label asp-for="Saldo" class="form-label"></label>
+                    <input type="text" asp-for="Saldo" class="form-control" placeholder="Ejemplos (100,02 - 50)" />
+                    <span asp-validation-for="Saldo" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="FechaApertura" value="@DateTime.Now" />
+                <div class="mb-3">
+                    <label>Tipos de Cuenta</label><br />
+                    <select asp-for="Tipo" class="mt-2">
+                        <option value="RAYO">RAYO</option>
+                        <option value="TRUENO">TRUENO</option>
+                        <option value="TORMENTA">TORMENTA</option>
+                    </select>
+                </div>
+                <button class="btn btn-success" type="submit">Enviar</button>
+                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+

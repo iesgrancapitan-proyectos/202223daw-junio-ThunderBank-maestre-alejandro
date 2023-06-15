@@ -1,0 +1,157 @@
+﻿#seccionInfo {
+    height: 40vh;
+}
+
+/*Estilos de la tarjeta*/
+#imagenTarjeta {
+    width: 25vw;
+    top: 0;
+    left: 0;
+    box-shadow: 5px 5px 15px black;
+    border-radius: 12px;
+}
+
+#tarjetaDatos {
+    padding: 0 1em;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    justify-content: space-between;
+    align-items: end;
+}
+
+    #tarjetaDatos div p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1em;
+        line-height: 0.5em;
+        color: #ebeaea;
+        text-shadow: 1px -1px 1px rgba(0, 0, 0, 0.5);
+        user-select: none;
+    }
+
+    #tarjetaDatos div:first-child :first-child{
+        font-size:1.2em;
+    }
+
+/*Estilos de la caja en general*/
+#cajasTarjeta {
+    height: 100%;
+}
+
+/*Estilos para la información de la caja*/
+#infoTarjeta {
+    height: 79%;
+    width: 60%;
+    background-color: var(--secondary-color);
+    margin-right: 1em;
+    align-items: center;
+    justify-content: end;
+}
+
+#itemsInfoTarjeta {
+    width: 60%;
+    height: 90%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#textoInfoTarjeta p {
+    font-size: 1.5rem;
+}
+
+#textoInfoTarjeta h3 {
+    font-size: 2.5rem;
+}
+
+.textoInfo{
+    color: var(--primary-color);
+}
+
+#botonesInfoTarjeta{
+    justify-content: stretch;
+    text-align: center;
+    margin-top: 5%;
+}
+
+    #botonesInfoTarjeta div{
+        flex-grow: 1;
+    }
+
+        #botonesInfoTarjeta div:not(:first-child) {
+            border-left: 1px solid black;
+        }
+
+        .enlaceAccion{
+            text-decoration: none !important;
+        }
+
+        .enlaceAccion i, .enlaceAccion p{
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+#botonesInfoTarjeta:hover {
+   cursor: pointer;
+}
+
+/*Estilos para la solicitud de tarjeta*/
+#solicitarTarjeta {
+    height: 79%;
+    background: radial-gradient(109.44% 290.01% at -12.03% -11.49%, #809F7B 0%, #FFFFFF 100%);
+    width: 31%;
+}
+
+#solicitarTarjeta:hover{
+    cursor: pointer;
+}
+
+#cajaNuevaTarjeta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#imagenTarjetas {
+    width: 50%;
+}
+
+#textoSolicitarTarjeta {
+    width: 50%;
+    text-align: right;
+}
+
+    #textoSolicitarTarjeta h3 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 1.8em;
+        line-height: 1em;
+        display: flex;
+        align-items: center;
+        text-align: right;
+        color: #031D40;
+    }
+
+
+@media screen and (min-width: 1920px) {
+    #seccionInfo {
+        height: 35vh;
+    }
+
+    #itemsInfoTarjeta {
+        width: 60%;
+        height: 80%;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #imagenTarjeta {
+        width: 20vw;
+        top: 0;
+        left: 0;
+    }
+}

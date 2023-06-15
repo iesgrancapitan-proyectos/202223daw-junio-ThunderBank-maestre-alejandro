@@ -1,0 +1,43 @@
+﻿h1 {
+    color: var(--secondary-color)
+}
+
+tr {
+    color: #f8f8f8;
+}
+
+#fechaApertura, #saldo, #tipo, #status {
+    display: none;
+}
+a i {
+    color: white !important;
+}
+#btn-edit{
+    background-color:white !important;
+}
+
+.table-hover tbody tr:hover td {
+    background: var(--secondary-color);
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #073b82;
+    color: white;
+}
+
+.table-striped tbody tr:nth-child(even):hover {
+    color: white;
+}
+
+thead tr {
+    font-weight: 700;
+}
+
+@media (min-width: 426px) {
+    #fechaApertura, #saldo,#tipo,#status {
+        display: table-cell;
+        color: #f8f8f8;
+    }
+}
+
+

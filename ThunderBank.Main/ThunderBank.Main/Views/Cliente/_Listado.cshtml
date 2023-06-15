@@ -1,0 +1,88 @@
+﻿@using ThunderBank.Models.DTO;
+@using ThunderBank.Services.Interfaces;
+@model IEnumerable<DtoUsuario>
+
+@{
+    var id = ViewBag.Id.Result;
+}
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr style="font-size:22px">
+            <td>Acciones</td>
+            <td>Nombre</td>
+            <td>Apellidos</td>
+            <td>DNI</td>
+            <td>Teléfono</td>
+            <td>Correo electrónico</td>
+            <td>Dirección</td>
+            <td>Fecha de nacimiento</td>
+        </tr>
+    </thead>
+    <tbody class="mb-3" style="font-size:20px">
+        @foreach (DtoUsuario cliente in Model)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-primary" asp-action="Editar" asp-controller="Cliente" asp-route-dni="@cliente.Dni" 
+                    data-bs-toggle="tooltip" data-bs-title="Editar cliente">
+                        <i class="bi bi-pen-fill"></i>
+                    </a>
+                    @if (cliente.ResponsableId == 0)
+                    {
+                        <a class="btn btn-success" asp-action="AsignarCliente" asp-controller="Cliente"
+                           data-bs-toggle="tooltip" data-bs-title="Asignar cliente"
+                           asp-route-idCliente="@cliente.ClienteId"
+                           onclick="clienteAsignado('@cliente.Nombre')">
+                            <i class="bi bi-check"></i>
+                        </a>
+                    }
+
+                    @if (cliente.ResponsableId == id)
+                    {
+                        <a class="btn btn-warning" asp-action="SoltarCliente" asp-controller="Cliente" 
+                        data-bs-toggle="tooltip" data-bs-title="Desvincular cliente" asp-route-idCliente="@cliente.ClienteId">
+                            <i class="bi bi-x-circle"></i>
+                        </a>
+                    }
+
+                    
+                </td>
+                <td>@cliente.Nombre</td>
+                <td>@cliente.Apellido</td>
+                <td>@cliente.Dni</td>
+                <td>@cliente.Telefono</td>
+                <td>@cliente.Email</td>
+                <td>@cliente.Direccion</td>
+                <td>@cliente.FechaDeNacimiento.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (TempData["LiberarSuccess"] != null)
+{
+    <script>
+        Swal.fire('Cliente liberado', '@TempData["LiberarSuccess"]', 'success');
+    </script>
+}
+
+@if (TempData["AsignarSuccess"] != null)
+{
+    <script>
+        Swal.fire('Cliente asignado', '@TempData["LiberarSuccess"]', 'success');
+    </script>
+}
+
+@if (TempData["LiberarError"] != null)
+{
+    <script>
+        Swal.fire('Error', '@TempData["Error"]', 'error');
+    </script>
+}
+@if (TempData["AsignarError"] != null)
+{
+    <script>
+        Swal.fire('Error', '@TempData["Error"]', 'error');
+    </script>
+}

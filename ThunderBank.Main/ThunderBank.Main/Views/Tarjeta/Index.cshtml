@@ -1,0 +1,93 @@
+﻿@using ThunderBank.Models;
+@using System.Text.RegularExpressions;
+@model IEnumerable<Tarjeta>
+
+@{
+    ViewData["Title"] = "Tarjetas";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div id="containerImg" class="col-10 col-sm-8 col-lg-6">
+        <img src="~/img/tarjetas.png" class="d-block mx-lg-auto img-fluid" alt="Tarjetas disponibles" width="400" height="500" loading="lazy" />
+    </div>
+    <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Gestiona tus tarjetas</h1>
+        <p class="lead text-white">
+            Bienvenido al panel de <b>tarjetas</b> cliente. En esta ventana tendrás siempre todas tus tarjetas y podrás gestionarlas. Tienes distintas <b>acciones</b>, una para poder obtener más información de la cuenta relacionada a dicha tarjeta y otra para borrar la tarjeta.<br />
+            O si lo prefieres dandole al botón puedes crear una nueva tarjeta sin costo alguno</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a asp-action="Crear" class="btn btn-enfasis text-white btn-lg px-4 me-md-2">Crear nueva tarjeta</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr style="font-size:22px">
+            <th>Acciones</th>
+            <th>Numero</th>
+            <th id="fechaCaducidad">Fecha de caducidad</th>
+            <th id="status">Status</th>
+        </tr>
+    </thead>
+    <tbody style="font-size:20px">
+        @foreach (Tarjeta tarjeta in Model.ToList().OrderByDescending(x => x.FechaDeCreacion))
+        {
+            <tr>
+                <td>
+                    <input type="hidden" value="@tarjeta.NumeroDeTarjeta" class="numero" />
+                    <a class="btn btn-enfasis" asp-action="Info" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-eye-fill"></i></a>
+                    <a class="btn btn-danger" onclick="confirmarDesactivar('@tarjeta.NumeroDeTarjeta')"><i class="bi bi-trash"></i></a>
+                    <a hidden id="btnDesactivarBack" class="btn btn-danger" asp-action="Borrar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-trash"></i></a>
+                </td>
+                <td>@tarjeta.NumeroDeTarjeta</td>
+                <td id="fechaCaducidad">@tarjeta.FechaDeCaducidad.ToString("dd/MM/yy")</td>
+                @if (tarjeta.Estado == "ACTIVA")
+                {
+                    <td id="status"><span class="badge rounded-pill bg-success" style="min-width:95px">Activa</span></td>
+                }
+                else
+                {
+                    <td id="status"><span class="badge rounded-pill bg-info text-black" style="min-width:95px">Congelada</span></td>
+
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        function confirmarDesactivar(numCuenta) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Esta acción desactivará la tarjeta ' + numCuenta,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Desactivar',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#3085d6',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    desactivarCuenta(numCuenta);
+                } else if (result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    Swal.fire(
+                        'Has cancelado',
+                        'Tu tarjeta no se ha borrado :)',
+                        'error'
+                    )
+                }
+            });
+        }
+
+        function desactivarCuenta(numCuenta) {
+            var btn = document.getElementById("btnDesactivarBack");
+            btn.click();
+
+        }
+    </script>
+
+}

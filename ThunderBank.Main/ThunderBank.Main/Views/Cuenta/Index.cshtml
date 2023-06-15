@@ -1,0 +1,108 @@
+﻿@using ThunderBank.Models;
+
+@model IEnumerable<CuentaViewModel>
+@{
+    ViewData["Title"] = "Listado Cuentas";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+<div class="px-4 py-5 my-3 text-center">
+    <i class="bi bi-bank mb-4 text-white" style="font-size:55px"></i>
+    <h1 class="display-5 fw-bold">Bienvenido a tu panel de Cuentas</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4 text-white">Estamos orgullosos de que hayas confiado en nosotros, ahora tenemos un camino largo que recorrer juntos.
+            En esta ventana podras tanto crear como ver detalles sobre tus cuentas <b>activas</b>. Échale un vistazo
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a asp-action="Crear" class="btn btn-enfasis mb-3 btn-lg text-white  btn-lg px-4 gap-3">Crear Cuenta</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr style="font-size:22px">
+            <th>Acciones</th>
+            <th>Numero</th>
+            <th id="saldo">Saldo</th>
+            <th id="tipo">Tipo</th>
+            <th id="fechaApertura">Apertura</th>
+            <th id="status">Status</th>
+        </tr>
+    </thead>
+    <tbody style="font-size:20px">
+        @foreach (var listaCuenta in Model)
+        {
+            @foreach (var cuenta in listaCuenta.Cuentas)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" value="@cuenta.Numero" class="numero"/>
+                        <a class="btn btn-danger" onclick="confirmarDesactivar('@cuenta.Numero', 'btnDesactivarBack-' + @cuenta.Numero)"><i class="bi bi-trash"></i></a>
+                        @*<a hidden id="btnDesactivarBack-@cuenta.Numero" class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>*@
+                        <a hidden id="btnDesactivarBack-@(string.Format("{0:R}",cuenta.Numero))" class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>
+
+                    </td>
+                    <td>@cuenta.Numero</td>
+                    <td id="saldo">@cuenta.Saldo €</td>
+                    <td id="tipo">@cuenta.Tipo</td>
+                    <td id="fechaApertura">@cuenta.FechaApertura.ToString("dd \"de\" MMMM yyyy")</td>
+                    @if (cuenta.Activa)
+                    {
+                        <td id="status"><span class="badge rounded-pill bg-success">Activa</span></td>
+                    }
+                    else
+                    {
+                        <td id="status"><span class="badge rounded-pill bg-danger">Desactiva</span></td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (TempData["Success"] != null)
+{
+    <script>
+        Swal.fire('Cuenta desactivada', '@TempData["Success"]', 'success');
+    </script>
+}
+
+@if (TempData["Error"] != null)
+{
+    <script>
+        Swal.fire('Error', '@TempData["Error"]', 'error');
+    </script>
+}
+@section Scripts{
+    <script>
+        function confirmarDesactivar(numCuenta, btnId) {
+            Swal.fire({
+                
+                title: '¿Estás seguro?',
+                text: 'Esta acción desactivará la cuenta ' + numCuenta,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Desactivar',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#3085d6',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    desactivarCuenta(numCuenta, btnId);
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire(
+                        'Has cancelado',
+                        'Tu cuenta no se ha borrado :)',
+                        'error'
+                    )
+                }
+            });
+        }
+
+        function desactivarCuenta(numCuenta, btnId) {
+            console.log("Desactivar cuenta: " + numCuenta);
+            var btn = document.getElementById("btnDesactivarBack-"+numCuenta);
+            btn.click();
+        }
+    </script>
+
+}

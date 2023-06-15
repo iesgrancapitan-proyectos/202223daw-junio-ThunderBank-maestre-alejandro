@@ -1,0 +1,55 @@
+﻿@using ThunderBank.Models.DTO;
+@model DTOCrearTarjeta
+
+@{
+    ViewData["Title"] = "Crear nueva tarjeta";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+@if (Model.Cuentas.Where(x => x.Activa == true).ToList().Count > 0)
+{
+
+    <h1 class="text-center mt-5">Crear tarjeta</h1>
+    <div class="container bg-light w-50 p-4 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <form asp-controller="Tarjeta" asp-action="Crear">
+                    <input type="hidden" asp-for="FechaDeCreacion" value="@DateTime.Now" />
+                    <input type="hidden" asp-for="FechaDeCaducidad" value="@DateTime.Now.AddYears(3)" />
+                    <input type="hidden" asp-for="Cvc" value="@Model.Cvc" />
+                    <input type="hidden" asp-for="Pin" value="@Model.Pin" />
+                    <input type="hidden" asp-for="Estado" value="@Model.Estado" />
+
+                    <label for="cuenta">Selecciona una cuenta:</label>
+                    <select name="NumeroDeCuenta" id="cuenta" asp-for="NumeroDeCuenta" class="form-select">
+                        @foreach (var cuenta in Model.Cuentas.Where(x => x.Activa == true))
+                        {
+                            <option value="@cuenta.Numero">@cuenta.Numero</option>
+                        }
+                    </select>
+
+                    <br />
+                    <label class="form-label">Anota tu código PIN</label><br>
+                    <input type="text" disabled placeholder="@Model.Pin" asp-for="Pin" class="form-control" />
+
+                    <div class="mt-3 text-center">
+                        <button type="submit" class="btn btn-success">Crear tarjeta</button>
+                        <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <script>
+        swal.fire({
+            title: "Error",
+            text: "Lo sentimos, ha ocurrido un error. Es posible que esté intentando crear una tarjeta sin tener una cuenta.",
+            icon: "error",
+            button: "Aceptar"
+        }).then(function () {
+            window.location.href = '@Url.Action("Index", "Tarjeta")'; // Redirige al índice de Tarjeta
+        });
+    </script>
+}

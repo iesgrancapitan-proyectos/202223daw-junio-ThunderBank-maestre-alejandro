@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Ha ocurrido un error";
+}
+<h1>Muestra de errores</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+

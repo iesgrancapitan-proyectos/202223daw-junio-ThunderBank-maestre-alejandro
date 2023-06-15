@@ -1,0 +1,17 @@
+﻿@using ThunderBank.Models.DTO;
+@model IEnumerable<DtoUsuario>
+
+@{
+    ViewData["Title"] = "Clientes";
+    Layout = "~/Views/Shared/_LayoutResponsable.cshtml";
+}
+<div class="px-4 py-5 my-5 text-center">
+    <i class="bi bi-person-lines-fill mb-4 text-white" style="font-size:55px" ></i>
+    <h1 class="display-5 fw-bold">Clientes ThunderBank</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4 text-white">De un simple vistazo podrás ver a los clientes los cuáles completan y acompañan a nuestra aplicación.Tenemos distintas acciones como pueden ser Ver y modificar los datos de un cliente como
+            tutorizar a clientes que esten sin responsable.
+        </p>
+    </div>
+</div>
+<partial name="_Listado" model="Model" />

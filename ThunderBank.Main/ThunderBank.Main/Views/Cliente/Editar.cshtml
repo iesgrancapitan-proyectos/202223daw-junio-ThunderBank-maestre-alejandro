@@ -1,0 +1,77 @@
+﻿@using ThunderBank.Models;
+@model Cliente
+
+@{
+    ViewData["Title"] = "Editar cliente";
+    Layout = "~/Views/Shared/_LayoutResponsable.cshtml";
+}
+
+<h1 class="text-white">Modificación de datos de Cliente</h1>
+<div class="form-container">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="Cliente" asp-action="Editar" class="w-100">
+        <div class="col mb-4">
+            <div class="row">
+                <div class="col-4">
+                    @*DNI*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Dni" value="@Model.Dni" disabled asp-route-dni="@Model.Dni" />
+                        <label asp-for="Dni" class="form-label"></label>
+                        <span asp-validation-for="Dni" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    @*Nombre*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Nombre" value="@Model.Nombre" asp-route-nombre="@Model.Nombre" />
+                        <label asp-for="Nombre" class="form-label"></label>
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    @*Apellidos*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Apellido" value="@Model.Apellido" asp-route-apellido="@Model.Apellido" />
+                        <label asp-for="Apellido" class="form-label"></label>
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col">
+                    @*Correo*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Correo" value="@Model.Correo" asp-route-correo="@Model.Correo" />
+                        <label asp-for="Correo" class="form-label"></label>
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    @*Teléfono*@
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="Telefono" value="@Model.Telefono" asp-route-telefono="@Model.Telefono" />
+                        <label asp-for="Telefono" class="form-label"></label>
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            @*Dirección*@
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control" asp-for="Direccion" placeholder="Inserte su dirección" value="@Model.Direccion" asp-route-direccion="@Model.Direccion" />
+                <label asp-for="Direccion" class="form-label"></label>
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+        </div>
+        <input type="hidden" asp-for="IdUsuario" asp-route-idusuario="@Model.IdUsuario"/>
+        <button class="btn btn-success" type="submit">Editar Datos</button>
+        <a class="btn btn-warning" asp-action="ListarClientes">Cancelar</a>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
