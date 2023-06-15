@@ -24,9 +24,9 @@
             <th>Acciones</th>
             <th>Numero</th>
             <th id="saldo">Saldo</th>
-            <th>Tipo</th>
+            <th id="tipo">Tipo</th>
             <th id="fechaApertura">Apertura</th>
-            <th>Status</th>
+            <th id="status">Status</th>
         </tr>
     </thead>
     <tbody style="font-size:20px">
@@ -37,22 +37,22 @@
                 <tr>
                     <td>
                         <input type="hidden" value="@cuenta.Numero" class="numero"/>
-                        <a id="btnDesactivar" class="btn btn-danger" onclick="confirmarDesactivar('@cuenta.Numero')"><i class="bi bi-trash"></i></a>
-                        <a hidden id="btnDesactivarBack" class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>
+                        <a class="btn btn-danger" onclick="confirmarDesactivar('@cuenta.Numero', 'btnDesactivarBack-' + @cuenta.Numero)"><i class="bi bi-trash"></i></a>
+                        @*<a hidden id="btnDesactivarBack-@cuenta.Numero" class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>*@
+                        <a hidden id="btnDesactivarBack-@(string.Format("{0:R}",cuenta.Numero))" class="btn btn-danger" asp-action="Desactivar" asp-route-numCuenta="@cuenta.Numero"><i class="bi bi-trash"></i></a>
 
                     </td>
                     <td>@cuenta.Numero</td>
                     <td id="saldo">@cuenta.Saldo €</td>
-                    <td>@cuenta.Tipo</td>
+                    <td id="tipo">@cuenta.Tipo</td>
                     <td id="fechaApertura">@cuenta.FechaApertura.ToString("dd \"de\" MMMM yyyy")</td>
                     @if (cuenta.Activa)
                     {
-                        <td><span class="badge rounded-pill bg-success">Activa</span></td>
+                        <td id="status"><span class="badge rounded-pill bg-success">Activa</span></td>
                     }
                     else
                     {
-                        <td><span class="badge rounded-pill bg-danger">Desactiva</span></td>
-
+                        <td id="status"><span class="badge rounded-pill bg-danger">Desactiva</span></td>
                     }
                 </tr>
             }
@@ -74,7 +74,7 @@
 }
 @section Scripts{
     <script>
-        function confirmarDesactivar(numCuenta) {
+        function confirmarDesactivar(numCuenta, btnId) {
             Swal.fire({
                 
                 title: '¿Estás seguro?',
@@ -87,9 +87,8 @@
                 cancelButtonColor: '#3085d6',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    desactivarCuenta(numCuenta);
-                } else if (result.dismiss === Swal.DismissReason.cancel
-                ) {
+                    desactivarCuenta(numCuenta, btnId);
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire(
                         'Has cancelado',
                         'Tu cuenta no se ha borrado :)',
@@ -99,10 +98,10 @@
             });
         }
 
-        function desactivarCuenta(numCuenta) {
-            var btn = document.getElementById("btnDesactivarBack");
+        function desactivarCuenta(numCuenta, btnId) {
+            console.log("Desactivar cuenta: " + numCuenta);
+            var btn = document.getElementById("btnDesactivarBack-"+numCuenta);
             btn.click();
-           
         }
     </script>
 

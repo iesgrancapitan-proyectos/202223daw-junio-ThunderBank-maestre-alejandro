@@ -32,7 +32,7 @@
                     <label class="form-check-label" for="exampleCheck1" asp-for="Recuerdame"></label>
                 </div>
                 <div>
-                    <a asp-action="Registro">No soy cliente</a>
+                    <a asp-action="Registro" class="bg-white p-1 text-black"><b>No soy cliente</b></a>
                     @*<a href="#">Olvidé mi contraseña</a>*@
                 </div>
             </div>
@@ -53,7 +53,16 @@
             </p>
         </div>
     </div>
+
 </div>
+    <footer class="footer" id="footerRedes">
+        <div class="mb-3 mx-5">
+            <a target="_blank" href="https://www.youtube.com/watch?v=5V0LE3VQVPc&ab_channel=KloxzTV"><i class="bi bi-instagram"></i></a>
+            <a target="_blank" href="https://www.tiktok.com/@@electronicant78/video/7240697311825857794?lang=es"><i class="bi bi-twitter"></i></a>
+            <a target="_blank" href="https://www.tiktok.com/@@davidnikiforov0/video/7229471262765042970?lang=es"><i class="bi bi-facebook"></i></a>
+            <a target="_blank" href="https://www.tiktok.com/@@all_we_need_is_love_19/video/7206073919634148613?lang=es"><i class="bi bi-envelope"></i></a>
+        </div>
+    </footer>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

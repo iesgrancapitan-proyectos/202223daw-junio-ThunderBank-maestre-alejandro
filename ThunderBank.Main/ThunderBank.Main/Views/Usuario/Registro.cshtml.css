@@ -110,3 +110,30 @@ a {
         transform: rotate(120deg);
     }
 }
+
+@media only screen and (max-width: 425px) {
+    * {
+        font-size: 15px
+    }
+
+    #logo {
+        margin-left: 10vw;
+    }
+
+    .derecha-landing {
+        display: none;
+    }
+
+    .svg-container {
+        display: none;
+    }
+
+    #izquierdaLanding {
+        width: 100vw !important;
+    }
+
+    .footer {
+        display: none;
+    }
+}
+
