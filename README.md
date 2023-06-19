@@ -1,104 +1,81 @@
-# Módulo Proyecto Integrado del IES Gran Capitán
+# ThunderBank
+*Por Rafael Maestre del Río y Alejandro Gómez Blanco*
 
 
-- [Módulo Proyecto Integrado del IES Gran Capitán](#módulo-proyecto-integrado-del-ies-gran-capitán)
-  - [Instrucciones para el desarrollo del Módulo Proyecto Integrado](#instrucciones-para-el-desarrollo-del-módulo-proyecto-integrado)
-    - [Obligaciones por parte del alumnado](#obligaciones-por-parte-del-alumnado)
-    - [Información que debe aparecer en este README](#información-que-debe-aparecer-en-este-readme)
-    - [Asignación/Elección de temas para el Proyecto y Convocatorias](#asignaciónelección-de-temas-para-el-proyecto-y-convocatorias)
-    - [Descripción del Desarrollo del Proyecto](#descripción-del-desarrollo-del-proyecto)
-  - [Curriculum  Didáctico del Módulo Proyecto Integrado](#curriculum--didáctico-del-módulo-proyecto-integrado)
-    - [Objetivos del Módulo](#objetivos-del-módulo)
-    - [Evaluación del Proyecto Integrado](#evaluación-del-proyecto-integrado)
+- [Descripción del proyecto](#descripcion)
+- [Información sobre despliegue](#despliegue)
+- [¿Cómo usarlo?](#instrucciones)
+
 
 ## Instrucciones para el desarrollo del Módulo Proyecto Integrado
 
-### Obligaciones por parte del alumnado
-Una vez facilitado el enlace de Classroom Github para los Proyectos Integrados que genera este repositorio, el Tutor de Proyecto da por sabida y explicada toda la documentación que aquí aparece. El alumno tiene la obligación de leer por completo toda la documentación.
+### <a id="descripcion" /> Descripción del Proyecto: ThunderBank 🌩️🏦
 
-[:arrow_up:](#módulo-proyecto-integrado-del-ies-gran-capitán)
+ThunderBank es una aplicación bancaria que proporciona a los usuarios una experiencia segura y conveniente para gestionar sus cuentas bancarias. Con una interfaz intuitiva y funciones avanzadas, ThunderBank ofrece una amplia gama de características tanto para los usuarios como para los responsables del banco.
 
-### Información que debe aparecer en este README
-Siguiendo unas buenas prácticas de uso de repositorios en una plataforma de control de versiones, este README.md, al finalizar el proyecto debe aparecer **mínimo** la siguiente información:
+La aplicación se centra en brindar a los usuarios un control completo sobre sus cuentas bancarias, permitiéndoles realizar operaciones como visualizar saldos y gestionar tarjetas. Además, ThunderBank también ofrece funciones especiales para los responsables del banco, como la administración de clientes.
 
-1. Descripción del proyecto
-2. Información sobre despliegue
-3. Información sobre cómo usarlo
-4. Autores
+Características principales:
 
-Como esta información debería estar detallada en la wiki, desarrollar una pequeña introducción y referenciar a la sección de la wiki donde esté toda la información detallada. _(Todo el contenido actual debe ser sustituido por esta información)_
+- **Autenticación segura**: Los usuarios pueden acceder a sus cuentas mediante autenticación de usuario, utilizando credenciales seguras como nombre de usuario y contraseña. Se implementan medidas de seguridad para proteger la información de los usuarios.
 
-[:arrow_up:](#módulo-proyecto-integrado-del-ies-gran-capitán)
+- **Visualización de cuentas**: Los usuarios pueden ver información detallada sobre sus cuentas bancarias.
 
-### Asignación/Elección de temas para el Proyecto y Convocatorias
-__El tutor/a convocará al alumnado de Proyecto en los primeros días tras la evaluación (septiembre o marzo). La asistencia es obligatoria__ pues se hará la exposición  de temas de proyectos y la recogida de propuestas del alumnado (anteproyectos). La asistencia es obligatoria.
+- **Transferencias bancarias**: Los usuarios pueden realizar transferencias entre sus propias cuentas.
 
-Una vez asignados los proyectos al alumnado y al profesor/a que lo tutorizará, el tutor/a establecerá una primera reunión con el alumno/a. La falta de asistencia a esta cita indicará que el alumno/a RENUNCIA AL SEGUIMIENTO del proyecto y por tanto gastaría una convocatoria de las dos de las que dispone en total  para la superación del módulo.
+- **Creación de tarjetas**: Los usuarios tienen la posibilidad de crear nuevas tarjetas para utilizar en sus cuentas bancarias.
 
-_**Según se recoge en el Plan de Centro , el alumnado de Proyecto sólo dispone de una convocatoria por curso escolar**_. **De este modo, el alumno que gasta la convocatoria elegida en el sobre de matriculación no podrá cursar el módulo de Proyecto hasta el siguiente curso escolar.  Para evitar que gaste convocatoria el alumno/a debe anular matrícula en el periodo que establece la normativa (preguntar en la secretaría del centro).**
+- **Gestión de clientes (para responsables)**: Los responsables del banco tienen acceso a un listado completo de todos los clientes, independientemente de si están a su cargo o no. Esto les permite tener una visión general y asignarse todos aquellos que están libres.
 
-[:arrow_up:](#módulo-proyecto-integrado-del-ies-gran-capitán)
-### Descripción del Desarrollo del Proyecto
-El desarrollo del módulo consiste en un seguimiento del desarrollo, una documentación que se irá elaborando durante el proceso, el desarrollo (e implantación si procede)  del producto  y una defensa final.
+ThunderBank busca brindar una experiencia bancaria completa y eficiente, asegurando la privacidad y la seguridad de los usuarios. Con una interfaz fácil de usar y funciones avanzadas. 💼💰
 
-1. **Documentación a entregar.**
+### <a id="despliegue" /> Información sobre el despliegue 🚀 
+El proyecto ha sido desplegado en un hosting gratuito, alojando la base de datos en el mismo.
+Para mas seguridad de la integridad de los datos, la cadena de conexión a la base de datos ha sido almacenada en los secrets del proyecto.
 
-    Si el alumno/a desea proponer un tema, debe presentar en la primera semana un anteproyecto ([ver Anteproyecto_IESGranCapitan](Anteproyecto_IESGranCapitan.odt))
+Se puede acceder a la aplicación en el siguiente enlace:
+>thunderies-001-site1.gtempurl.com
 
-    Una vez asignado el tema de PI (o aprobado el anteproyecto propuesto) se deberá preparar la documentación del proyecto, que será presentada a través de una wiki asociada la repositorio con la estructura indicada _**[aquí](https://github.com/iesgrancapitan-proyectos/Plantilla_Documentacion_Wiki_PI/wiki)**_ 
 
-    La documentación final se presentará en formato electrónico (no impresa). La documentación definitiva tiene que ser subida al repositorio del departamento antes del dia de la presentación.
-**Importante: NO SE EVALUARÁ SI VUESTRA DOCUMENTACIÓN NO ESTÁ SUBIDA ANTES DEL DIA DE LA PRESENTACIÓN.**
+La opción de despliegue en local que tienes es la siguiente: 
 
-2. **Seguimiento.** Durante el período de seguimiento, el/la tutor/a establecerá un calendario de seguimiento indicando:
-   1. Fecha y hora de cada reunión de seguimiento.
-   2. Hitos que el alumno debe cumplir en la realización del proyecto para ser revisados por el tutor en cada reunión. Antes de ese dia el alumnado debe enviar la documentación de lo realizado (si procede) para que se pueda revisar antes de la cita.
+1. Clonar el repositorio: Debes clonar el repositorio de GitHub en tu máquina local utilizando un cliente de Git o descargando el código fuente como un archivo ZIP.
 
-3. **Primera Reunión:** El alumno/a debe tener una 1ra Reunión con su tutor/a  cuando ambo/as acuerden _**(preferiblemente dentro de las dos primeras semanas tras comenzar el módulo)**_. En dicha reunión se aclararán los objetivos del proyecto y se resolverán dudas. 
 
-    El número de sesiones de seguimiento para evaluar el progreso del proyecto será establecido en función de la dificultad y longitud del proyecto. Si el alumno/a  no hubiera avanzado en el trabajo lo suficiente para cumplir un hito o no se presenta a las reuniones establecidas de forma reiterada, el tutor podrá considerar que el proyecto no cumplelos RA (resultados de aprendizaje)  mínimos para superar el módulo con evaluación positiva y comunicará al alumno/a la imposibilidad de asistir y realizar la defensa del mismo.
- 
-4. **La defensa de los proyectos** tendrá una duración de 30 minutos dividida en:
-    • Exposición. 	
-    • Demostración.
-    • Preguntas. 
-La defensa/presentación de los proyectos se realizará los días previos a la sesión de evaluación. **El día y hora concreto os lo comunicará vuestro tutor/a de proyecto en las fechas cercanas a la presentación.**
+2. Instalar .NET SDK: Debes mirar si tienes instalado el SDK de .NET Core 6 en su máquina. Puede descargar e instalar el SDK desde el sitio web oficial de .NET Core (https://dotnet.microsoft.com/download/dotnet).
 
-[:arrow_up:](#módulo-proyecto-integrado-del-ies-gran-capitán)
 
-## Curriculum  Didáctico del Módulo Proyecto Integrado
-### Objetivos del Módulo
+3. Restaurar las dependencias: Abra una línea de comandos (terminal) en el directorio raíz del proyecto clonado y ejecute el comando `` dotnet restore ``. Esto descargará todas las dependencias necesarias para compilar y ejecutar el proyecto
 
-Este módulo profesional complementa la formación establecida para el resto de los módulos profesionales que integran el título en las funciones de análisis del contexto, diseño del proyecto y organización de la ejecución.
-- La función de análisis del contexto 	incluye las subfunciones de: 	
-  - Recopilación de información. 
-  - Identificación y priorización de necesidades.
-  - Identificación de los aspectos que facilitan o dificultan el desarrollo de la posible intervención.
 
-- La función de diseño del proyecto 	tiene como objetivo establecer las líneas generales para dar respuesta a las necesidades planteadas concretando los aspectos relevantes para su realización. Incluye las subfunciones de: 
-  - Definición o adaptación de la intervención.
-  - Priorización y secuenciación de las acciones.
-  - Planificación de la intervención.
-  - Determinación de recursos.
-  - Planificación de la evaluación.
-  - Diseño de documentación.
-  - Plan de atención al cliente.
+4. Compilar el proyecto: En la misma línea de comandos, ejecute el comando `` dotnet build `` para compilar el proyecto. Esto generará los archivos binarios necesarios para ejecutar la aplicación.
 
-- La función de organización de la ejecución incluye las subfunciones de: 
-  - Detección de demandas y necesidades.
-  - Programación.
-  - Gestión.
-  - Coordinación y supervisión de la intervención.
-  - Elaboración de informes.
 
-[:arrow_up:](#módulo-proyecto-integrado-del-ies-gran-capitán)
-### Evaluación del Proyecto Integrado
+5. Ejecutar la aplicación: Una vez que la compilación se haya completado con éxito, el usuario final puede ejecutar la aplicación utilizando el comando ``dotnet run``. Esto iniciará la aplicación y estará disponible para su uso localmente en el entorno de la línea de comandos.
 
-| Resultados de Aprendizaje | % Nota |
-| -- | -- | 
-| RA1. Identifica necesidades del sector productivo relacionándolas con proyectos tipo que las puedan satisfacer. _(Justificación de proyecto, estado actual y necesidad/solución a un problema existente)_ | 5% |
-| RA2. Diseña proyectos relacionados con las competencias expresadas en el título, incluyendo y desarrollando las fases que lo componen _(Diseño , Planificación y secuenciación de acciones, determinación de recursos)_ | 20% |
-| RA3. Planifica la puesta en funcionamiento o ejecución del proyecto, determinando el plan de intervención y la documentación asociada. _(Implementación)_ | 65% |
-| RA4. Define los procedimientos para el seguimiento y control en la ejecución del proyecto, justificando la selección de variables e instrumentos empleados. _(Manual de funcionamiento,  mantenimiento/actualizaciones  del producto,  futuras mejoras) _ | 10% |
 
-[:arrow_up:](#módulo-proyecto-integrado-del-ies-gran-capitán)
+### <a id="instrucciones" /> ¿Cómo usarlo? 📱💼
+
+Para utilizar esta aplicación, sigue los siguientes pasos:
+
+1. **Autenticación de usuario** 🔐
+   - Ingresa tus credenciales, como nombre de usuario y contraseña, para iniciar sesión en tu cuenta bancaria. La autenticación de usuario es una medida de seguridad esencial para proteger tu información financiera.
+
+2. **Visualización de cuentas** 👀
+   - Una vez que hayas iniciado sesión, podrás ver información detallada sobre tus cuentas bancarias. Esto incluye el saldo, las tarjetas asociadas, los movimientos realizados y otra información relevante.
+
+3. **Movimientos** 💸
+   - Utiliza la función de movimientos para enviar y recibir fondos desde y hacia tus cuentas bancarias. Puedes transferir fondos a otras cuentas dentro del mismo banco.
+
+4. **Creación de tarjetas** 💳
+   - Si deseas obtener una nueva tarjeta para tu cuenta bancaria, utiliza esta función.
+
+Funciones adicionales para el responsable:
+1. **Listado de todos los clientes** 📋
+   - Obtén un listado rápido de todos los clientes del banco, independientemente de si están a tu cargo o no.
+
+2. **Listado de tus propios clientes** 👤
+   - Accede a un listado de todos los clientes que tienes a tu cargo y obtén acceso a sus datos personales.
+
+
+Sigue estas instrucciones y podrás aprovechar al máximo todas las funciones de ThunderBank 🎉💰

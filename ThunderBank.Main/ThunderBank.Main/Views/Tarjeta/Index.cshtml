@@ -8,7 +8,7 @@
 }
 
 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-10 col-sm-8 col-lg-6">
+    <div id="containerImg" class="col-10 col-sm-8 col-lg-6">
         <img src="~/img/tarjetas.png" class="d-block mx-lg-auto img-fluid" alt="Tarjetas disponibles" width="400" height="500" loading="lazy" />
     </div>
     <div class="col-lg-6">
@@ -27,8 +27,8 @@
         <tr style="font-size:22px">
             <th>Acciones</th>
             <th>Numero</th>
-            <th>Fecha de caducidad</th>
-            <th>Status</th>
+            <th id="fechaCaducidad">Fecha de caducidad</th>
+            <th id="status">Status</th>
         </tr>
     </thead>
     <tbody style="font-size:20px">
@@ -42,14 +42,14 @@
                     <a hidden id="btnDesactivarBack" class="btn btn-danger" asp-action="Borrar" asp-route-numero="@tarjeta.NumeroDeTarjeta"><i class="bi bi-trash"></i></a>
                 </td>
                 <td>@tarjeta.NumeroDeTarjeta</td>
-                <td>@tarjeta.FechaDeCaducidad.ToString("dd/MM/yy")</td>
+                <td id="fechaCaducidad">@tarjeta.FechaDeCaducidad.ToString("dd/MM/yy")</td>
                 @if (tarjeta.Estado == "ACTIVA")
                 {
-                    <td><span class="badge rounded-pill bg-success">Activa</span></td>
+                    <td id="status"><span class="badge rounded-pill bg-success" style="min-width:95px">Activa</span></td>
                 }
                 else
                 {
-                    <td><span class="badge rounded-pill bg-info text-black">Congelada</span></td>
+                    <td id="status"><span class="badge rounded-pill bg-info text-black" style="min-width:95px">Congelada</span></td>
 
                 }
             </tr>

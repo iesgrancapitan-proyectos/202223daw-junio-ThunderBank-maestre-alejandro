@@ -31,12 +31,13 @@ a i{
     color: white !important;
 }
 
-#fechaApertura, #saldo {
+#fechaCaducidad, #saldo, #status {
     display: none;
 }
 
-@media (min-width: 768px) {
-    #fechaApertura, #saldo {
+@media (min-width: 426px) {
+    
+    #saldo, #status, #fechaCaducidad {
         display: table-cell;
         color: #f8f8f8;
     }

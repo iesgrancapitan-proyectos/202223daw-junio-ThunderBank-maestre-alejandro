@@ -6,7 +6,7 @@ tr {
     color: #f8f8f8;
 }
 
-#fechaApertura, #saldo {
+#fechaApertura, #saldo, #tipo, #status {
     display: none;
 }
 a i {
@@ -33,9 +33,11 @@ thead tr {
     font-weight: 700;
 }
 
-@media (min-width: 768px) {
-    #fechaApertura, #saldo {
+@media (min-width: 426px) {
+    #fechaApertura, #saldo,#tipo,#status {
         display: table-cell;
         color: #f8f8f8;
     }
 }
+
+
